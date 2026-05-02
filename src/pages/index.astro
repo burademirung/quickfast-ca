@@ -299,6 +299,84 @@ const allMigrated = Object.values(import.meta.glob('~/assets/migrated/*.{png,jpg
     </div>
   </section>
 
+  {/* LIMITED OFFER — Rebates & Financing callout (extracted from old site) */}
+  <section class="relative py-20 lg:py-24 overflow-hidden bg-page bg-dots">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 grid md:grid-cols-2 gap-10 items-center">
+      <div data-animate>
+        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent/10 text-accent text-xs font-bold uppercase tracking-widest mb-5">
+          <span class="relative flex h-2 w-2">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-2 w-2 bg-accent"></span>
+          </span>
+          Limited Offer
+        </div>
+        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-serif font-bold text-heading leading-tight mb-5">
+          Don't miss out — up to
+          <span style="-webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; background-image: linear-gradient(135deg, #DF3131, #116DFF);"> $10,500 </span>
+          in rebates + financing
+        </h2>
+        <p class="text-lg text-default leading-relaxed mb-5">
+          Upgrading your home's equipment doesn't have to be expensive. Federal Greener Homes Grant ($5,000), IESO save-on-energy rebates, manufacturer rebates, and 0% promotional financing through Snap stack to lower your out-of-pocket cost dramatically.
+        </p>
+        <p class="text-default leading-relaxed mb-7">
+          QuickFast helps homeowners and property managers install qualifying energy-efficient systems — heat pumps, high-efficiency furnaces, tankless water heaters, smart thermostats — and we file every rebate form on your behalf.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-3">
+          <a href="/contact/" data-open-request-dialog class="btn-primary">Check my rebate eligibility</a>
+          <a href="/pricing/" class="btn-secondary">See plans & pricing</a>
+        </div>
+      </div>
+
+      {/* Rebate-stack visual — sums to $10,500 max */}
+      <div class="relative" data-animate style="animation-delay:140ms">
+        <div class="absolute inset-0 bg-gradient-to-br from-primary/20 via-accent/10 to-transparent blur-3xl"></div>
+        <div class="relative rounded-3xl bg-secondary text-white p-8 sm:p-10 shadow-2xl border border-white/10">
+          <div class="flex items-center justify-between mb-6">
+            <p class="text-xs font-bold uppercase tracking-widest text-blue-300">Rebate Stack</p>
+            <span class="text-xs text-white/60">Maximum potential</span>
+          </div>
+          <ul class="space-y-4 mb-8">
+            <li class="flex items-baseline justify-between gap-4 pb-3 border-b border-white/10">
+              <div>
+                <p class="font-semibold">Greener Homes Grant</p>
+                <p class="text-xs text-white/60">Federal · heat pumps + insulation</p>
+              </div>
+              <span class="text-xl font-serif font-bold text-blue-300">$5,000</span>
+            </li>
+            <li class="flex items-baseline justify-between gap-4 pb-3 border-b border-white/10">
+              <div>
+                <p class="font-semibold">IESO Save-on-Energy</p>
+                <p class="text-xs text-white/60">Provincial · HVAC + insulation</p>
+              </div>
+              <span class="text-xl font-serif font-bold text-blue-300">$3,000</span>
+            </li>
+            <li class="flex items-baseline justify-between gap-4 pb-3 border-b border-white/10">
+              <div>
+                <p class="font-semibold">Manufacturer Rebates</p>
+                <p class="text-xs text-white/60">Lennox / Carrier / Bosch / Mitsubishi</p>
+              </div>
+              <span class="text-xl font-serif font-bold text-blue-300">$1,500</span>
+            </li>
+            <li class="flex items-baseline justify-between gap-4 pb-3 border-b border-white/10">
+              <div>
+                <p class="font-semibold">Gas-Utility Rebates</p>
+                <p class="text-xs text-white/60">Enbridge HER+ furnace + WH</p>
+              </div>
+              <span class="text-xl font-serif font-bold text-blue-300">$1,000</span>
+            </li>
+          </ul>
+          <div class="flex items-baseline justify-between gap-4 pt-2">
+            <span class="text-sm font-semibold uppercase tracking-widest text-white/80">Total potential</span>
+            <span class="text-3xl sm:text-4xl font-serif font-bold" style="-webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; background-image: linear-gradient(135deg, #FBBF24, #60A5FA);">$10,500</span>
+          </div>
+          <p class="mt-5 text-xs text-white/50 leading-relaxed">
+            Plus 0% promo financing through Snap (OAC). Eligibility depends on equipment type, install date, and program availability — we confirm before quoting.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   {/* SERVICES — bento grid */}
   <section class="py-20 lg:py-24 bg-page bg-dots">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
