@@ -65,7 +65,7 @@ export const footerData = {
   socialLinks: [
     { ariaLabel: 'Facebook', icon: 'tabler:brand-facebook', href: '#' },
     { ariaLabel: 'Google Business', icon: 'tabler:brand-google', href: '#' },
-    { ariaLabel: 'Yelp', icon: 'tabler:brand-yelp', href: '#' },
+    { ariaLabel: 'Maps', icon: 'tabler:map-pin', href: '#' },
   ],
   footNote: `\n    © ${new Date().getFullYear()} QuickFast Service Company. All rights reserved.\n  `,
 };

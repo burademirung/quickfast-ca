@@ -1,2 +1,21 @@
+/*
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
+  X-XSS-Protection: 1; mode=block
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), interest-cohort=(), autoplay=(), payment=(), usb=(), magnetometer=(), gyroscope=(), accelerometer=(), clipboard-write=(self), fullscreen=(self)
+  Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
+  Cross-Origin-Opener-Policy: same-origin
+  Cross-Origin-Embedder-Policy: credentialless
+  Cross-Origin-Resource-Policy: same-origin
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' challenges.cloudflare.com static.cloudflareinsights.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' challenges.cloudflare.com static.cloudflareinsights.com; frame-src challenges.cloudflare.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; report-uri /api/csp-report; report-to default
+  Report-To: {"group":"default","max_age":10886400,"endpoints":[{"url":"/api/csp-report"}]}
+
+/api/*
+  Cache-Control: no-store
+
+/blog/*
+  Cache-Control: public, max-age=300, s-maxage=3600
+
 /_astro/*
   Cache-Control: public, max-age=31536000, immutable

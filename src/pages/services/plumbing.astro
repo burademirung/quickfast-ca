@@ -1,0 +1,48 @@
+---
+import ServiceCategoryPage from '~/components/ServiceCategoryPage.astro';
+
+const services = [
+  { title: 'Emergency Plumbing', desc: '24/7 response for burst pipes, sewage backups, and no-water emergencies.' },
+  { title: 'Water Heaters', desc: 'Tank and tankless installation, repair, and annual flush.' },
+  { title: 'Hot Water Tank Installation', desc: 'Same-day tank replacement when yours fails.' },
+  { title: 'Hot Water Tank Repair', desc: 'Element, thermostat, T&P valve and anode-rod repairs.' },
+  { title: 'Water Softeners', desc: 'Hard-water systems sized to your usage and well or city supply.' },
+  { title: 'Pipe Installation / Repair', desc: 'Copper, PEX and CPVC pipe runs, repair and re-piping.' },
+  { title: 'Sewer Line Repair', desc: 'Trenchless and traditional sewer line repair and replacement.' },
+  { title: 'Sewer Camera Inspection', desc: 'Find blockages and root intrusion without digging.' },
+  { title: 'Water Main Repair', desc: 'Water main replacement to and from the city tap.' },
+  { title: 'Sump Pumps', desc: 'Primary and battery-backup sump pump installation.' },
+  { title: 'Clogged Drains', desc: 'Snake, hydro-jet and camera-verified drain clearing.' },
+  { title: 'Root Intrusion Removal', desc: 'Permanent fix for tree roots in clay sewer lines.' },
+  { title: 'Waterproofing', desc: 'Interior and exterior basement waterproofing.' },
+];
+
+const whyUs = [
+  { title: '24/7 emergency line', desc: "Burst pipe at 2 a.m.? We're on the way within 2 hours." },
+  { title: 'Camera-verified clears', desc: 'We send a camera down to confirm the drain is fully clear, not just temporarily moving water.' },
+  { title: 'Trenchless sewer repair', desc: 'Most sewer line replacements done without tearing up the lawn.' },
+  { title: 'Up-front pricing', desc: 'Flat fee for diagnosis. Written quote before work starts. No surprises.' },
+];
+
+const faqs = [
+  { q: 'My drain keeps backing up. Snaking it never lasts. Why?', a: 'Repeat clogs in the same drain usually mean tree-root intrusion, a belly in the pipe, or scale buildup. We do a sewer-camera inspection ($249) to identify the actual cause, then quote a permanent fix instead of another snake-out.' },
+  { q: 'Tank or tankless water heater?', a: "Tankless is more efficient and lasts ~20 years vs. 8-12 for a tank. It costs 1.5-2× upfront. For most 3-4 person households the payback is 7-10 years. We'll quote both with operating-cost comparisons." },
+  { q: 'Can you replace a hot water tank same-day?', a: 'Yes — for standard 40-60 gallon gas/electric tanks we typically replace same-day if you call before noon. We stock the most common sizes.' },
+  { q: 'Do I need a backup sump pump?', a: 'If you have a finished basement and rely solely on a single primary sump, yes. A battery backup or water-powered backup runs during power outages — which is precisely when storms cause flooding.' },
+];
+
+const longDescription =
+  'Whether your basement is filling up at 2 a.m. or you need a tankless water heater installed next month, our plumbers handle it. We answer emergency calls 24/7 and dispatch within 2 hours, including weekends and holidays. Routine service typically books within 24-48 hours. <strong>Camera inspections, hydro-jetting, and trenchless sewer repair</strong> mean we fix problems permanently — not just patch them.';
+---
+
+<ServiceCategoryPage
+  slug="plumbing"
+  title="Plumbing"
+  kicker="Service Category"
+  intro="24/7 emergency plumbing, water heaters, sewer line repair, drain cleaning and waterproofing across Mississauga and the GTA."
+  longDescription={longDescription}
+  services={services}
+  metaDescription="24/7 emergency plumbing, water heaters, sewer repair, drain cleaning, sump pumps and waterproofing in Mississauga & the GTA. Up-front pricing, camera-verified clears."
+  whyUs={whyUs}
+  faqs={faqs}
+/>

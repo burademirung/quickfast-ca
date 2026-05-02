@@ -1,224 +1,180 @@
 ---
-import CallToAction from '~/components/widgets/CallToAction.astro';
-import Content from '~/components/widgets/Content.astro';
-import Features2 from '~/components/widgets/Features2.astro';
-import Hero from '~/components/widgets/Hero.astro';
-import Testimonials from '~/components/widgets/Testimonials.astro';
 import Layout from '~/layouts/PageLayout.astro';
 
 const metadata = {
-  title: 'Services',
+  title: 'All Services — HVAC, Plumbing, Electrical & Renovations',
+  description:
+    'Complete list of QuickFast Service Company services: HVAC, plumbing, electrical, duct cleaning, renovations, commercial property management. Mississauga & GTA.',
+};
+
+const categories = [
+  {
+    slug: 'hvac',
+    title: 'HVAC & Heating',
+    intro: 'TSSA-licensed installation and service for furnaces, boilers, heat pumps, AC, mini-splits and ventilation.',
+    items: [
+      { title: 'Air Conditioning Installation', desc: 'Central AC and ductless installs, brand-agnostic.' },
+      { title: 'AC Maintenance', desc: 'Annual tune-ups to keep your AC efficient through summer.' },
+      { title: 'AC Repair', desc: 'Same-day repair on most makes — refrigerant, capacitors, blowers.' },
+      { title: 'Furnace Installation', desc: 'High-efficiency gas furnace replacement with rebate paperwork.' },
+      { title: 'Boiler Installation', desc: 'Combi and standalone boilers for radiator and in-floor heat.' },
+      { title: 'Heat Pump Installation', desc: 'Cold-climate heat pumps — Greener Homes / GST/HST rebate eligible.' },
+      { title: 'Mini-Split Installation', desc: 'Ductless heating and cooling for additions and laneway suites.' },
+      { title: 'Thermostat', desc: 'Smart thermostat install and zoning configuration.' },
+      { title: 'ERV / HRV Systems', desc: 'Energy-recovery ventilation for tight modern homes.' },
+      { title: 'Humidifiers / Dehumidifiers', desc: 'Whole-home humidity control tied to your HVAC.' },
+    ],
+  },
+  {
+    slug: 'plumbing',
+    title: 'Plumbing',
+    intro: '24/7 emergency response. Drain cleaning, water heaters, sewer line repair, sump pumps, waterproofing.',
+    items: [
+      { title: 'Emergency Plumbing', desc: '24/7 response for burst pipes, sewage backups, no-water emergencies.' },
+      { title: 'Water Heaters', desc: 'Tank and tankless installation, repair, and annual flush.' },
+      { title: 'Hot Water Tank Installation', desc: 'Same-day tank replacement when yours fails.' },
+      { title: 'Hot Water Tank Repair', desc: 'Element, thermostat, T&P valve and anode repairs.' },
+      { title: 'Water Softeners', desc: 'Hard-water solutions sized to your usage and well or city supply.' },
+      { title: 'Pipe Installation / Repair', desc: 'Copper, PEX and CPVC pipe runs, repair and re-piping.' },
+      { title: 'Sewer Line Repair', desc: 'Trenchless and traditional sewer line repair and replacement.' },
+      { title: 'Sewer Camera Inspection', desc: 'Find blockages and root intrusion without digging.' },
+      { title: 'Water Main Repair', desc: 'Water main replacement to and from the city tap.' },
+      { title: 'Sump Pumps', desc: 'Primary and backup sump pump installation and replacement.' },
+      { title: 'Clogged Drains', desc: 'Snake, hydro-jet and camera-verified drain clearing.' },
+      { title: 'Root Intrusion Removal', desc: 'Permanent fix for tree roots in clay sewer lines.' },
+      { title: 'Waterproofing', desc: 'Interior and exterior basement waterproofing.' },
+    ],
+  },
+  {
+    slug: 'electrical',
+    title: 'Electrical',
+    intro: 'ESA-certified electrical contractor. Panel upgrades, wiring, lighting, EV chargers, generators.',
+    items: [
+      { title: 'Electrical Panel Upgrades', desc: '100A → 200A panel upgrades with ESA inspection.' },
+      { title: 'Wiring & Remodelling', desc: 'New circuits and rewiring for renovations and additions.' },
+      { title: 'EV Charger Installation', desc: 'Level-2 home EV chargers — Tesla, J1772, Stellantis.' },
+      { title: 'Generator Installation', desc: 'Standby and portable generator installation and transfer switch.' },
+      { title: 'Lighting Installation', desc: 'Recessed, pendant, accent and track lighting installs.' },
+      { title: 'Exterior Pot Lights', desc: 'Outdoor pot lighting for soffits, eaves and walkways.' },
+      { title: 'Residential Inspection', desc: 'Pre-purchase electrical inspections with ESA certificate.' },
+      { title: 'Red Tag Removal', desc: 'ESA red-tag remediation and re-inspection coordination.' },
+    ],
+  },
+  {
+    slug: 'duct-cleaning',
+    title: 'Medical-Grade Duct Cleaning',
+    intro: 'HEPA-filtered process and hospital-grade equipment for the deepest possible duct clean.',
+    items: [
+      { title: 'Whole-Home Duct Cleaning', desc: 'Every supply and return cleaned, sanitized, and HEPA-filtered.' },
+      { title: 'Dryer Vent Cleaning', desc: 'Reduce fire risk and improve dryer efficiency in 30 minutes.' },
+    ],
+  },
+  {
+    slug: 'renovations',
+    title: 'Renovations & Construction',
+    intro: 'Bathroom, basement, condo and laneway-suite renovations. Permits, design, build, finish.',
+    items: [
+      { title: 'Bathroom Renovations', desc: 'Full bathroom rebuilds: plumbing, tile, fixtures, ventilation.' },
+      { title: 'Basement Renovations', desc: 'Finished basement: framing, electrical, plumbing, drywall, paint.' },
+      { title: 'Condo Renovations', desc: 'Condo-spec compliant renovations with property-management coordination.' },
+      { title: 'Laneway Suite Renovations', desc: 'Laneway suite design-build, including HVAC, plumbing, electrical.' },
+      { title: 'Home Renovations', desc: 'Whole-home and addition renovations.' },
+      { title: 'General Construction', desc: 'Smaller construction work and handyman projects.' },
+    ],
+  },
+  {
+    slug: 'commercial',
+    title: 'Commercial & Property Management',
+    intro: 'Multi-unit residential, commercial and condo property maintenance and capital projects.',
+    items: [
+      { title: 'Commercial Inspections', desc: 'HVAC, plumbing and electrical inspections for commercial properties.' },
+      { title: 'Property Management', desc: 'Ongoing maintenance contracts for property managers.' },
+      { title: 'Multi-Unit Service', desc: 'Repeat service for buildings with multiple units or systems.' },
+    ],
+  },
+];
+
+const itemList = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  itemListElement: categories.flatMap((c, ci) =>
+    c.items.map((it, i) => ({
+      '@type': 'ListItem',
+      position: ci * 100 + i + 1,
+      item: {
+        '@type': 'Service',
+        name: it.title,
+        description: it.desc,
+        serviceType: c.title,
+        provider: { '@type': 'HomeAndConstructionBusiness', name: 'QuickFast Service Company' },
+        areaServed: 'Mississauga, ON',
+      },
+    }))
+  ),
+};
+const breadcrumb = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://quickfast.ca/' },
+    { '@type': 'ListItem', position: 2, name: 'Services', item: 'https://quickfast.ca/services/' },
+  ],
 };
 ---
 
 <Layout metadata={metadata}>
-  <!-- Hero Widget ******************* -->
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(itemList).replace(/</g, '\\u003c')} />
+    <script type="application/ld+json" set:html={JSON.stringify(breadcrumb).replace(/</g, '\\u003c')} />
+  </Fragment>
 
-  <Hero
-    tagline="Services"
-    title="Elevate your projects with our stunning templates"
-    subtitle="Explore our meticulously crafted templates tailored to various industries and purposes. From captivating presentations to functional website designs, we offer the tools you need to succeed."
-    actions={[{ variant: 'primary', target: '_blank', text: 'Start exploring', href: '/' }]}
-    image={{
-      src: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80',
-      alt: 'AstroWind Hero Image',
-    }}
-  />
+  <section class="relative min-h-[50vh] flex items-center overflow-hidden -mt-[72px]" style="background: linear-gradient(135deg, #112F5B 0%, #0a1f40 100%);">
+    <div class="absolute inset-0 opacity-[0.05]" style="background-image: radial-gradient(circle, rgba(255,255,255,0.5) 1px, transparent 1px); background-size: 32px 32px;"></div>
+    <div class="absolute top-[10%] right-[5%] w-[400px] h-[400px] rounded-full opacity-[0.18] blur-[100px]" style="background: radial-gradient(circle, #116DFF, transparent 70%); animation: drift 22s ease-in-out infinite alternate;"></div>
 
-  <!-- Features2 Widget ************** -->
+    <div class="relative z-10 mx-auto max-w-4xl px-6 text-center pt-32 pb-12">
+      <p class="hero-fade text-xs font-bold uppercase tracking-[0.2em] text-blue-300 mb-3">Our Services</p>
+      <h1 class="hero-fade text-4xl sm:text-5xl lg:text-6xl font-serif font-bold text-white leading-tight" style="animation-delay:120ms">
+        Every property service,
+        <span class="block" style="-webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; background-image: linear-gradient(135deg, #60A5FA, #FBBF24);">under one roof.</span>
+      </h1>
+      <p class="hero-fade mt-5 text-lg text-gray-200 max-w-2xl mx-auto" style="animation-delay:280ms">
+        HVAC, plumbing, electrical, duct cleaning, renovations and commercial property management — all by ESA-certified, TSSA-licensed technicians on our own team.
+      </p>
+    </div>
+  </section>
 
-  <Features2
-    title="Explore our diverse templates"
-    subtitle="Discover our selection below to streamline and elevate your projects."
-    columns={3}
-    items={[
-      {
-        title: 'Educational',
-        description:
-          'By harmonizing instructional design and visual appeal, templates streamline content creation for varied materials, expediting development and cultivating engaging educational spaces.',
-        icon: 'tabler:school',
-      },
-      {
-        title: 'Interior Design',
-        description:
-          'Crafting functional, visually appealing spaces for residential and commercial use. Templates emphasize layout, colors, and furniture setups, offering a versatile toolkit for your design vision.',
-        icon: 'tabler:home-star',
-      },
-      {
-        title: 'Photography',
-        description: `Empowering photographers, our templates facilitate captivating storytelling. With a keen focus on layout, galleries, and typography, they cater to both professionals and enthusiasts.`,
-        icon: 'tabler:photo',
-      },
-      {
-        title: 'E-commerce',
-        description:
-          'Developing engaging online stores, our E-commerce templates ensure a dynamic presence to effectively showcase products. Ideal for startups or revamps.',
-        icon: 'tabler:shopping-cart',
-      },
-      {
-        title: 'Blog',
-        description:
-          'With attention to typography, these templates empower effective content presentation for writers at any stage, ensuring visually engaging and user-friendly blogs.',
-        icon: 'tabler:article',
-      },
-      {
-        title: 'Business',
-        description:
-          'Providing polished options for effective visual communication, these templates empower both startups and established companies for a professional brand presence.',
-        icon: 'tabler:building-store',
-      },
-      {
-        title: 'Branding',
-        description:
-          'Offering pre-designed elements for a consistent brand identity, including logos and marketing materials. Ideal for new ventures or revamps.',
-        icon: 'tabler:arrow-big-up-lines',
-      },
-      {
-        title: 'Medical',
-        description: `From presentations to patient forms, these tools enhance communication effectiveness for healthcare professionals. Ideal for medical practices and research pursuits.`,
-        icon: 'tabler:vaccine',
-      },
-      {
-        title: 'Fashion Design',
-        description:
-          'With attention to detail, customization, and contemporary design, they empower designers to showcase ideas cohesively. Ideal for all levels of designers.',
-        icon: 'tabler:tie',
-      },
-    ]}
-  />
+  {categories.map((cat, ci) => (
+    <section class={`py-16 lg:py-20 ${ci % 2 === 0 ? 'bg-page' : 'bg-page bg-dots'}`} id={cat.slug}>
+      <div class="max-w-6xl mx-auto px-4 sm:px-6">
+        <div class="mb-10 flex items-end justify-between flex-wrap gap-3" data-animate>
+          <div>
+            <p class="text-xs font-bold uppercase tracking-[0.2em] text-primary mb-2">Category</p>
+            <h2 class="text-3xl sm:text-4xl font-serif font-bold text-heading">{cat.title}</h2>
+            <p class="mt-3 text-muted max-w-2xl">{cat.intro}</p>
+          </div>
+          <a href="/contact/" data-open-request-dialog class="btn-primary text-sm">Request a quote</a>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {cat.items.map((it, i) => (
+            <div class="card" data-animate style={`animation-delay: ${i * 50}ms`}>
+              <h3 class="text-lg font-serif font-bold text-heading mb-2">{it.title}</h3>
+              <p class="text-sm text-muted leading-relaxed">{it.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  ))}
 
-  <!-- Content Widget **************** -->
-
-  <Content
-    isReversed
-    items={[
-      {
-        title: 'High-Quality Designs',
-        description:
-          'Our templates feature top-tier designs that ensure a professional and polished appearance for your projects.',
-        icon: 'tabler:wand',
-      },
-      {
-        title: 'Customization Tools',
-        description:
-          'Tailor each template to your unique needs with user-friendly customization tools that let you personalize colors, fonts, and content.',
-        icon: 'tabler:settings',
-      },
-      {
-        title: 'Pre-Designed Elements',
-        description:
-          'Save time and effort with our ready-to-use elements, including graphics, icons, and layouts that enhance the visual appeal of your creations.',
-        icon: 'tabler:presentation',
-      },
-      {
-        title: 'Preview and Mockup Views',
-        description:
-          'Visualize the final outcome before making any changes using our preview and mockup views, ensuring your projects meet your expectations.',
-        icon: 'tabler:carousel-horizontal',
-      },
-    ]}
-    image={{
-      src: 'https://images.unsplash.com/photo-1525909002-1b05e0c869d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80',
-      alt: 'Features Image',
-    }}
-  >
-    <Fragment slot="content">
-      <h3 class="text-2xl font-bold tracking-tight  sm:text-3xl mb-2">Main Features</h3>
-    </Fragment>
-  </Content>
-
-  <!-- Content Widget **************** -->
-
-  <Content
-    isAfterContent
-    items={[
-      {
-        title: 'Time Savings',
-        description:
-          'Streamline your workflow, enabling you to create stunning materials efficiently and allocate more time to your core tasks.',
-        icon: 'tabler:clock',
-      },
-      {
-        title: 'Professional Appearance',
-        description:
-          'Elevate your projects with the polished and sophisticated look that our templates provide, making a lasting impression on your audience.',
-        icon: 'tabler:school',
-      },
-      {
-        title: 'Cost-Efficiency',
-        description:
-          'Benefit from cost savings by avoiding the need for custom design work, as our templates offer professional-grade designs at a fraction of the cost.',
-        icon: 'tabler:coin',
-      },
-      {
-        title: 'Instant Download',
-        description:
-          'Enjoy immediate access to your chosen templates upon purchase, enabling you to begin working on your projects without delay.',
-        icon: 'tabler:file-download',
-      },
-    ]}
-    image={{
-      src: 'https://images.unsplash.com/photo-1552664688-cf412ec27db2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80',
-      alt: 'Benefits Image',
-    }}
-  >
-    <Fragment slot="content">
-      <h3 class="text-2xl font-bold tracking-tight  sm:text-3xl mb-2">Benefits</h3>
-    </Fragment>
-  </Content>
-
-  <!-- Testimonials Widget *********** -->
-
-  <Testimonials
-    title="Words from real customers"
-    testimonials={[
-      {
-        testimonial: `The designs are not only visually appealing but also highly professional. The templates have saved me a significant amount of time while helping me make a lasting impression on my clients.`,
-        name: 'Emily Kennedy',
-        job: 'Front-end developer',
-        image: {
-          src: 'https://images.unsplash.com/photo-1618835962148-cf177563c6c0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=930&q=80',
-          alt: 'Emily Kennedy Image',
-        },
-      },
-      {
-        testimonial: `It beautifully showcases my work, with its clean and elegant design that lets my photographs shine. Customization was a breeze, even for a non-tech person like me. The result is a professional and immersive portfolio that's garnered numerous compliments.`,
-        name: 'Sarah Hansen',
-        job: 'Photographer',
-        image: {
-          src: 'https://images.unsplash.com/photo-1561406636-b80293969660?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80',
-          alt: 'Sarah Hansen Image',
-        },
-      },
-      {
-        testimonial: `I discovered these templates and I'm impressed by their variety and quality. They've helped me establish a consistent brand image across my marketing and social platforms, elevating my business's overall appearance.`,
-        name: 'Mark Wilkinson',
-        job: 'Small business owner',
-        image: {
-          src: 'https://images.unsplash.com/photo-1545167622-3a6ac756afa4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=824&q=80',
-          alt: 'Mark Wilkinson Image',
-        },
-      },
-    ]}
-    callToAction={{
-      target: '_blank',
-      text: 'More testimonials...',
-      href: 'https://github.com/arthelokyo/astrowind',
-      icon: 'tabler:chevron-right',
-    }}
-  />
-
-  <!-- CallToAction Widget *********** -->
-
-  <CallToAction
-    actions={[
-      {
-        variant: 'primary',
-        text: 'Start exploring',
-        href: '/',
-      },
-    ]}
-    title="Dive into our template collection"
-    subtitle="Whether you're in business, design, or education, our templates are here to elevate your projects."
-  />
+  <section class="py-20 bg-secondary text-white text-center">
+    <div class="max-w-3xl mx-auto px-4" data-animate>
+      <h2 class="text-3xl sm:text-4xl font-serif font-bold mb-4">Don't see what you need?</h2>
+      <p class="text-white/80 mb-8 text-lg">Call us — chances are we do it. We handle 90% of property work in-house.</p>
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-3">
+        <a href="tel:+14166293213" class="btn-primary">+1 416-629-3213</a>
+        <a href="/contact/" data-open-request-dialog class="inline-flex items-center gap-2 rounded-xl border border-white/15 bg-white/5 px-9 py-4 text-lg font-semibold text-white hover:bg-white/10 transition">Request Service</a>
+      </div>
+    </div>
+  </section>
 </Layout>

@@ -16,7 +16,7 @@ metadata:
   openGraph:
     site_name: 'QuickFast Service Company'
     images:
-      - url: '/og-image.png'
+      - url: '~/assets/images/og-image.png'
         width: 1200
         height: 630
     type: website

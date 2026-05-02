@@ -7,11 +7,14 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: 'var(--aw-color-primary)',
-        secondary: 'var(--aw-color-secondary)',
-        accent: 'var(--aw-color-accent)',
-        default: 'var(--aw-color-text-default)',
-        muted: 'var(--aw-color-text-muted)',
+        // Using rgb(<channels> / <alpha>) so opacity modifiers like /20 work
+        primary: 'rgb(var(--aw-color-primary-rgb) / <alpha-value>)',
+        secondary: 'rgb(var(--aw-color-secondary-rgb) / <alpha-value>)',
+        accent: 'rgb(var(--aw-color-accent-rgb) / <alpha-value>)',
+        heading: 'rgb(var(--aw-color-text-heading-rgb) / <alpha-value>)',
+        default: 'rgb(var(--aw-color-text-default-rgb) / <alpha-value>)',
+        muted: 'rgb(var(--aw-color-text-muted-rgb) / <alpha-value>)',
+        page: 'rgb(var(--aw-color-bg-page-rgb) / <alpha-value>)',
       },
       fontFamily: {
         sans: ['var(--aw-font-sans, ui-sans-serif)', ...defaultTheme.fontFamily.sans],
@@ -37,5 +40,4 @@ export default {
       addVariant('intersect', '&:not([no-intersect])');
     }),
   ],
-  darkMode: 'class',
 };

@@ -1,2 +1,39 @@
+# Search engines
 User-agent: *
-Disallow:
+Allow: /
+Disallow: /api/
+Disallow: /_astro/
+
+# AI crawlers — explicitly allowed (AIO gate 3)
+User-agent: GPTBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: Bytespider
+Allow: /
+
+User-agent: cohere-ai
+Allow: /
+
+User-agent: FacebookBot
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+Sitemap: https://quickfast.ca/sitemap-index.xml
+Sitemap: https://quickfast.ca/blog-sitemap.xml

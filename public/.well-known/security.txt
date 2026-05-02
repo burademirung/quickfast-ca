@@ -1,0 +1,6 @@
+Contact: mailto:security@degenito.ai
+Contact: https://degenito.ai/contact/
+Expires: 2027-05-02T23:59:59.000Z
+Preferred-Languages: en
+Canonical: https://quickfast.ca/.well-known/security.txt
+Policy: https://degenito.ai/security-policy/

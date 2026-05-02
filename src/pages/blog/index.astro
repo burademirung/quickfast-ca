@@ -1,0 +1,111 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+
+const metadata = {
+  title: 'Blog — HVAC, Plumbing & Property Tips',
+  description:
+    'Practical advice from QuickFast Service Company technicians: when to repair vs. replace, seasonal maintenance, rebate guides, and emergency tips.',
+};
+
+const breadcrumb = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://quickfast.ca/' },
+    { '@type': 'ListItem', position: 2, name: 'Blog', item: 'https://quickfast.ca/blog/' },
+  ],
+};
+---
+
+<Layout metadata={metadata}>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(breadcrumb).replace(/</g, '\\u003c')} />
+  </Fragment>
+
+  <section class="relative min-h-[40vh] flex items-center overflow-hidden -mt-[72px]" style="background: linear-gradient(135deg, #112F5B 0%, #0a1f40 100%);">
+    <div class="absolute inset-0 opacity-[0.05]" style="background-image: radial-gradient(circle, rgba(255,255,255,0.5) 1px, transparent 1px); background-size: 32px 32px;"></div>
+    <div class="relative z-10 mx-auto max-w-3xl px-6 text-center pt-32 pb-12">
+      <p class="hero-fade text-xs font-bold uppercase tracking-[0.2em] text-blue-300 mb-3">Blog</p>
+      <h1 class="hero-fade text-4xl sm:text-5xl font-serif font-bold text-white" style="animation-delay:120ms">From the workshop</h1>
+      <p class="hero-fade mt-4 text-lg text-gray-300" style="animation-delay:280ms">
+        Practical advice from our technicians — repair vs. replace, seasonal maintenance, rebate guides, and emergency tips.
+      </p>
+    </div>
+  </section>
+
+  <section class="py-16 lg:py-20 bg-page">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <div id="recent-articles-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div id="loading-state" class="col-span-full text-center text-muted py-12">
+          <p>Loading articles…</p>
+        </div>
+      </div>
+
+      <div id="empty-state" class="hidden text-center py-16 max-w-md mx-auto">
+        <p class="text-2xl font-serif font-bold text-heading mb-2">Articles coming soon</p>
+        <p class="text-muted mb-6">We're building out a knowledge base on HVAC, plumbing, electrical, and home maintenance. Check back soon — or get in touch if you have a specific question.</p>
+        <a href="/contact/" data-open-request-dialog class="btn-primary">Ask a question</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-16 bg-secondary text-white text-center">
+    <div class="max-w-2xl mx-auto px-4" data-animate>
+      <h2 class="text-2xl sm:text-3xl font-serif font-bold mb-4">Get a quote on the work</h2>
+      <p class="text-white/80 mb-6">We respond within 1 business hour.</p>
+      <a href="/contact/" data-open-request-dialog class="btn-primary">Request Service</a>
+    </div>
+  </section>
+
+  <script>
+    (async () => {
+      try {
+        const res = await fetch('/api/recent-articles?limit=24');
+        const data = await res.json();
+        const articles = data.articles || [];
+        const grid = document.getElementById('recent-articles-grid');
+        const loading = document.getElementById('loading-state');
+        const empty = document.getElementById('empty-state');
+        loading?.remove();
+        if (!grid) return;
+        if (articles.length === 0) {
+          grid.classList.add('hidden');
+          empty?.classList.remove('hidden');
+          return;
+        }
+        for (const a of articles) {
+          const card = document.createElement('a');
+          card.href = '/blog/' + encodeURIComponent(a.slug) + '/';
+          card.className = 'card group block';
+          if (a.publishDate) {
+            const meta = document.createElement('p');
+            meta.className = 'text-xs text-muted font-medium uppercase tracking-wide mb-2';
+            try { meta.textContent = new Date(a.publishDate).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' }); } catch {}
+            card.appendChild(meta);
+          }
+          const h3 = document.createElement('h3');
+          h3.className = 'text-xl font-serif font-bold text-heading group-hover:text-primary transition-colors mb-3';
+          h3.textContent = a.title;
+          card.appendChild(h3);
+          if (a.excerpt) {
+            const p = document.createElement('p');
+            p.className = 'text-sm text-muted leading-relaxed';
+            p.textContent = a.excerpt;
+            card.appendChild(p);
+          }
+          const cta = document.createElement('span');
+          cta.className = 'inline-flex items-center gap-1 text-primary font-semibold text-sm mt-4';
+          cta.textContent = 'Read more →';
+          card.appendChild(cta);
+          grid.appendChild(card);
+        }
+      } catch {
+        const empty = document.getElementById('empty-state');
+        const grid = document.getElementById('recent-articles-grid');
+        document.getElementById('loading-state')?.remove();
+        grid?.classList.add('hidden');
+        empty?.classList.remove('hidden');
+      }
+    })();
+  </script>
+</Layout>

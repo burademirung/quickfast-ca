@@ -1,0 +1,38 @@
+---
+import ServiceCategoryPage from '~/components/ServiceCategoryPage.astro';
+
+const services = [
+  { title: 'Whole-Home Duct Cleaning', desc: 'Every supply and return cleaned, sanitized and HEPA-filtered. Typical job: 3-5 hours.' },
+  { title: 'Dryer Vent Cleaning', desc: 'Reduce fire risk and improve dryer efficiency in 30 minutes.' },
+  { title: 'HVAC System Sanitization', desc: 'Optional EPA-registered sanitizer applied after cleaning.' },
+];
+
+const whyUs = [
+  { title: 'Hospital-grade vacuums', desc: '7,500+ CFM negative-pressure trucks pull contaminants out, not into your home.' },
+  { title: 'HEPA filtration', desc: 'Every speck of debris captured by HEPA filters — not blown into your living space.' },
+  { title: 'Before/after photos', desc: 'We document every duct with photos so you see what was actually removed.' },
+  { title: 'Same-day appointments', desc: "Most weekly slots have same-day or next-day availability — we're not booked out 6 weeks like the chains." },
+];
+
+const faqs = [
+  { q: 'How often should ducts be cleaned?', a: 'Every 3-5 years for most homes. More frequently if you have pets that shed heavily, recently completed renovations (drywall dust gets everywhere), or a household member with allergies or asthma. After buying a new home is also a good time.' },
+  { q: 'Will duct cleaning improve my air quality?', a: "Yes — particularly if you have measurable allergens, mould spores, or pet dander. We can show you the difference before/after with photos. For chronic IAQ issues we also recommend pairing with a high-MERV filter and HRV if you don't have one." },
+  { q: 'Is dryer vent cleaning really necessary?', a: 'Yes — clogged dryer vents are the #1 cause of laundry-room fires (Health Canada estimates 2,000+ per year). We recommend annual cleaning, more often if you do 5+ loads/week or have a long vent run.' },
+  { q: 'How much does duct cleaning cost?', a: 'Standard 3-bedroom homes: $399-$549 for whole-home duct cleaning depending on supplies/returns count and accessibility. Dryer vent cleaning is typically $99 add-on or $129 standalone.' },
+];
+
+const longDescription =
+  "Most duct-cleaning companies use small portable vacuums and a stiff brush — leaving most of the dust behind. We use <strong>truck-mounted hospital-grade vacuums (7,500+ CFM)</strong> with HEPA-filtered exhaust. Every supply and return cleaned, sanitized, and documented with before/after photos. Typical 3-bedroom home: 3-5 hours. We can usually book within a week.";
+---
+
+<ServiceCategoryPage
+  slug="duct-cleaning"
+  title="Medical-Grade Duct Cleaning"
+  kicker="Service Category"
+  intro="Hospital-grade vacuums, HEPA-filtered process, before/after photos. The duct cleaning the chains aren't doing."
+  longDescription={longDescription}
+  services={services}
+  metaDescription="Medical-grade duct cleaning in Mississauga & the GTA. Truck-mounted 7,500+ CFM vacuums, HEPA filtration, before/after photos, dryer-vent cleaning."
+  whyUs={whyUs}
+  faqs={faqs}
+/>

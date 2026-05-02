@@ -1,0 +1,43 @@
+---
+import ServiceCategoryPage from '~/components/ServiceCategoryPage.astro';
+
+const services = [
+  { title: 'Electrical Panel Upgrades', desc: '100A → 200A panel upgrades. ESA inspection coordination included.' },
+  { title: 'Wiring & Remodelling', desc: 'New circuits and rewiring for renovations, additions and unfinished basements.' },
+  { title: 'EV Charger Installation', desc: 'Level-2 home chargers — Tesla, J1772, Stellantis Brand-X compatible.' },
+  { title: 'Generator Installation', desc: 'Standby and portable generator installation, transfer switches.' },
+  { title: 'Lighting Installation', desc: 'Recessed, pendant, accent and track lighting.' },
+  { title: 'Exterior Pot Lights', desc: 'Outdoor pot lighting for soffits, eaves, walkways, and driveways.' },
+  { title: 'Residential Inspection', desc: 'Pre-purchase electrical inspections with ESA certificate.' },
+  { title: 'Red Tag Removal', desc: 'ESA red-tag remediation and re-inspection coordination.' },
+];
+
+const whyUs = [
+  { title: 'ESA-certified contractor', desc: 'Every job pulled with the proper ESA permit and inspection.' },
+  { title: 'EV-charger specialists', desc: 'We install Level-2 chargers for every brand of EV — Tesla, Ford, GM, BMW, Stellantis, Hyundai/Kia.' },
+  { title: 'Panel-upgrade experts', desc: 'Most panel upgrades complete in a single day with minimal power downtime.' },
+  { title: 'Same-day red-tag fixes', desc: 'Real-estate closing on Friday? Most red-tag remediation done same-day.' },
+];
+
+const faqs = [
+  { q: 'Do I need a 200-amp panel upgrade?', a: "If you're adding a heat pump, EV charger, hot tub, or major addition — usually yes. Most 1960s-1980s GTA homes have 100A service, which is at capacity once you add modern loads. ESA inspection is included in our panel-upgrade quote." },
+  { q: 'How much is an EV charger install?', a: 'Typical Level-2 EV charger install on an existing 200A panel runs $1,200-$1,800 including the charger, conduit, and ESA inspection. Add $500-$1,500 if a panel upgrade is required.' },
+  { q: 'What is an ESA red tag and why do I have one?', a: "An ESA red tag is issued when an inspector finds work that doesn't meet the Ontario Electrical Safety Code. It's typically issued during a real-estate transaction or after an inspection. We can remediate most red tags within 1-2 days and coordinate the re-inspection." },
+  { q: 'Do you work with builders / contractors?', a: 'Yes — we do trade work for builders, renovators and property managers. Volume pricing available for repeat work.' },
+];
+
+const longDescription =
+  "We're an ESA-certified electrical contractor based in Mississauga. Every job pulled with the proper permit and inspection — no shortcuts. Our specialty is whole-home electrical work: <strong>panel upgrades, EV charger installation, generator installation, and full home rewiring</strong> during renovations. Need a single light fixture installed or a red tag remediated? We do those too — usually same-day.";
+---
+
+<ServiceCategoryPage
+  slug="electrical"
+  title="Electrical"
+  kicker="Service Category"
+  intro="ESA-certified electrical contractor. Panel upgrades, EV chargers, generators, lighting, residential inspections, red-tag removal — all in Mississauga and the GTA."
+  longDescription={longDescription}
+  services={services}
+  metaDescription="ESA-certified electrical work in Mississauga & the GTA: panel upgrades, EV charger installation, generators, lighting, inspections, red-tag removal."
+  whyUs={whyUs}
+  faqs={faqs}
+/>

@@ -1,0 +1,41 @@
+---
+import ServiceCategoryPage from '~/components/ServiceCategoryPage.astro';
+
+const services = [
+  { title: 'Property Management Service', desc: 'Recurring HVAC, plumbing and electrical maintenance contracts for property managers.' },
+  { title: 'Multi-Unit Residential Service', desc: 'Repeat-call service for low-rise and high-rise condo buildings, townhouse complexes, and apartments.' },
+  { title: 'Commercial HVAC', desc: 'Rooftop units, split systems, and PTAC service for commercial spaces.' },
+  { title: 'Commercial Inspections', desc: 'HVAC, plumbing and electrical inspections for commercial property transactions.' },
+  { title: 'Condo HVAC Fleet Replacement', desc: 'Coordinated PTAC / fan-coil unit replacements across an entire condo building.' },
+  { title: 'Capital Project Management', desc: 'Multi-trade capital projects: boiler replacements, riser repairs, panel upgrades.' },
+];
+
+const whyUs = [
+  { title: 'One vendor, every trade', desc: "HVAC, plumbing, electrical, renovations — one PO, one invoice, one accountable team." },
+  { title: 'After-hours work', desc: 'Most commercial work scheduled evenings or weekends to avoid tenant disruption.' },
+  { title: 'Compliance documentation', desc: 'Every job ships with permits, inspection certs, and warranty paperwork formatted for property records.' },
+  { title: 'Volume pricing', desc: 'Multi-unit and recurring-contract pricing for repeat work.' },
+];
+
+const faqs = [
+  { q: 'Do you have a service contract for property managers?', a: 'Yes — we offer monthly, quarterly and annual maintenance contracts for property managers. Includes priority scheduling, discounted repair rates, and quarterly site visits. We can size a contract to your portfolio.' },
+  { q: 'Can you replace 50+ PTAC units in a condo building?', a: "Yes — we've done this. Typical timeline: 2-3 weeks for 50 units, scheduled with property management to minimize tenant disruption. We can stage equipment on-site and complete the swaps in batches of 10-15 per day." },
+  { q: 'What hours can you work in commercial spaces?', a: 'We can schedule day, evening, weekend, or overnight shifts depending on your tenant requirements. Premium rate (1.5x) applies for nights and weekends.' },
+  { q: 'Do you carry the right insurance for commercial work?', a: 'Yes — $5M general liability, WSIB coverage on all employees, and tools/equipment insurance. Certificates of insurance available on request.' },
+];
+
+const longDescription =
+  "We work with property managers, condo boards, and commercial property owners across the GTA. <strong>One vendor, every trade — HVAC, plumbing, electrical, renovations</strong>. We carry $5M general liability, WSIB coverage, and provide formal compliance documentation on every job. Recurring maintenance contracts available for property portfolios.";
+---
+
+<ServiceCategoryPage
+  slug="commercial"
+  title="Commercial & Property Management"
+  kicker="Service Category"
+  intro="Multi-unit residential, commercial and condo property maintenance and capital projects across Mississauga and the GTA."
+  longDescription={longDescription}
+  services={services}
+  metaDescription="Commercial property maintenance, condo HVAC replacement, multi-unit service, and property-management contracts in Mississauga & the GTA. $5M general liability."
+  whyUs={whyUs}
+  faqs={faqs}
+/>

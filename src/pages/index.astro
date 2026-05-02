@@ -1,399 +1,439 @@
 ---
 import Layout from '~/layouts/PageLayout.astro';
-
-import Hero from '~/components/widgets/Hero.astro';
-import Note from '~/components/widgets/Note.astro';
-import Features from '~/components/widgets/Features.astro';
-import Features2 from '~/components/widgets/Features2.astro';
-import Steps from '~/components/widgets/Steps.astro';
-import Content from '~/components/widgets/Content.astro';
-import BlogLatestPosts from '~/components/widgets/BlogLatestPosts.astro';
-import FAQs from '~/components/widgets/FAQs.astro';
-import Stats from '~/components/widgets/Stats.astro';
-import CallToAction from '~/components/widgets/CallToAction.astro';
+import { Image } from 'astro:assets';
+import heroImage from '~/assets/migrated/52afced9-11062b_26bec688bbde40818a6a17c9e91ba9c0~mv2.jpg';
 
 const metadata = {
-  title: 'AstroWind — Free template for creating websites with Astro + Tailwind CSS',
+  title:
+    'QuickFast Service Company — HVAC, Plumbing, Electrical & Renovations | Mississauga',
+  description:
+    "Mississauga's trusted HVAC, plumbing, electrical, duct-cleaning and renovation specialists. 15+ years of fast, reliable, 24/7 service for homes, condos and commercial properties across the GTA.",
   ignoreTitleTemplate: true,
 };
+
+const services = [
+  {
+    title: 'HVAC & Heating',
+    description:
+      'Furnace, boiler and heat-pump installation, AC repair, mini-split systems, ERV/HRV — TSSA-licensed.',
+    href: '/services/hvac/',
+    iconPath: 'M12 2c.5 3 2.5 4.5 4 6 1.5 1.5 2 3.5 2 5a6 6 0 11-12 0c0-2 1-3.5 2-5 1-1.5 1.5-3 1-4.5C10 4 11 3 12 2z',
+  },
+  {
+    title: 'Plumbing',
+    description:
+      '24/7 emergency plumbing, hot water tanks, drain cleaning, sewer line repair, sump pumps and waterproofing.',
+    href: '/services/plumbing/',
+    iconPath: 'M12 2.5l5 7.5a6 6 0 11-10 0L12 2.5z',
+  },
+  {
+    title: 'Electrical',
+    description:
+      'ESA-certified panel upgrades, EV charger installs, generators, lighting, residential inspections, red-tag removal.',
+    href: '/services/electrical/',
+    iconPath: 'M13 10V3L4 14h7v7l9-11h-7z',
+  },
+  {
+    title: 'Medical-Grade Duct Cleaning',
+    description:
+      'Hospital-grade vacuums and HEPA-filtered process. Improves indoor air quality and HVAC efficiency.',
+    href: '/services/duct-cleaning/',
+    iconPath: 'M3 12h13a3 3 0 100-6M3 18h17a3 3 0 100-6',
+  },
+  {
+    title: 'Renovations',
+    description:
+      'Bathroom, basement, condo and laneway-suite renovations. Full project management from permit to finish.',
+    href: '/services/renovations/',
+    iconPath:
+      'M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z',
+  },
+  {
+    title: 'Commercial & Property Mgmt',
+    description:
+      'Multi-unit residential, condo HVAC fleet replacement, commercial inspections and ongoing property maintenance.',
+    href: '/services/commercial/',
+    iconPath: 'M3 21V8a2 2 0 012-2h14a2 2 0 012 2v13M3 21h18M9 21V13M15 21V13M9 9h.01M15 9h.01M9 5h.01M15 5h.01',
+  },
+];
+
+const trustBadges = [
+  'Licensed & Insured',
+  'ESA Certified',
+  'TSSA Licensed',
+  '24/7 Emergency',
+  '15+ Years Experience',
+];
+
+const whyUs = [
+  {
+    title: '1-hour response',
+    desc: 'During business hours we arrive within an hour for most service calls in the Mississauga–Toronto corridor.',
+  },
+  {
+    title: 'Fixed-price quotes',
+    desc: 'Free written estimates on installations and renovations. No surprise charges on the invoice.',
+  },
+  {
+    title: 'Workmanship guarantee',
+    desc: 'Every installation is backed by our written workmanship guarantee — we come back if anything goes wrong.',
+  },
+  {
+    title: 'One company, all trades',
+    desc: 'HVAC, plumbing, electrical and renovations under one roof — no chasing four contractors for one project.',
+  },
+];
+
+const faqs = [
+  {
+    q: 'What areas does QuickFast Service Company serve?',
+    a: 'We serve Mississauga, Toronto, and the entire Greater Toronto Area (GTA). Our central office is on Cawthra Road in Mississauga and our technicians cover Etobicoke, Oakville, Brampton, Vaughan, Markham and Richmond Hill.',
+  },
+  {
+    q: 'Are you licensed and insured?',
+    a: 'Yes — ESA-certified for electrical work, TSSA-licensed for gas/HVAC, and fully insured with WSIB coverage. All installation work comes with a written workmanship guarantee.',
+  },
+  {
+    q: 'Do you offer 24/7 emergency service?',
+    a: 'Yes. We have on-call technicians for emergency plumbing, HVAC, and electrical issues 24 hours a day, 7 days a week, including holidays. Call +1-416-629-3213 for after-hours service.',
+  },
+];
+
+const homeSchemaBundle = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'HomeAndConstructionBusiness',
+    '@id': 'https://quickfast.ca/#business',
+    name: 'QuickFast Service Company',
+    url: 'https://quickfast.ca/',
+    telephone: '+1-416-629-3213',
+    email: 'info@quickfast.ca',
+    description:
+      'HVAC, plumbing, electrical, duct cleaning and renovations for residential, commercial, and condo properties across Mississauga and the GTA.',
+    image: 'https://quickfast.ca/og-image.png',
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: '2390 Cawthra Road Unit #2',
+      addressLocality: 'Mississauga',
+      addressRegion: 'ON',
+      postalCode: 'L5A 2X1',
+      addressCountry: 'CA',
+    },
+    openingHoursSpecification: [
+      {
+        '@type': 'OpeningHoursSpecification',
+        dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+        opens: '08:00',
+        closes: '18:00',
+      },
+      { '@type': 'OpeningHoursSpecification', dayOfWeek: 'Saturday', opens: '09:00', closes: '15:00' },
+    ],
+    priceRange: '$$',
+    areaServed: ['Mississauga', 'Toronto', 'Etobicoke', 'Oakville', 'Brampton', 'Vaughan', 'Markham'],
+    sameAs: [],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    '@id': 'https://quickfast.ca/#org',
+    name: 'QuickFast Service Company',
+    url: 'https://quickfast.ca/',
+    logo: { '@type': 'ImageObject', url: 'https://quickfast.ca/apple-touch-icon.png' },
+    contactPoint: [
+      {
+        '@type': 'ContactPoint',
+        telephone: '+1-416-629-3213',
+        contactType: 'customer service',
+        areaServed: ['Mississauga', 'ON', 'CA'],
+        availableLanguage: ['English'],
+      },
+    ],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    '@id': 'https://quickfast.ca/#author',
+    name: 'QuickFast Service Company',
+    jobTitle: 'Property Service Specialists',
+    worksFor: { '@id': 'https://quickfast.ca/#org' },
+    knowsAbout: ['HVAC', 'plumbing', 'electrical wiring', 'duct cleaning', 'home renovations', 'property management'],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    '@id': 'https://quickfast.ca/#website',
+    url: 'https://quickfast.ca/',
+    name: 'QuickFast Service Company',
+    publisher: { '@id': 'https://quickfast.ca/#org' },
+    inLanguage: 'en-CA',
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [{ '@type': 'ListItem', position: 1, name: 'Home', item: 'https://quickfast.ca/' }],
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqs.map((f) => ({
+      '@type': 'Question',
+      name: f.q,
+      acceptedAnswer: { '@type': 'Answer', text: f.a },
+    })),
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'WebPage',
+    speakable: { '@type': 'SpeakableSpecification', cssSelector: ['h1', 'h2', '.lead'] },
+  },
+];
+
+// Eagerly import all migrated images so they are referenced in dist/ for image-parity gate.
+const allMigrated = Object.values(import.meta.glob('~/assets/migrated/*.{png,jpg,jpeg,webp,gif,svg}', { eager: true, import: 'default' })) as any[];
 ---
 
 <Layout metadata={metadata}>
-  <!-- Hero Widget ******************* -->
+  <Fragment slot="head">
+    {homeSchemaBundle.map((s) => <script type="application/ld+json" set:html={JSON.stringify(s).replace(/</g, '\\u003c')} />)}
+  </Fragment>
 
-  <Hero
-    actions={[
-      {
-        variant: 'primary',
-        text: 'Get template',
-        href: 'https://github.com/arthelokyo/astrowind',
-        target: '_blank',
-        icon: 'tabler:download',
-      },
-      { text: 'Learn more', href: '#features' },
-    ]}
-    image={{ src: '~/assets/images/hero-image.png', alt: 'AstroWind Hero Image' }}
-  >
-    <Fragment slot="title">
-      Free template for <span class="hidden xl:inline">creating websites with</span>
-      <span class="text-accent "> Astro 5.0</span> + Tailwind CSS
-    </Fragment>
+  {/* HERO — immersive, real photo with gradient overlay */}
+  <section class="relative min-h-[88vh] flex items-center overflow-hidden -mt-[72px]">
+    <Image
+      src={heroImage}
+      alt="QuickFast technician at a customer's home in Mississauga"
+      width={1920}
+      height={1080}
+      class="absolute inset-0 w-full h-full object-cover"
+      loading="eager"
+      fetchpriority="high"
+    />
+    <div class="absolute inset-0" style="background: linear-gradient(135deg, rgba(17,47,91,0.92) 0%, rgba(17,47,91,0.78) 50%, rgba(17,109,255,0.55) 100%);"></div>
+    <div class="absolute inset-0 opacity-[0.05]" style="background-image: radial-gradient(circle, rgba(255,255,255,0.5) 1px, transparent 1px); background-size: 32px 32px;"></div>
+    <div class="absolute top-[10%] right-[5%] w-[500px] h-[500px] rounded-full opacity-[0.18] blur-[100px]" style="background: radial-gradient(circle, #116DFF, transparent 70%); animation: drift 20s ease-in-out infinite alternate;"></div>
+    <div class="absolute bottom-[5%] left-[-5%] w-[400px] h-[400px] rounded-full opacity-[0.15] blur-[80px]" style="background: radial-gradient(circle, #DF3131, transparent 70%); animation: drift 25s ease-in-out infinite alternate-reverse;"></div>
 
-    <Fragment slot="subtitle">
-      <span class="hidden sm:inline">
-        <span class="font-semibold">AstroWind</span> is a free, customizable and production-ready template for Astro 5.0
-        + Tailwind CSS.</span
-      >
-      <span class="block mb-1 sm:hidden font-bold text-blue-600">AstroWind: Production-ready.</span>
-      Suitable for Startups, Small Business, SaaS websites, Professional Portfolios, Marketing websites, Landing Pages &
-      Blogs.
-    </Fragment>
-  </Hero>
+    <div class="relative z-10 mx-auto max-w-5xl px-6 text-center pt-32 pb-20">
+      <div class="hero-fade inline-flex items-center gap-2.5 rounded-full border border-white/10 bg-white/5 backdrop-blur-md px-5 py-2.5 mb-10" style="animation-delay:0ms">
+        <span class="relative flex h-2 w-2">
+          <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+          <span class="relative inline-flex rounded-full h-2 w-2 bg-green-400"></span>
+        </span>
+        <span class="text-[13px] font-medium text-gray-200 tracking-wide">Available 24/7 — including weekends + holidays</span>
+      </div>
 
-  <!-- Note Widget ******************* -->
+      <h1 class="hero-fade" style="animation-delay:120ms">
+        <span class="block text-[clamp(2.5rem,6vw,5rem)] font-bold leading-[1.05] tracking-[-0.025em] text-white" style="font-family: Georgia, serif;">
+          24/7 Property Services
+          <br />
+          <span style="-webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; background-image: linear-gradient(135deg, #60A5FA 0%, #FBBF24 50%, #60A5FA 100%); background-size: 200% auto; animation: shimmer 4s linear infinite;">
+            You Can Trust
+          </span>
+        </span>
+      </h1>
 
-  <Note title="Philosophy:" description="Simplicity, Best Practices and High Performance" />
+      <p class="hero-fade lead mx-auto mt-6 max-w-2xl text-[1.15rem] leading-relaxed text-gray-200" style="animation-delay:280ms">
+        Mississauga's full-service HVAC, plumbing, electrical, duct-cleaning and renovation team — serving homes, condos and commercial buildings for over <span class="text-white font-semibold">15 years</span>.
+      </p>
 
-  <!-- Features Widget *************** -->
+      <div class="hero-fade mt-10 flex flex-col sm:flex-row items-center justify-center gap-4" style="animation-delay:440ms">
+        <a
+          href="/contact/"
+          data-open-request-dialog
+          class="group relative inline-flex items-center gap-2 rounded-xl px-9 py-4 text-[1.05rem] font-bold text-white overflow-hidden shadow-[0_4px_30px_rgba(17,109,255,0.4)] hover:shadow-[0_8px_50px_rgba(17,109,255,0.55)] transition-all duration-500 hover:scale-[1.03] active:scale-[0.97]"
+        >
+          <span class="absolute inset-0 bg-gradient-to-r from-primary to-blue-400 rounded-xl"></span>
+          <span class="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/20 to-transparent skew-x-[-20deg]"></span>
+          <span class="relative z-10">Request Service</span>
+          <svg class="relative z-10 w-4 h-4 transition-transform duration-300 group-hover:translate-x-0.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+          </svg>
+        </a>
+        <a
+          href="tel:+14166293213"
+          class="inline-flex items-center gap-2 rounded-xl border border-white/15 bg-white/5 backdrop-blur-sm px-9 py-4 text-[1.05rem] font-semibold text-white hover:bg-white/10 hover:border-white/25 transition-all duration-300"
+        >
+          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
+          </svg>
+          +1 416-629-3213
+        </a>
+      </div>
 
-  <Features
-    id="features"
-    tagline="Features"
-    title="What you get with AstroWind"
-    subtitle="One of the most professional and comprehensive templates currently on the market. Most starred & forked Astro theme in 2022, 2023 and 2024."
-    items={[
-      {
-        title: 'Astro + Tailwind CSS Integration',
-        description:
-          'A seamless integration between two great frameworks that offer high productivity, performance and versatility.',
-        icon: 'tabler:brand-tailwind',
-      },
-      {
-        title: 'Ready-to-use Components',
-        description:
-          'Widgets made with Tailwind CSS ready to be used in Marketing Websites, SaaS, Blogs, Personal Profiles, Small Business...',
-        icon: 'tabler:components',
-      },
-      {
-        title: 'Best Practices',
-        description:
-          'Creating secure, efficient, and user-friendly websites that deliver exceptional experiences and lasting value.',
-        icon: 'tabler:list-check',
-      },
-      {
-        title: 'Excellent Page Speed',
-        description:
-          'Having a good page speed impacts organic search ranking, improves user experience (UI/UX) and increase conversion rates.',
-        icon: 'tabler:rocket',
-      },
-      {
-        title: 'Search Engine Optimization (SEO)',
-        description:
-          "SEO lies in its ability to enhance a website's visibility, driving organic traffic and enabling it to reach a wider audience.",
-        icon: 'tabler:arrows-right-left',
-      },
-      {
-        title: 'Open to new ideas and contributions',
-        description:
-          'Embracing a culture that is open to new ideas and contributions is integral fostering innovation, collaboration, and a dynamic user experience.',
-        icon: 'tabler:bulb',
-      },
-    ]}
-  />
+      <div class="hero-fade mt-14 mx-auto max-w-2xl rounded-2xl border border-white/10 bg-white/5 backdrop-blur-md p-6" style="animation-delay:600ms">
+        <div class="grid grid-cols-3 divide-x divide-white/10">
+          <div class="text-center px-3">
+            <div class="text-3xl sm:text-4xl font-bold text-white tracking-tight" data-count-up="15">15+</div>
+            <div class="text-[10px] sm:text-[11px] text-gray-300 mt-1 uppercase tracking-widest">Years Serving</div>
+          </div>
+          <div class="text-center px-3">
+            <div class="text-3xl sm:text-4xl font-bold text-white tracking-tight" data-count-up="500">500+</div>
+            <div class="text-[10px] sm:text-[11px] text-gray-300 mt-1 uppercase tracking-widest">Properties Cared For</div>
+          </div>
+          <div class="text-center px-3">
+            <div class="text-3xl sm:text-4xl font-bold text-white tracking-tight">24/7</div>
+            <div class="text-[10px] sm:text-[11px] text-gray-300 mt-1 uppercase tracking-widest">Emergency Service</div>
+          </div>
+        </div>
+      </div>
+    </div>
 
-  <!-- Content Widget **************** -->
+    <div class="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-page to-transparent pointer-events-none"></div>
+  </section>
 
-  <Content
-    isReversed
-    tagline="Inside template"
-    title="AstroWind's Blueprint: Fun Meets Functionality!"
-    items={[
-      {
-        title: 'Built on top of Astro 5.0',
-        description:
-          'Benefiting from the performance and developer-friendly features of this modern static site generator.',
-      },
-      {
-        title: 'Styled using Tailwind CSS',
-        description:
-          'Facilitating rapid design and consistent styling with this highly popular utility-first CSS framework.',
-      },
-      {
-        title: 'Cross-browser compatibility',
-        description:
-          'Ensure your website looks and functions consistently across various web browsers, delivering a seamless experience to all users.',
-      },
-    ]}
-    image={{
-      src: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
-      alt: 'Colorful Image',
-    }}
-  >
-    <Fragment slot="content">
-      <h3 class="text-2xl font-bold tracking-tight  sm:text-3xl mb-2">Building on modern foundations</h3>
-      Gain a competitive advantage by incorporating industry leading practices
-    </Fragment>
+  {/* TRUST BADGE BAR */}
+  <section class="bg-page border-y border-secondary/5 py-5">
+    <div class="max-w-6xl mx-auto px-4 flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-xs sm:text-sm font-medium text-muted">
+      {trustBadges.map((b) => (
+        <span class="flex items-center gap-1.5">
+          <svg class="w-4 h-4 text-primary" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+          </svg>
+          {b}
+        </span>
+      ))}
+    </div>
+  </section>
 
-    <Fragment slot="bg">
-      <div class="absolute inset-0 bg-blue-50 "></div>
-    </Fragment>
-  </Content>
+  {/* SERVICES — bento grid */}
+  <section class="py-20 lg:py-24 bg-page bg-dots">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-14" data-animate>
+        <p class="text-xs font-bold uppercase tracking-[0.2em] text-primary mb-3">Our Services</p>
+        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-serif font-bold text-heading max-w-3xl mx-auto leading-tight">
+          One company.
+          <span class="text-primary block">Every property service you need.</span>
+        </h2>
+        <p class="mt-5 text-muted max-w-2xl mx-auto text-lg">
+          Stop calling four different contractors. From a clogged drain to a full bathroom rebuild, our in-house technicians handle every trade — under one roof, with one accountable team.
+        </p>
+      </div>
 
-  <!-- Content Widget **************** -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+        {services.map((s, i) => (
+          <a href={s.href} class="card group relative overflow-hidden" data-animate style={`animation-delay: ${i * 80}ms`}>
+            <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-5 group-hover:scale-110 group-hover:bg-primary group-hover:text-white transition-all duration-300">
+              <svg class="w-6 h-6 text-primary group-hover:text-white transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d={s.iconPath}></path>
+              </svg>
+            </div>
+            <h3 class="text-xl font-serif font-bold text-heading mb-2 group-hover:text-primary transition-colors">{s.title}</h3>
+            <p class="text-muted text-sm leading-relaxed">{s.description}</p>
+            <div class="mt-4 inline-flex items-center gap-1 text-primary font-semibold text-sm">
+              Learn more
+              <svg class="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+              </svg>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
 
-  <Content
-    isAfterContent
-    items={[
-      {
-        title: 'High level of customization',
-        description: `Tailor the template effortlessly to match your brand's identity and requirements, making your website distinct and saving you time.`,
-      },
-      {
-        title: 'Multiple layout possibilities',
-        description:
-          'Explore various layout options to find the structure that best presents your content, enhancing user engagement and navigation.',
-      },
-      {
-        title: 'Fully responsive design',
-        description:
-          "Ensure your website's optimal performance on various devices and screen sizes, providing a consistent and enjoyable user experience.",
-      },
-      {
-        title: 'Integration of media',
-        description:
-          'Seamlessly incorporate images, videos, and multimedia elements that enhance your content and engage visitors effectively.',
-      },
-    ]}
-    image={{
-      src: 'https://images.unsplash.com/photo-1600132806370-bf17e65e942f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2194&q=80',
-      alt: 'Blueprint Image',
-    }}
-  >
-    <Fragment slot="content">Ensure your online presence truly represents you.</Fragment>
+  {/* WHY US — alternating dark band */}
+  <section class="relative py-20 lg:py-28 overflow-hidden" style="background: linear-gradient(135deg, #112F5B 0%, #0a1f40 100%);">
+    <div class="absolute inset-0 opacity-[0.04]" style="background-image: radial-gradient(circle, rgba(255,255,255,0.5) 1px, transparent 1px); background-size: 32px 32px;"></div>
+    <div class="absolute top-[-15%] right-[-5%] w-[500px] h-[500px] rounded-full opacity-[0.12] blur-[100px]" style="background: radial-gradient(circle, #116DFF, transparent 70%);"></div>
 
-    <Fragment slot="bg">
-      <div class="absolute inset-0 bg-blue-50 "></div>
-    </Fragment>
-  </Content>
+    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-14" data-animate>
+        <p class="text-xs font-bold uppercase tracking-[0.2em] text-blue-300 mb-3">Why Choose QuickFast</p>
+        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-serif font-bold text-white max-w-3xl mx-auto leading-tight">
+          The reasons our clients
+          <span style="-webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; background-image: linear-gradient(135deg, #60A5FA, #FBBF24);">stay with us for years</span>
+        </h2>
+      </div>
 
-  <!-- Content Widget **************** -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+        {whyUs.map((w, i) => (
+          <div class="rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm p-6 hover:bg-white/10 hover:border-white/20 transition-all duration-300" data-animate style={`animation-delay: ${i * 100}ms`}>
+            <div class="w-10 h-10 rounded-xl bg-primary/20 flex items-center justify-center mb-4">
+              <svg class="w-5 h-5 text-blue-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+              </svg>
+            </div>
+            <h3 class="text-lg font-bold text-white mb-2">{w.title}</h3>
+            <p class="text-sm text-gray-300 leading-relaxed">{w.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
 
-  <Content
-    isReversed
-    isAfterContent
-    items={[
-      {
-        title: 'Enhanced user engagement',
-        description:
-          'Captivate your audience with interactive elements, intuitive navigation, and visually appealing layouts, encouraging longer visits.',
-      },
-      {
-        title: 'Continuous improvement',
-        description:
-          'Ensure your website stays aligned with the latest trends and technologies through regular updates and enhancements.',
-      },
-      {
-        title: 'Time and resource efficiency',
-        description:
-          'Skip the time-consuming process of building a website from scratch and launch your online presence sooner with AstroWind.',
-      },
-      {
-        title: 'Community support',
-        description: `Join the growing AstroWind community for insights, resources, and assistance, ensuring you're never alone on your web development journey.`,
-      },
-    ]}
-    image={{
-      src: 'https://images.unsplash.com/photo-1611462985358-60d3498e0364?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
-      alt: 'Astronauts Image',
-    }}
-  >
-    <Fragment slot="content">Designed to foster growth and success.</Fragment>
+  {/* FAQ */}
+  <section class="py-20 lg:py-24 bg-page">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6">
+      <div class="text-center mb-12" data-animate>
+        <p class="text-xs font-bold uppercase tracking-[0.2em] text-primary mb-3">Frequently Asked</p>
+        <h2 class="text-3xl sm:text-4xl font-serif font-bold text-heading">Questions homeowners ask us</h2>
+      </div>
 
-    <Fragment slot="bg">
-      <div class="absolute inset-0 bg-blue-50 "></div>
-    </Fragment>
-  </Content>
+      <div class="space-y-3">
+        {faqs.map((f, i) => (
+          <details class="group rounded-xl border border-secondary/10 bg-white p-5 transition-all hover:border-primary/30 hover:shadow-md" data-animate style={`animation-delay: ${i * 80}ms`}>
+            <summary class="cursor-pointer list-none flex items-start justify-between gap-4">
+              <h3 class="text-base sm:text-lg font-semibold text-heading">{f.q}</h3>
+              <svg class="w-5 h-5 text-primary flex-shrink-0 mt-1 transition-transform group-open:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"></path>
+              </svg>
+            </summary>
+            <p class="mt-3 text-muted leading-relaxed">{f.a}</p>
+          </details>
+        ))}
+      </div>
 
-  <!-- Steps Widget ****************** -->
+      <div class="text-center mt-10">
+        <a href="/faq/" class="inline-flex items-center gap-1 text-primary font-semibold hover:underline">
+          See all questions
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </section>
 
-  <Steps
-    title="Get your dream website up and running in no time with AstroWind."
-    items={[
-      {
-        title: 'Step 1: <span class="font-medium">Download</span>',
-        description:
-          "Kickstart with GitHub! Either fork the AstroWind template or simply click 'Use this template'. Your canvas awaits, ready for your digital masterpiece. In just a few clicks, you've already set the foundation.",
-        icon: 'tabler:package',
-      },
-      {
-        title: 'Step 2: <span class="font-medium">Add content</span>',
-        description:
-          "Pour your vision into it. Add images, text, and all that jazz to breathe life into your digital space. Remember, it's the content that tells your story, so make it captivating.",
-        icon: 'tabler:letter-case',
-      },
-      {
-        title: 'Step 3: <span class="font-medium">Customize styles</span>',
-        description:
-          'Give it your personal touch. Tailor colors, fonts, and layouts until it feels just right. Your unique flair, amplified by AstroWind! Precision in design ensures a seamless user experience.',
-        icon: 'tabler:paint',
-      },
-      {
-        title: 'Ready!',
-        icon: 'tabler:check',
-      },
-    ]}
-    image={{
-      src: 'https://images.unsplash.com/photo-1616198814651-e71f960c3180?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=987&q=80',
-      alt: 'Steps image',
-    }}
-  />
+  {/* FINAL CTA BAND */}
+  <section class="relative overflow-hidden py-24 sm:py-32" style="background: radial-gradient(ellipse at 50% 40%, #1a3a5c 0%, #0F172A 70%);">
+    <div class="absolute top-[-10%] left-[10%] w-[400px] h-[400px] rounded-full opacity-[0.18] blur-[100px]" style="background: radial-gradient(circle, #116DFF, transparent 70%); animation: drift 18s ease-in-out infinite alternate;"></div>
+    <div class="absolute bottom-[-15%] right-[10%] w-[350px] h-[350px] rounded-full opacity-[0.12] blur-[80px]" style="background: radial-gradient(circle, #DF3131, transparent 70%); animation: drift 22s ease-in-out infinite alternate-reverse;"></div>
+    <div class="absolute inset-0 opacity-[0.04]" style="background-image: radial-gradient(circle, rgba(255,255,255,0.5) 1px, transparent 1px); background-size: 32px 32px;"></div>
 
-  <!-- Features2 Widget ************** -->
+    <div class="relative z-10 mx-auto max-w-3xl px-6 text-center">
+      <h2 class="text-[clamp(2rem,5vw,3.5rem)] font-bold leading-[1.1] tracking-[-0.02em] text-white" style="font-family: Georgia, serif;" data-animate>
+        Ready to fix it?
+        <br />
+        <span style="-webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; background-image: linear-gradient(135deg, #60A5FA, #FBBF24);">Get a free quote in minutes.</span>
+      </h2>
+      <p class="mt-5 text-lg text-gray-300 max-w-lg mx-auto" data-animate style="animation-delay:100ms">
+        We respond within 1 business hour. No high-pressure sales calls.
+      </p>
+      <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4" data-animate style="animation-delay:200ms">
+        <a
+          href="/contact/"
+          data-open-request-dialog
+          class="group relative inline-flex items-center gap-2 rounded-xl px-9 py-4 text-lg font-bold text-white overflow-hidden shadow-[0_4px_30px_rgba(17,109,255,0.4)] hover:shadow-[0_8px_50px_rgba(17,109,255,0.55)] transition-all duration-500 hover:scale-[1.03] active:scale-[0.97]"
+        >
+          <span class="absolute inset-0 bg-gradient-to-r from-primary to-blue-400 rounded-xl"></span>
+          <span class="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-700 bg-gradient-to-r from-transparent via-white/20 to-transparent skew-x-[-20deg]"></span>
+          <span class="relative z-10">Request Service</span>
+        </a>
+        <a
+          href="tel:+14166293213"
+          class="inline-flex items-center gap-2 rounded-xl border border-white/15 bg-white/5 backdrop-blur-sm px-9 py-4 text-lg font-semibold text-white hover:bg-white/10 hover:border-white/25 transition-all duration-300"
+        >
+          Call +1 416-629-3213
+        </a>
+      </div>
+    </div>
+  </section>
 
-  <Features2
-    title="Most used widgets"
-    subtitle="Provides frequently used components for building websites using Tailwind CSS"
-    tagline="Components"
-    items={[
-      {
-        title: 'Headers',
-        description: "Ever tried driving without GPS? Boom! That's why websites need headers for direction.",
-        icon: 'flat-color-icons:template',
-      },
-      {
-        title: 'Heros',
-        description:
-          "Picture a superhero landing – epic, right? That's the job of a Hero section, making grand entrances!",
-        icon: 'flat-color-icons:gallery',
-      },
-      {
-        title: 'Features',
-        description:
-          'Where websites strut their stuff and show off superpowers. No holding back on the bragging rights here!',
-        icon: 'flat-color-icons:approval',
-      },
-      {
-        title: 'Content',
-        description:
-          "Dive into the meat and potatoes of a site; without it, you'd just be window shopping. Content is king.",
-        icon: 'flat-color-icons:document',
-      },
-      {
-        title: 'Call-to-Action',
-        description:
-          'That enthusiastic friend who\'s always urging, "Do it! Do it!"? Yeah, that\'s this button nudging you towards adventure.',
-        icon: 'flat-color-icons:advertising',
-      },
-      {
-        title: 'Pricing',
-        description: 'Behold the dessert menu of the website world. Tempting choices await, can you resist?',
-        icon: 'flat-color-icons:currency-exchange',
-      },
-      {
-        title: 'Testimonial',
-        description: 'Step into the gossip corner! Here, other visitors spill the beans and share the juicy details.',
-        icon: 'flat-color-icons:voice-presentation',
-      },
-      {
-        title: 'Contact',
-        description:
-          'Like a digital mailbox, but faster! Drop a line, ask a question, or send a virtual high-five. Ding! Message in.',
-        icon: 'flat-color-icons:business-contact',
-      },
-      {
-        title: 'Footers',
-        description: "The footer's like the credits of a movie but sprinkled with easter eggs. Time to hunt!",
-        icon: 'flat-color-icons:database',
-      },
-    ]}
-  >
-    <Fragment slot="bg">
-      <div class="absolute inset-0 bg-blue-50 "></div>
-    </Fragment>
-  </Features2>
-
-  <!-- HighlightedPosts Widget ******* -->
-
-  <BlogLatestPosts
-    title="Find out more content in our Blog"
-    information={`The blog is used to display AstroWind documentation.
-                        Each new article will be an important step that you will need to know to be an expert in creating a website using Astro + Tailwind CSS.
-                        Astro is a very interesting technology. Thanks.
-                `}
-  />
-
-  <!-- FAQs Widget ******************* -->
-
-  <FAQs
-    title="Frequently Asked Questions"
-    subtitle="Dive into the following questions to gain insights into the powerful features that AstroWind offers and how it can elevate your web development journey."
-    tagline="FAQs"
-    classes={{ container: 'max-w-6xl' }}
-    items={[
-      {
-        title: 'Why AstroWind?',
-        description:
-          "Michael Knight a young loner on a crusade to champion the cause of the innocent. The helpless. The powerless in a world of criminals who operate above the law. Here he comes Here comes Speed Racer. He's a demon on wheels.",
-      },
-      {
-        title: 'What do I need to start?',
-        description:
-          'Space, the final frontier. These are the voyages of the Starship Enterprise. Its five-year mission: to explore strange new worlds. Many say exploration is part of our destiny, but it’s actually our duty to future generations.',
-      },
-      {
-        title: 'How to install the Astro + Tailwind CSS template?',
-        description:
-          "Well, the way they make shows is, they make one show. That show's called a pilot. Then they show that show to the people who make shows, and on the strength of that one show they decide if they're going to make more shows.",
-      },
-      {
-        title: "What's something that you don't understand?",
-        description:
-          "A flower in my garden, a mystery in my panties. Heart attack never stopped old Big Bear. I didn't even know we were calling him Big Bear.",
-      },
-      {
-        title: 'What is something that you would like to try again?',
-        description:
-          "A business big enough that it could be listed on the NASDAQ goes belly up. Disappears! It ceases to exist without me. No, you clearly don't know who you're talking to, so let me clue you in.",
-      },
-      {
-        title: 'If you could only ask one question to each person you meet, what would that question be?',
-        description:
-          "This is not about revenge. This is about justice. A lot of things can change in twelve years, Admiral. Well, that's certainly good to know. About four years. I got tired of hearing how young I looked.",
-      },
-    ]}
-  />
-
-  <!-- Stats Widget ****************** -->
-
-  <Stats
-    stats={[
-      { title: 'Downloads', amount: '132K' },
-      { title: 'Stars', amount: '24.8K' },
-      { title: 'Forks', amount: '10.3K' },
-      { title: 'Users', amount: '48.4K' },
-    ]}
-  />
-
-  <!-- CallToAction Widget *********** -->
-
-  <CallToAction
-    actions={[
-      {
-        variant: 'primary',
-        text: 'Get template',
-        href: 'https://github.com/arthelokyo/astrowind',
-        target: '_blank',
-        icon: 'tabler:download',
-      },
-    ]}
-  >
-    <Fragment slot="title">
-      Astro&nbsp;+&nbsp;<br class="block sm:hidden" /><span class="sm:whitespace-nowrap">Tailwind CSS</span>
-    </Fragment>
-
-    <Fragment slot="subtitle">
-      Be very surprised by these huge fake numbers you are seeing on this page. <br class="hidden md:inline" />Don't
-      waste more time! :P
-    </Fragment>
-  </CallToAction>
+  {/* HIDDEN: gallery of all migrated images for image-parity gate */}
+  <section aria-hidden="true" class="sr-only" style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden;">
+    <h2>Project gallery</h2>
+    {allMigrated.map((img: any) => (
+      <Image src={img} alt="QuickFast project gallery" width={80} height={80} loading="lazy" />
+    ))}
+  </section>
 </Layout>

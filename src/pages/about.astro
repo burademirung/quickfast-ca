@@ -1,228 +1,151 @@
 ---
-import Features2 from '~/components/widgets/Features2.astro';
-import Features3 from '~/components/widgets/Features3.astro';
-import Hero from '~/components/widgets/Hero.astro';
-import Stats from '~/components/widgets/Stats.astro';
-import Steps2 from '~/components/widgets/Steps2.astro';
 import Layout from '~/layouts/PageLayout.astro';
 
 const metadata = {
-  title: 'About us',
+  title: 'About QuickFast Service Company',
+  description:
+    "15+ years of HVAC, plumbing, electrical and renovation expertise serving Mississauga and the GTA. Family-owned, ESA-certified, TSSA-licensed and fully insured.",
 };
+
+const aboutSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'AboutPage',
+  name: 'About QuickFast Service Company',
+  url: 'https://quickfast.ca/about/',
+  mainEntity: { '@id': 'https://quickfast.ca/#business' },
+};
+const breadcrumb = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://quickfast.ca/' },
+    { '@type': 'ListItem', position: 2, name: 'About', item: 'https://quickfast.ca/about/' },
+  ],
+};
+
+const stats = [
+  { number: '15', suffix: '+', label: 'Years in Business' },
+  { number: '500', suffix: '+', label: 'Properties Serviced' },
+  { number: '1', suffix: 'hr', label: 'Average Response' },
+  { number: '100', suffix: '%', label: 'Workmanship Guaranteed' },
+];
+
+const principles = [
+  {
+    title: 'Show up on time',
+    desc: 'When we book a window, we keep it. If the technician will be more than 15 minutes late, you get a call — not a no-show.',
+  },
+  {
+    title: 'Quote it once',
+    desc: 'You see the price before the work starts. The number on the invoice matches the number on the quote — no surprise add-ons.',
+  },
+  {
+    title: 'Fix the cause, not the symptom',
+    desc: "If the same drain keeps clogging, we don't sell you another snake-out. We diagnose root intrusion, scale buildup or a venting issue, and solve it for good.",
+  },
+  {
+    title: 'Stand behind the work',
+    desc: 'Every installation comes with a written workmanship guarantee. If something goes wrong inside the warranty window, we come back at no charge.',
+  },
+];
 ---
 
 <Layout metadata={metadata}>
-  <!-- Hero Widget ******************* -->
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(aboutSchema).replace(/</g, '\\u003c')} />
+    <script type="application/ld+json" set:html={JSON.stringify(breadcrumb).replace(/</g, '\\u003c')} />
+  </Fragment>
 
-  <Hero
-    tagline="About us"
-    image={{
-      src: 'https://images.unsplash.com/photo-1559136555-9303baea8ebd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
-      alt: 'Caos Image',
-    }}
-  >
-    <Fragment slot="title">
-      Elevate your online presence with our <br />
-      <span class="text-accent "> Beautiful Website Templates</span>
-    </Fragment>
+  <section class="relative min-h-[55vh] flex items-center overflow-hidden -mt-[72px]" style="background: linear-gradient(135deg, #112F5B 0%, #0a1f40 100%);">
+    <div class="absolute inset-0 opacity-[0.05]" style="background-image: radial-gradient(circle, rgba(255,255,255,0.5) 1px, transparent 1px); background-size: 32px 32px;"></div>
+    <div class="absolute top-[10%] right-[5%] w-[400px] h-[400px] rounded-full opacity-[0.18] blur-[100px]" style="background: radial-gradient(circle, #116DFF, transparent 70%); animation: drift 22s ease-in-out infinite alternate;"></div>
 
-    <Fragment slot="subtitle">
-      Donec efficitur, ipsum quis congue luctus, mauris magna convallis mauris, eu auctor nisi lectus non augue. Donec
-      quis lorem non massa vulputate efficitur ac at turpis. Sed tincidunt ex a nunc convallis, et lobortis nisi tempus.
-      Suspendisse vitae nisi eget tortor luctus maximus sed non lectus.
-    </Fragment>
-  </Hero>
+    <div class="relative z-10 mx-auto max-w-4xl px-6 text-center pt-32 pb-16">
+      <p class="hero-fade text-xs font-bold uppercase tracking-[0.2em] text-blue-300 mb-3">About Us</p>
+      <h1 class="hero-fade text-4xl sm:text-5xl lg:text-6xl font-serif font-bold text-white leading-tight" style="animation-delay:120ms">
+        15 years of doing the job
+        <span class="block" style="-webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; background-image: linear-gradient(135deg, #60A5FA, #FBBF24);">the way it should be done.</span>
+      </h1>
+      <p class="hero-fade mt-6 text-lg text-gray-200 max-w-2xl mx-auto" style="animation-delay:280ms">
+        Family-owned. Mississauga-based. Trusted by homeowners, condo boards, and property managers across the GTA.
+      </p>
+    </div>
+  </section>
 
-  <!-- Stats Widget ****************** -->
+  <section class="py-20 lg:py-24 bg-page">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6">
+      <div data-animate class="prose prose-lg max-w-none">
+        <h2 class="text-3xl sm:text-4xl font-serif font-bold text-heading mb-6">Our story</h2>
+        <p class="text-lg text-default leading-relaxed mb-6">
+          QuickFast Service Company started in Mississauga in 2010 with a simple idea: most homeowners get bounced between three or four different contractors for what should be one straightforward job. A leaking water heater becomes a plumber, an electrician, and a drywall repair — three trips, three invoices, three different stories about who broke what.
+        </p>
+        <p class="text-lg text-default leading-relaxed mb-6">
+          We built QuickFast as the alternative. Every trade — HVAC, plumbing, electrical, and renovations — handled by certified technicians on our own team. One call. One quote. One company that owns the result from start to finish.
+        </p>
+        <p class="text-lg text-default leading-relaxed mb-6">
+          Fifteen years later, we maintain over 500 properties across Mississauga, Toronto, and the GTA — single-family homes, condos, and commercial buildings. We're ESA-certified for electrical work, TSSA-licensed for gas and HVAC, fully insured, and our technicians carry WSIB coverage. Every installation comes with a written workmanship guarantee.
+        </p>
+        <p class="text-lg text-default leading-relaxed">
+          We're still family-owned. The phone still gets answered by a person, not a chatbot. And our commitment hasn't changed: show up on time, quote it once, and stand behind the work.
+        </p>
+      </div>
+    </div>
+  </section>
 
-  <Stats
-    title="Statistics about us"
-    stats={[
-      { title: 'Offices', amount: '4' },
-      { title: 'Employees', amount: '248' },
-      { title: 'Templates', amount: '12' },
-      { title: 'Awards', amount: '24' },
-    ]}
-  />
+  <section class="relative py-16 sm:py-20 overflow-hidden" style="background: linear-gradient(135deg, #116DFF 0%, #112F5B 100%);">
+    <div class="absolute inset-0 opacity-[0.05]" style="background-image: radial-gradient(circle, rgba(255,255,255,0.5) 1px, transparent 1px); background-size: 32px 32px;"></div>
+    <div class="relative z-10 mx-auto max-w-5xl px-4 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+      {stats.map((s, i) => (
+        <div data-animate style={`animation-delay: ${i * 120}ms`}>
+          <p class="text-4xl md:text-5xl font-bold text-white" data-count-up={s.number}>{s.number}{s.suffix}</p>
+          <p class="mt-2 text-sm text-white/80 uppercase tracking-wider">{s.label}</p>
+        </div>
+      ))}
+    </div>
+  </section>
 
-  <!-- Features3 Widget ************** -->
+  <section class="py-20 lg:py-24 bg-page">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <div class="text-center mb-14" data-animate>
+        <p class="text-xs font-bold uppercase tracking-[0.2em] text-primary mb-3">Our Principles</p>
+        <h2 class="text-3xl sm:text-4xl font-serif font-bold text-heading">How we run every job</h2>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+        {principles.map((p, i) => (
+          <div class="card" data-animate style={`animation-delay: ${i * 100}ms`}>
+            <div class="flex items-start gap-4">
+              <div class="flex-shrink-0 w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary font-bold">
+                {i + 1}
+              </div>
+              <div>
+                <h3 class="text-xl font-serif font-bold text-heading mb-2">{p.title}</h3>
+                <p class="text-muted leading-relaxed">{p.desc}</p>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
 
-  <Features3
-    title="Our templates"
-    subtitle="Etiam scelerisque, enim eget vestibulum luctus, nibh mauris blandit nulla, nec vestibulum risus justo ut enim. Praesent lacinia diam et ante imperdiet euismod."
-    columns={3}
-    isBeforeContent={true}
-    items={[
-      {
-        title: 'Educational',
-        description:
-          'Morbi faucibus luctus quam, sit amet aliquet felis tempor id. Cras augue massa, ornare quis dignissim a, molestie vel nulla.',
-        icon: 'tabler:template',
-      },
-      {
-        title: 'Interior Design',
-        description:
-          'Vivamus porttitor, tortor convallis aliquam pretium, turpis enim consectetur elit, vitae egestas purus erat ac nunc nulla.',
-        icon: 'tabler:template',
-      },
-      {
-        title: 'Photography',
-        description:
-          'Duis sed lectus in nisl vehicula porttitor eget quis odio. Aliquam erat volutpat. Nulla eleifend nulla id sem fermentum.',
-        icon: 'tabler:template',
-      },
-    ]}
-  />
+  <section class="py-16 bg-secondary text-white">
+    <div class="max-w-4xl mx-auto px-4 text-center">
+      <h2 class="text-2xl sm:text-3xl font-serif font-bold mb-8" data-animate>Credentials & Memberships</h2>
+      <ul class="flex flex-wrap items-center justify-center gap-3 text-sm" data-animate>
+        <li class="px-4 py-2 rounded-full border border-white/15 bg-white/5">ESA Certified Electrical Contractor</li>
+        <li class="px-4 py-2 rounded-full border border-white/15 bg-white/5">TSSA Licensed Gas / HVAC</li>
+        <li class="px-4 py-2 rounded-full border border-white/15 bg-white/5">WSIB Coverage</li>
+        <li class="px-4 py-2 rounded-full border border-white/15 bg-white/5">Fully Insured</li>
+        <li class="px-4 py-2 rounded-full border border-white/15 bg-white/5">Workmanship Guarantee</li>
+      </ul>
+    </div>
+  </section>
 
-  <!-- Features3 Widget ************** -->
-
-  <Features3
-    columns={3}
-    isAfterContent={true}
-    items={[
-      {
-        title: 'E-commerce',
-        description:
-          'Rutrum non odio at vehicula. Proin ipsum justo, dignissim in vehicula sit amet, dignissim id quam. Sed ac tincidunt sapien.',
-        icon: 'tabler:template',
-      },
-      {
-        title: 'Blog',
-        description:
-          'Nullam efficitur volutpat sem sed fringilla. Suspendisse et enim eu orci volutpat laoreet ac vitae libero.',
-        icon: 'tabler:template',
-      },
-      {
-        title: 'Business',
-        description:
-          'Morbi et elit finibus, facilisis justo ut, pharetra ipsum. Donec efficitur, ipsum quis congue luctus, mauris magna.',
-        icon: 'tabler:template',
-      },
-      {
-        title: 'Branding',
-        description:
-          'Suspendisse vitae nisi eget tortor luctus maximus sed non lectus. Cras malesuada pretium placerat. Nullam venenatis dolor a ante rhoncus.',
-        icon: 'tabler:template',
-      },
-      {
-        title: 'Medical',
-        description:
-          'Vestibulum malesuada lacus id nibh posuere feugiat. Nam volutpat nulla a felis ultrices, id suscipit mauris congue. In hac habitasse platea dictumst.',
-        icon: 'tabler:template',
-      },
-      {
-        title: 'Fashion Design',
-        description:
-          'Maecenas eu tellus eget est scelerisque lacinia et a diam. Aliquam velit lorem, vehicula id fermentum et, rhoncus et purus.',
-        icon: 'tabler:template',
-      },
-    ]}
-    image={{
-      src: 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80',
-      alt: 'Colorful Image',
-    }}
-  />
-
-  <!-- Steps2 Widget ****************** -->
-
-  <Steps2
-    title="Our values"
-    subtitle="Maecenas eu tellus eget est scelerisque lacinia et a diam. Aliquam velit lorem, vehicula id fermentum et, rhoncus et purus. Nulla facilisi. Vestibulum malesuada lacus."
-    items={[
-      {
-        title: 'Customer-centric approach',
-        description:
-          'Donec id nibh neque. Quisque et fermentum tortor. Fusce vitae dolor a mauris dignissim commodo. Ut eleifend luctus condimentum.',
-      },
-      {
-        title: 'Constant Improvement',
-        description:
-          'Phasellus laoreet fermentum venenatis. Vivamus dapibus pulvinar arcu eget mattis. Fusce eget mauris leo.',
-      },
-      {
-        title: 'Ethical Practices',
-        description:
-          'Vestibulum imperdiet libero et lectus molestie, et maximus augue porta. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.',
-      },
-    ]}
-  />
-
-  <!-- Steps2 Widget ****************** -->
-
-  <Steps2
-    title="Achievements"
-    subtitle="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi sagittis, quam nec venenatis lobortis, mi risus tempus nulla, sed porttitor est nibh at nulla."
-    isReversed={true}
-    callToAction={{
-      text: 'See more',
-      href: '/',
-    }}
-    items={[
-      {
-        title: 'Global reach',
-        description: 'Nam malesuada urna in enim imperdiet tincidunt. Phasellus non tincidunt nisi, at elementum mi.',
-        icon: 'tabler:globe',
-      },
-      {
-        title: 'Positive customer feedback and reviews',
-        description:
-          'Cras semper nulla leo, eget laoreet erat cursus sed. Praesent faucibus massa in purus iaculis dictum.',
-        icon: 'tabler:message-star',
-      },
-      {
-        title: 'Awards and recognition as industry experts',
-        description:
-          'Phasellus lacinia cursus velit, eu malesuada magna pretium eu. Etiam aliquet tellus purus, blandit lobortis ex rhoncus vitae.',
-        icon: 'tabler:award',
-      },
-    ]}
-  />
-
-  <!-- Features2 Widget ************** -->
-
-  <Features2
-    title="Our locations"
-    tagline="Find us"
-    columns={4}
-    items={[
-      {
-        title: 'EE.UU',
-        description: '1234 Lorem Ipsum St, 12345, Miami',
-      },
-      {
-        title: 'Spain',
-        description: '5678 Lorem Ipsum St, 56789, Madrid',
-      },
-      {
-        title: 'Australia',
-        description: '9012 Lorem Ipsum St, 90123, Sydney',
-      },
-      {
-        title: 'Brazil',
-        description: '3456 Lorem Ipsum St, 34567, São Paulo',
-      },
-    ]}
-  />
-
-  <!-- Features2 Widget ************** -->
-
-  <Features2
-    title="Technical Support"
-    tagline="Contact us"
-    columns={2}
-    items={[
-      {
-        title: 'Chat with us',
-        description:
-          'Integer luctus laoreet libero, auctor varius purus rutrum sit amet. Ut nec molestie nisi, quis eleifend mi.',
-        icon: 'tabler:messages',
-      },
-      {
-        title: 'Call us',
-        description:
-          'Mauris faucibus finibus orci, in posuere elit viverra non. In hac habitasse platea dictumst. Cras lobortis metus a hendrerit congue.',
-        icon: 'tabler:headset',
-      },
-    ]}
-  />
+  <section class="py-20 bg-page">
+    <div class="max-w-3xl mx-auto px-4 text-center" data-animate>
+      <h2 class="text-3xl sm:text-4xl font-serif font-bold text-heading mb-4">Work with us</h2>
+      <p class="text-lg text-muted mb-8">Get a free written quote within one business hour.</p>
+      <a href="/contact/" data-open-request-dialog class="btn-primary">Request Service</a>
+    </div>
+  </section>
 </Layout>

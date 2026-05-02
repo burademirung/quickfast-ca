@@ -1,0 +1,45 @@
+---
+import ServiceCategoryPage from '~/components/ServiceCategoryPage.astro';
+
+const services = [
+  { title: 'Air Conditioning Installation', desc: 'Central AC and ductless installs, brand-agnostic, with permits and rebate paperwork handled.' },
+  { title: 'AC Maintenance', desc: 'Annual tune-up: coil clean, refrigerant check, electrical inspection, condensate flush.' },
+  { title: 'AC Repair', desc: 'Same-day repair on most makes — capacitors, contactors, blower motors, refrigerant leaks.' },
+  { title: 'Furnace Installation', desc: 'High-efficiency gas furnace replacement. Rebate paperwork prepared on your behalf.' },
+  { title: 'Boiler Installation', desc: 'Combi and standalone boilers for radiator, baseboard, and in-floor heat.' },
+  { title: 'Heat Pump Installation', desc: 'Cold-climate heat pumps eligible for the federal Greener Homes Grant + Ontario rebates.' },
+  { title: 'Mini-Split Installation', desc: 'Ductless heating and cooling for additions, basements, and laneway suites.' },
+  { title: 'Thermostat', desc: 'Smart thermostat installation and zoning configuration (Nest, Ecobee, Honeywell).' },
+  { title: 'ERV / HRV Systems', desc: 'Energy-recovery ventilation for tight modern homes — improves IAQ without losing heat.' },
+  { title: 'Humidifiers / Dehumidifiers', desc: 'Whole-home humidity control integrated with your HVAC.' },
+];
+
+const whyUs = [
+  { title: 'TSSA-licensed', desc: 'All gas + HVAC work performed by TSSA-licensed technicians.' },
+  { title: 'Brand-agnostic', desc: 'We install Lennox, Carrier, Trane, Goodman, Bosch, Mitsubishi — whatever fits.' },
+  { title: '12-month workmanship guarantee', desc: 'Plus pass-through manufacturer warranty (5-12 years on equipment).' },
+  { title: 'Rebate paperwork included', desc: 'We file Greener Homes, IESO, and gas-utility rebate forms on your behalf.' },
+];
+
+const faqs = [
+  { q: 'When should I replace my furnace?', a: 'Most gas furnaces last 15-20 years. If yours is 15+ years old, has rising repair costs, or your heating bills are climbing year-over-year, it may be time to replace. We offer free energy-efficiency comparisons.' },
+  { q: 'Are heat pumps worth it in Ontario?', a: 'Modern cold-climate heat pumps work efficiently down to -25°C and qualify for the federal Greener Homes Grant ($5,000) plus Ontario rebates. For most GTA homes, a heat pump + small backup gas furnace ("dual-fuel") is the most efficient combo.' },
+  { q: 'How often should I service my AC?', a: 'Annually, before peak summer. A spring tune-up extends equipment life, prevents breakdowns during heat waves, and keeps your warranty valid.' },
+  { q: 'Do you offer financing on furnaces and AC?', a: 'Yes — through our partner Snap Financial. Most installations qualify for 0% promotional financing or low-interest installment plans.' },
+];
+
+const longDescription =
+  "We've installed and serviced thousands of HVAC systems across Mississauga and the GTA over the past 15 years. Our TSSA-licensed technicians work on gas furnaces, central AC, mini-splits, boilers, heat pumps, and full ventilation systems — every brand. Most repairs are completed same-day; installations are typically scheduled within a week. <strong>Need it before tonight?</strong> Our 24/7 emergency line gets you a technician within 2-4 hours.";
+---
+
+<ServiceCategoryPage
+  slug="hvac"
+  title="HVAC & Heating"
+  kicker="Service Category"
+  intro="TSSA-licensed installation and service for furnaces, boilers, heat pumps, AC, mini-splits and ventilation across Mississauga and the GTA."
+  longDescription={longDescription}
+  services={services}
+  metaDescription="HVAC, furnace, AC, heat pump, boiler installation and repair in Mississauga & the GTA. TSSA-licensed, 24/7 service, rebate paperwork included."
+  whyUs={whyUs}
+  faqs={faqs}
+/>

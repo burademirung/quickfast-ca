@@ -1,0 +1,12 @@
+{
+  "name": "QuickFast Service Company",
+  "short_name": "QuickFast",
+  "icons": [
+    { "src": "/favicon.svg", "type": "image/svg+xml", "sizes": "any" },
+    { "src": "/apple-touch-icon.png", "type": "image/png", "sizes": "180x180" }
+  ],
+  "theme_color": "#112F5B",
+  "background_color": "#FAF9F6",
+  "display": "standalone",
+  "start_url": "/"
+}

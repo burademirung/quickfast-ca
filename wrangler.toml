@@ -1,0 +1,7 @@
+name = "quickfast-ca"
+compatibility_date = "2026-04-01"
+pages_build_output_dir = "./dist"
+
+[[kv_namespaces]]
+binding = "CLIENT_SCHEMAS"
+id = "34b358516e744248b4c33ae265e42811"

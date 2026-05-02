@@ -1,23 +1,30 @@
 ---
-import Layout from '~/layouts/Layout.astro';
-import { getHomePermalink } from '~/utils/permalinks';
+import Layout from '~/layouts/PageLayout.astro';
 
-const title = `Error 404`;
+const metadata = {
+  title: 'Page not found',
+  description: "The page you're looking for has moved or doesn't exist.",
+  robots: { index: false, follow: false },
+};
 ---
 
-<Layout metadata={{ title }}>
-  <section class="flex items-center h-full p-16">
-    <div class="container flex flex-col items-center justify-center px-5 mx-auto my-8">
-      <div class="max-w-md text-center">
-        <h2 class="mb-8 font-bold text-9xl">
-          <span class="sr-only">Error</span>
-          <span class="text-primary">404</span>
-        </h2>
-        <p class="text-3xl font-semibold md:text-3xl">Sorry, we couldn't find this page.</p>
-        <p class="mt-4 mb-8 text-lg text-muted ">
-          But dont worry, you can find plenty of other things on our homepage.
-        </p>
-        <a rel="noopener noreferrer" href={getHomePermalink()} class="btn ml-4">Back to homepage</a>
+<Layout metadata={metadata}>
+  <section class="relative min-h-[80vh] flex items-center overflow-hidden -mt-[72px]" style="background: linear-gradient(135deg, #112F5B 0%, #0a1f40 100%);">
+    <div class="absolute inset-0 opacity-[0.05]" style="background-image: radial-gradient(circle, rgba(255,255,255,0.5) 1px, transparent 1px); background-size: 32px 32px;"></div>
+    <div class="absolute top-[10%] right-[5%] w-[400px] h-[400px] rounded-full opacity-[0.18] blur-[100px]" style="background: radial-gradient(circle, #116DFF, transparent 70%); animation: drift 22s ease-in-out infinite alternate;"></div>
+
+    <div class="relative z-10 mx-auto max-w-2xl px-6 text-center">
+      <p class="text-[8rem] sm:text-[12rem] font-black leading-none mb-4" style="-webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; background-image: linear-gradient(135deg, #60A5FA, #FBBF24);">
+        404
+      </p>
+      <h1 class="text-3xl sm:text-4xl font-serif font-bold text-white mb-4">Page not found</h1>
+      <p class="text-lg text-gray-300 mb-10 max-w-md mx-auto">
+        We probably moved this page or renamed it during our recent site rebuild. Try one of these instead:
+      </p>
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-3">
+        <a href="/" class="btn-primary">Back home</a>
+        <a href="/services/" class="inline-flex items-center gap-2 rounded-xl border border-white/15 bg-white/5 px-9 py-4 text-base font-semibold text-white hover:bg-white/10 transition">All services</a>
+        <a href="/contact/" data-open-request-dialog class="inline-flex items-center gap-2 rounded-xl border border-white/15 bg-white/5 px-9 py-4 text-base font-semibold text-white hover:bg-white/10 transition">Contact us</a>
       </div>
     </div>
   </section>

@@ -1,0 +1,41 @@
+---
+import ServiceCategoryPage from '~/components/ServiceCategoryPage.astro';
+
+const services = [
+  { title: 'Bathroom Renovations', desc: 'Full bathroom rebuilds: plumbing rough-in, tile, fixtures, vanities, ventilation.' },
+  { title: 'Basement Renovations', desc: 'Finished basement: framing, electrical, plumbing rough-in, HVAC, drywall, paint.' },
+  { title: 'Condo Renovations', desc: 'Condo-spec compliant rebuilds with property-management coordination.' },
+  { title: 'Laneway Suite Renovations', desc: 'Laneway suite design-build, including HVAC, plumbing, electrical and finishing.' },
+  { title: 'Home Renovations', desc: 'Whole-home and addition renovations.' },
+  { title: 'General Construction', desc: 'Smaller construction work and handyman projects.' },
+];
+
+const whyUs = [
+  { title: 'In-house trades', desc: 'HVAC, plumbing and electrical all done by our own team — no scheduling conflicts.' },
+  { title: 'Permit handling', desc: 'We pull permits, schedule inspections, and coordinate with the city / condo board.' },
+  { title: 'Fixed-price quotes', desc: 'Itemized written quote covers everything — equipment, labour, permits, disposal, taxes.' },
+  { title: 'Workmanship guarantee', desc: 'Every renovation comes with a 12-month workmanship guarantee on labour.' },
+];
+
+const faqs = [
+  { q: 'How long does a bathroom renovation take?', a: '2-4 weeks for a typical full-gut bathroom — depending on tile complexity, fixture lead times, and whether the layout changes (which moves plumbing). We provide a written timeline with the quote.' },
+  { q: 'Do I need a permit?', a: "Most bathroom renovations don't (cosmetic) but plumbing/electrical changes do. Basement finishings and additions always do. Condo renos require board approval. We handle all permitting — it's part of the quote." },
+  { q: "What's a laneway suite?", a: "A small detached secondary dwelling unit on the laneway side of a Toronto residential property — a 2024 zoning change that lets homeowners add a rental unit. We design and build them turnkey, typically $250-450K depending on size and finishes." },
+  { q: 'Do you take on small jobs?', a: 'Yes — single-room work, tile repair, deck rebuilds, fence work, drywall patching. Our handyman rate is $145/hour with a 1-hour minimum.' },
+];
+
+const longDescription =
+  "Renovations are where most contractors fall apart — schedule overruns, blown budgets, three subcontractors blaming each other when something goes wrong. We do it differently: <strong>HVAC, plumbing, electrical and renovations all under one roof, with our own technicians</strong>. One project manager, one quote, one accountable team. From a single bathroom rebuild to a full laneway suite, we handle permits, design, build and finish.";
+---
+
+<ServiceCategoryPage
+  slug="renovations"
+  title="Renovations & Construction"
+  kicker="Service Category"
+  intro="Bathroom, basement, condo and laneway-suite renovations across Mississauga and the GTA. Permits handled, in-house trades, fixed-price quotes."
+  longDescription={longDescription}
+  services={services}
+  metaDescription="Bathroom, basement, condo and laneway-suite renovations in Mississauga & the GTA. Permits handled, in-house HVAC + plumbing + electrical, fixed-price quotes."
+  whyUs={whyUs}
+  faqs={faqs}
+/>

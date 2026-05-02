@@ -1,0 +1,67 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+
+const updated = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+const metadata = {
+  title: 'Terms of Service',
+  description: 'QuickFast Service Company terms of service. Last updated ' + updated + '.',
+};
+const breadcrumb = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://quickfast.ca/' },
+    { '@type': 'ListItem', position: 2, name: 'Terms', item: 'https://quickfast.ca/terms/' },
+  ],
+};
+---
+
+<Layout metadata={metadata}>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(breadcrumb).replace(/</g, '\\u003c')} />
+  </Fragment>
+
+  <section class="bg-secondary text-white py-16 -mt-[72px] pt-32">
+    <div class="max-w-3xl mx-auto px-4 text-center">
+      <h1 class="text-4xl sm:text-5xl font-serif font-bold">Terms of Service</h1>
+      <p class="text-white/70 mt-3">Last updated: {updated}</p>
+    </div>
+  </section>
+
+  <article class="py-16 lg:py-20 bg-page">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 prose prose-lg max-w-none">
+      <h2 class="text-2xl font-serif font-bold text-heading mt-0 mb-3">1. Services</h2>
+      <p>QuickFast Service Company provides HVAC, plumbing, electrical, duct cleaning, renovation and property-management services in Mississauga and the Greater Toronto Area. Specific scope, deliverables and price are documented in a written quote provided before work begins.</p>
+
+      <h2 class="text-2xl font-serif font-bold text-heading mt-10 mb-3">2. Quotes & estimates</h2>
+      <p>Written quotes are valid for 30 days from issue. Quotes assume access to the work area, no concealed conditions, and standard permitting timelines. Discovery of concealed conditions (e.g., hidden code violations, asbestos, undisclosed structural work) may require a change-order signed by the client before work continues.</p>
+
+      <h2 class="text-2xl font-serif font-bold text-heading mt-10 mb-3">3. Payment</h2>
+      <p>Service-call repair work is invoiced on completion. Installations and renovations follow a standard schedule: 30% deposit on contract signing, 30% on rough-in, 30% on substantial completion, 10% on final inspection. We accept Visa, Mastercard, AmEx, e-transfer, cheque and cash. Overdue invoices accrue 1.5% per month after 30 days.</p>
+
+      <h2 class="text-2xl font-serif font-bold text-heading mt-10 mb-3">4. Workmanship guarantee</h2>
+      <p>All installation labour is guaranteed for 12 months from substantial completion. If installed equipment fails due to our workmanship inside the warranty window, we return at no charge to repair or replace the affected component. Equipment manufacturer warranties are passed through directly from the manufacturer.</p>
+
+      <h2 class="text-2xl font-serif font-bold text-heading mt-10 mb-3">5. Cancellation</h2>
+      <p>Service calls can be cancelled or rescheduled up to 24 hours in advance with no charge. Less than 24 hours, a $50 short-notice fee applies. Installation contracts can be cancelled within 10 days of signing under the Ontario Consumer Protection Act for a full refund of any deposit.</p>
+
+      <h2 class="text-2xl font-serif function-bold text-heading mt-10 mb-3">6. Limitation of liability</h2>
+      <p>Our liability is limited to the amount paid for the services performed. We are not liable for indirect, incidental, or consequential damages, including lost rental income or business interruption, except where prohibited by law. Nothing in these terms limits liability for personal injury caused by our negligence.</p>
+
+      <h2 class="text-2xl font-serif font-bold text-heading mt-10 mb-3">7. Permits & inspections</h2>
+      <p>Where work requires a permit (electrical, gas, plumbing, structural), we obtain the permit on behalf of the client and arrange the inspection. Permit fees are itemized on the quote and invoice.</p>
+
+      <h2 class="text-2xl font-serif font-bold text-heading mt-10 mb-3">8. Governing law</h2>
+      <p>These terms are governed by the laws of the Province of Ontario, Canada. Any dispute will be resolved in the courts of the Region of Peel.</p>
+
+      <h2 class="text-2xl font-serif font-bold text-heading mt-10 mb-3">9. Changes</h2>
+      <p>These terms may be updated. The "Last updated" date reflects the most recent revision. Continued engagement constitutes acceptance.</p>
+
+      <h2 class="text-2xl font-serif font-bold text-heading mt-10 mb-3">10. Contact</h2>
+      <p>QuickFast Service Company<br />
+      2390 Cawthra Road Unit #2<br />
+      Mississauga, ON, L5A 2X1<br />
+      <a href="tel:+14166293213">+1-416-629-3213</a> · <a href="mailto:info@quickfast.ca">info@quickfast.ca</a></p>
+    </div>
+  </article>
+</Layout>
