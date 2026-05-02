@@ -1,0 +1,140 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+
+export interface Props {
+  data: {
+    slug: string;
+    route: string;
+    cat: string;
+    title: string;
+    desc: string;
+    h1: string;
+    wordcount: number;
+    body: string;
+  };
+  parentLabel?: string;
+  parentRoute?: string;
+}
+
+const { data, parentLabel = 'Services', parentRoute = '/services/' } = Astro.props;
+
+const metadata = {
+  title: data.title,
+  description: data.desc.slice(0, 160) || `${data.title} in Mississauga and the GTA — by QuickFast Service Company.`,
+};
+
+// Convert markdown to HTML (lightweight inline)
+function mdToHtml(md: string): string {
+  let h = md
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+  // Strip Wix image markdown ![alt](url) — we don't proxy old Wix CDN images
+  h = h.replace(/!\[[^\]]*\]\([^)]+\)/g, '');
+  // Headings
+  h = h.replace(/^### (.+)$/gm, '<h3>$1</h3>');
+  h = h.replace(/^## (.+)$/gm, '<h2>$1</h2>');
+  h = h.replace(/^# (.+)$/gm, '<h2>$1</h2>'); // demote stray h1's
+  // Bold/italic
+  h = h.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+  // Links — only allow safe relative or http(s) links
+  h = h.replace(/\[(.+?)\]\(([^)]+)\)/g, (_, t, url) => {
+    if (!/^(https?:\/\/|\/|tel:|mailto:|#)/i.test(url)) return t;
+    const ext = url.startsWith('http') ? ' target="_blank" rel="noopener noreferrer"' : '';
+    return `<a href="${url}"${ext}>${t}</a>`;
+  });
+  // Lists
+  h = h.replace(/^(?:[*-])\s+(.+)$/gm, '<li>$1</li>');
+  h = h.replace(/(<li>[\s\S]*?<\/li>(?:\n<li>[\s\S]*?<\/li>)*)/g, '<ul>$1</ul>');
+  // Paragraphs (split on blank lines, wrap text-only chunks)
+  const paragraphs = h
+    .split(/\n{2,}/)
+    .map((p) => p.trim())
+    .filter(Boolean)
+    .map((p) => (p.startsWith('<') ? p : `<p>${p.replace(/\n/g, ' ')}</p>`));
+  return paragraphs.join('\n');
+}
+
+const bodyHtml = mdToHtml(data.body);
+
+const breadcrumb = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://quickfast.ca/' },
+    { '@type': 'ListItem', position: 2, name: parentLabel, item: 'https://quickfast.ca' + parentRoute },
+    { '@type': 'ListItem', position: 3, name: data.title, item: 'https://quickfast.ca' + data.route },
+  ],
+};
+
+const serviceSchema = data.cat !== 'blog' && data.cat !== 'standalone'
+  ? {
+      '@context': 'https://schema.org',
+      '@type': 'Service',
+      name: data.title,
+      description: data.desc,
+      serviceType: data.title,
+      provider: {
+        '@type': 'HomeAndConstructionBusiness',
+        '@id': 'https://quickfast.ca/#business',
+        name: 'QuickFast Service Company',
+      },
+      areaServed: ['Mississauga', 'Toronto', 'Etobicoke', 'Oakville', 'Brampton', 'Vaughan'].map((c) => ({
+        '@type': 'City',
+        name: c,
+      })),
+    }
+  : null;
+---
+
+<Layout metadata={metadata}>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(breadcrumb).replace(/</g, '\\u003c')} />
+    {serviceSchema && <script type="application/ld+json" set:html={JSON.stringify(serviceSchema).replace(/</g, '\\u003c')} />}
+  </Fragment>
+
+  <section class="relative min-h-[40vh] flex items-center overflow-hidden" style="background: linear-gradient(135deg, #112F5B 0%, #0a1f40 100%);">
+    <div class="absolute inset-0 opacity-[0.05]" style="background-image: radial-gradient(circle, rgba(255,255,255,0.5) 1px, transparent 1px); background-size: 32px 32px;"></div>
+    <div class="absolute top-[10%] right-[5%] w-[400px] h-[400px] rounded-full opacity-[0.18] blur-[100px]" style="background: radial-gradient(circle, #116DFF, transparent 70%); animation: drift 22s ease-in-out infinite alternate;"></div>
+
+    <div class="relative z-10 mx-auto max-w-4xl px-6 pt-24 pb-12">
+      <nav aria-label="breadcrumb" class="text-xs uppercase tracking-widest text-blue-300 mb-4 hero-fade">
+        <a href="/" class="hover:underline">Home</a>
+        <span class="mx-2 text-white/30">/</span>
+        <a href={parentRoute} class="hover:underline">{parentLabel}</a>
+        <span class="mx-2 text-white/30">/</span>
+        <span>{data.title}</span>
+      </nav>
+      <h1 class="hero-fade text-3xl sm:text-4xl lg:text-5xl font-serif font-bold text-white leading-tight" style="animation-delay:120ms">
+        {data.title}
+      </h1>
+      {data.desc && (
+        <p class="hero-fade mt-5 text-lg text-gray-200 max-w-2xl" style="animation-delay:280ms">
+          {data.desc.slice(0, 200)}
+        </p>
+      )}
+      <div class="hero-fade mt-7 flex flex-wrap gap-3" style="animation-delay:440ms">
+        <a href="/contact/" data-open-request-dialog class="btn-primary">Request a quote</a>
+        <a href="tel:+14166293213" class="inline-flex items-center gap-2 rounded-xl border border-white/15 bg-white/5 px-7 py-3.5 text-base font-semibold text-white hover:bg-white/10 transition">+1 416-629-3213</a>
+      </div>
+    </div>
+  </section>
+
+  <article class="py-16 lg:py-20 bg-page">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6">
+      <div class="prose prose-lg max-w-none prose-headings:font-serif prose-headings:text-heading prose-h2:text-3xl prose-h2:mt-12 prose-h2:mb-4 prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-3 prose-p:text-default prose-p:leading-relaxed prose-li:text-default prose-strong:text-heading prose-a:text-primary" data-animate set:html={bodyHtml} />
+    </div>
+  </article>
+
+  <section class="py-16 bg-secondary text-white text-center">
+    <div class="max-w-2xl mx-auto px-4" data-animate>
+      <h2 class="text-2xl sm:text-3xl font-serif font-bold mb-4">Ready to start?</h2>
+      <p class="text-white/80 mb-6">We respond within 1 business hour during business hours, 24/7 for emergencies.</p>
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-3">
+        <a href="/contact/" data-open-request-dialog class="btn-primary">Request Service</a>
+        <a href="tel:+14166293213" class="inline-flex items-center gap-2 rounded-xl border border-white/15 bg-white/5 px-9 py-4 text-base font-semibold text-white hover:bg-white/10 transition">Call +1 416-629-3213</a>
+      </div>
+    </div>
+  </section>
+</Layout>

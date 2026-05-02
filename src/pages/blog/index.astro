@@ -1,11 +1,20 @@
 ---
 import Layout from '~/layouts/PageLayout.astro';
+import postWhy from '~/data/details/post-why-you-should-schedule-your-ac-installation-today.json';
+import post10 from '~/data/details/post-10-benefits-of-choosing-quickfast-for-your-ac-installation.json';
+import postEssential from '~/data/details/post-essential-tips-for-ac-maintenance-before-summer-starts.json';
 
 const metadata = {
   title: 'Blog — HVAC, Plumbing & Property Tips',
   description:
     'Practical advice from QuickFast Service Company technicians: when to repair vs. replace, seasonal maintenance, rebate guides, and emergency tips.',
 };
+
+const articles = [
+  { ...postWhy, publishDate: '2025-09-15' },
+  { ...post10, publishDate: '2025-08-22' },
+  { ...postEssential, publishDate: '2025-04-10' },
+];
 
 const breadcrumb = {
   '@context': 'https://schema.org',
@@ -24,7 +33,7 @@ const breadcrumb = {
 
   <section class="relative min-h-[40vh] flex items-center overflow-hidden" style="background: linear-gradient(135deg, #112F5B 0%, #0a1f40 100%);">
     <div class="absolute inset-0 opacity-[0.05]" style="background-image: radial-gradient(circle, rgba(255,255,255,0.5) 1px, transparent 1px); background-size: 32px 32px;"></div>
-    <div class="relative z-10 mx-auto max-w-3xl px-6 text-center pt-32 pb-12">
+    <div class="relative z-10 mx-auto max-w-3xl px-6 text-center pt-24 pb-12">
       <p class="hero-fade text-xs font-bold uppercase tracking-[0.2em] text-blue-300 mb-3">Blog</p>
       <h1 class="hero-fade text-4xl sm:text-5xl font-serif font-bold text-white" style="animation-delay:120ms">From the workshop</h1>
       <p class="hero-fade mt-4 text-lg text-gray-300" style="animation-delay:280ms">
@@ -35,16 +44,24 @@ const breadcrumb = {
 
   <section class="py-16 lg:py-20 bg-page">
     <div class="max-w-6xl mx-auto px-4 sm:px-6">
-      <div id="recent-articles-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        <div id="loading-state" class="col-span-full text-center text-muted py-12">
-          <p>Loading articles…</p>
-        </div>
-      </div>
-
-      <div id="empty-state" class="hidden text-center py-16 max-w-md mx-auto">
-        <p class="text-2xl font-serif font-bold text-heading mb-2">Articles coming soon</p>
-        <p class="text-muted mb-6">We're building out a knowledge base on HVAC, plumbing, electrical, and home maintenance. Check back soon — or get in touch if you have a specific question.</p>
-        <a href="/contact/" data-open-request-dialog class="btn-primary">Ask a question</a>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {articles.map((a, i) => (
+          <a href={a.route} class="card group block" data-animate style={`animation-delay: ${i * 80}ms`}>
+            <p class="text-xs text-muted font-medium uppercase tracking-wide mb-2">
+              {new Date(a.publishDate).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}
+            </p>
+            <h3 class="text-xl font-serif font-bold text-heading group-hover:text-primary transition-colors mb-3">
+              {a.title}
+            </h3>
+            <p class="text-sm text-muted leading-relaxed line-clamp-3">{a.desc.slice(0, 180)}</p>
+            <span class="inline-flex items-center gap-1 text-primary font-semibold text-sm mt-4">
+              Read more
+              <svg class="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6"/>
+              </svg>
+            </span>
+          </a>
+        ))}
       </div>
     </div>
   </section>
@@ -56,56 +73,4 @@ const breadcrumb = {
       <a href="/contact/" data-open-request-dialog class="btn-primary">Request Service</a>
     </div>
   </section>
-
-  <script>
-    (async () => {
-      try {
-        const res = await fetch('/api/recent-articles?limit=24');
-        const data = await res.json();
-        const articles = data.articles || [];
-        const grid = document.getElementById('recent-articles-grid');
-        const loading = document.getElementById('loading-state');
-        const empty = document.getElementById('empty-state');
-        loading?.remove();
-        if (!grid) return;
-        if (articles.length === 0) {
-          grid.classList.add('hidden');
-          empty?.classList.remove('hidden');
-          return;
-        }
-        for (const a of articles) {
-          const card = document.createElement('a');
-          card.href = '/blog/' + encodeURIComponent(a.slug) + '/';
-          card.className = 'card group block';
-          if (a.publishDate) {
-            const meta = document.createElement('p');
-            meta.className = 'text-xs text-muted font-medium uppercase tracking-wide mb-2';
-            try { meta.textContent = new Date(a.publishDate).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' }); } catch {}
-            card.appendChild(meta);
-          }
-          const h3 = document.createElement('h3');
-          h3.className = 'text-xl font-serif font-bold text-heading group-hover:text-primary transition-colors mb-3';
-          h3.textContent = a.title;
-          card.appendChild(h3);
-          if (a.excerpt) {
-            const p = document.createElement('p');
-            p.className = 'text-sm text-muted leading-relaxed';
-            p.textContent = a.excerpt;
-            card.appendChild(p);
-          }
-          const cta = document.createElement('span');
-          cta.className = 'inline-flex items-center gap-1 text-primary font-semibold text-sm mt-4';
-          cta.textContent = 'Read more →';
-          card.appendChild(cta);
-          grid.appendChild(card);
-        }
-      } catch {
-        const empty = document.getElementById('empty-state');
-        const grid = document.getElementById('recent-articles-grid');
-        document.getElementById('loading-state')?.remove();
-        grid?.classList.add('hidden');
-        empty?.classList.remove('hidden');
-      }
-    })();
-  </script>
 </Layout>

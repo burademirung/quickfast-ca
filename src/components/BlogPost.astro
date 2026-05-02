@@ -1,0 +1,113 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+
+export interface Props {
+  data: {
+    slug: string;
+    route: string;
+    title: string;
+    desc: string;
+    body: string;
+    publishDate?: string;
+  };
+}
+
+const { data } = Astro.props;
+const metadata = {
+  title: data.title,
+  description: data.desc.slice(0, 160) || data.title,
+  openGraph: { type: 'article' },
+};
+
+function mdToHtml(md: string): string {
+  let h = md.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  h = h.replace(/!\[[^\]]*\]\([^)]+\)/g, '');
+  h = h.replace(/^### (.+)$/gm, '<h3>$1</h3>');
+  h = h.replace(/^## (.+)$/gm, '<h2>$1</h2>');
+  h = h.replace(/^# (.+)$/gm, '<h2>$1</h2>');
+  h = h.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+  h = h.replace(/\[(.+?)\]\(([^)]+)\)/g, (_, t, url) => {
+    if (!/^(https?:\/\/|\/|tel:|mailto:|#)/i.test(url)) return t;
+    const ext = url.startsWith('http') ? ' target="_blank" rel="noopener noreferrer"' : '';
+    return `<a href="${url}"${ext}>${t}</a>`;
+  });
+  h = h.replace(/^(?:[*-])\s+(.+)$/gm, '<li>$1</li>');
+  h = h.replace(/(<li>[\s\S]*?<\/li>(?:\n<li>[\s\S]*?<\/li>)*)/g, '<ul>$1</ul>');
+  return h
+    .split(/\n{2,}/)
+    .map((p) => p.trim())
+    .filter(Boolean)
+    .map((p) => (p.startsWith('<') ? p : `<p>${p.replace(/\n/g, ' ')}</p>`))
+    .join('\n');
+}
+
+const bodyHtml = mdToHtml(data.body);
+const publishDate = data.publishDate || '2025-09-01';
+const dateLong = new Date(publishDate).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: data.title,
+  description: data.desc,
+  datePublished: publishDate,
+  dateModified: publishDate,
+  url: 'https://quickfast.ca' + data.route,
+  publisher: {
+    '@type': 'Organization',
+    name: 'QuickFast Service Company',
+    logo: { '@type': 'ImageObject', url: 'https://quickfast.ca/apple-touch-icon.png' },
+  },
+  image: 'https://quickfast.ca/og-image.png',
+  author: { '@type': 'Organization', name: 'QuickFast Service Company' },
+  mainEntityOfPage: { '@type': 'WebPage', '@id': 'https://quickfast.ca' + data.route },
+};
+const breadcrumb = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://quickfast.ca/' },
+    { '@type': 'ListItem', position: 2, name: 'Blog', item: 'https://quickfast.ca/blog/' },
+    { '@type': 'ListItem', position: 3, name: data.title, item: 'https://quickfast.ca' + data.route },
+  ],
+};
+---
+
+<Layout metadata={metadata}>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(articleSchema).replace(/</g, '\\u003c')} />
+    <script type="application/ld+json" set:html={JSON.stringify(breadcrumb).replace(/</g, '\\u003c')} />
+  </Fragment>
+
+  <section class="relative min-h-[40vh] flex items-center overflow-hidden" style="background: linear-gradient(135deg, #112F5B 0%, #0a1f40 100%);">
+    <div class="absolute inset-0 opacity-[0.05]" style="background-image: radial-gradient(circle, rgba(255,255,255,0.5) 1px, transparent 1px); background-size: 32px 32px;"></div>
+
+    <div class="relative z-10 mx-auto max-w-3xl px-6 pt-24 pb-12">
+      <nav class="text-xs uppercase tracking-widest text-blue-300 mb-4 hero-fade">
+        <a href="/" class="hover:underline">Home</a>
+        <span class="mx-2 text-white/30">/</span>
+        <a href="/blog/" class="hover:underline">Blog</a>
+      </nav>
+      <h1 class="hero-fade text-3xl sm:text-4xl lg:text-5xl font-serif font-bold text-white leading-tight" style="animation-delay:120ms">{data.title}</h1>
+      <div class="hero-fade mt-5 flex items-center gap-3 text-sm text-gray-300" style="animation-delay:280ms">
+        <span>{dateLong}</span>
+        <span class="text-white/30">·</span>
+        <span>QuickFast Service Company</span>
+      </div>
+    </div>
+  </section>
+
+  <article class="py-16 lg:py-20 bg-page">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6">
+      <div class="prose prose-lg max-w-none prose-headings:font-serif prose-headings:text-heading prose-h2:text-2xl prose-h2:mt-12 prose-h2:mb-4 prose-h3:text-xl prose-p:text-default prose-p:leading-relaxed prose-li:text-default prose-strong:text-heading prose-a:text-primary" data-animate set:html={bodyHtml} />
+    </div>
+  </article>
+
+  <section class="py-16 bg-secondary text-white text-center">
+    <div class="max-w-2xl mx-auto px-4" data-animate>
+      <h2 class="text-2xl sm:text-3xl font-serif font-bold mb-4">Ready to work together?</h2>
+      <p class="text-white/80 mb-6">Get a free quote — we respond within one business hour.</p>
+      <a href="/contact/" data-open-request-dialog class="btn-primary">Request Service</a>
+    </div>
+  </section>
+</Layout>

@@ -1,101 +1,101 @@
 # www → apex (must be first — Cloudflare Pages first-match-wins)
 https://www.quickfast.ca/*  https://quickfast.ca/:splat  301!
 
-# Old Wix top-level pages → new top-level pages
-/about-1                /about/                                301
-/contact-us             /contact/                              301
+# Top-level page renames
+/about-1     /about/    301
+/contact-us  /contact/  301
 
-# Heating
-/heating-1                    /services/heating/  301
-/heat-pump                    /services/heating/  301
-/heat-pump-installation       /services/heating/  301
-/heat-pump-installation-2     /services/heating/  301
-/furnace-installation         /services/heating/  301
-/boiler-installation          /services/heating/  301
-/mini-splits-installation     /services/heating/  301
-/thermostat                   /services/heating/  301
-/erv-hrv-systems              /services/heating/  301
-/humidifiers-dehumidification /services/heating/  301
+# Heating — to specific detail pages
+/heating-1                    /services/heating/                              301
+/furnace-installation         /services/heating/furnace-installation/         301
+/boiler-installation          /services/heating/boiler-installation/          301
+/heat-pump                    /services/heating/heat-pump/                    301
+/heat-pump-installation       /services/heating/heat-pump-installation/       301
+/heat-pump-installation-2     /services/heating/heat-pump-installation/       301
+/mini-splits-installation     /services/heating/mini-splits-installation/     301
+/thermostat                   /services/heating/thermostat/                   301
+/erv-hrv-systems              /services/heating/erv-hrv-systems/              301
+/humidifiers-dehumidification /services/heating/humidifiers-dehumidification/ 301
 
-# Air Conditioning
-/air-conditioning              /services/air-conditioning/  301
-/air-conditioning-1            /services/air-conditioning/  301
-/air-conditioning-installation /services/air-conditioning/  301
-/ac-maintenance                /services/air-conditioning/  301
-/ac-repair                     /services/air-conditioning/  301
+# Air Conditioning — to specific detail pages
+/air-conditioning              /services/air-conditioning/               301
+/air-conditioning-1            /services/air-conditioning/               301
+/air-conditioning-installation /services/air-conditioning/installation/  301
+/ac-maintenance                /services/air-conditioning/maintenance/   301
+/ac-repair                     /services/air-conditioning/repair/        301
 
-# Plumbing → /services/plumbing/
-/plumbing                       /services/plumbing/  301
-/plumbing-1                     /services/plumbing/  301
-/emergency-plumbing             /services/plumbing/  301
-/water-heaters                  /services/water-heaters/  301
-/water-softeners                /services/plumbing/  301
-/hot-water-tank-installation    /services/water-heaters/  301
-/hot-water-tank-repair          /services/water-heaters/  301
-/sewer-line-repair              /services/plumbing/  301
-/sewer-camera-inspection        /services/plumbing/  301
-/water-main-repair              /services/plumbing/  301
-/sump-pumps                     /services/plumbing/  301
-/clogged-drains                 /services/plumbing/  301
-/root-intrusion                 /services/plumbing/  301
-/pipe-installation-or-repair    /services/plumbing/  301
-/waterproofing-clean-up         /services/plumbing/  301
+# Water Heaters — to specific detail pages
+/water-heaters               /services/water-heaters/                  301
+/hot-water-tank-installation /services/water-heaters/tank-installation/ 301
+/hot-water-tank-repair       /services/water-heaters/tank-repair/      301
+/water-softeners             /services/water-heaters/water-softeners/  301
 
-# Electrical → /services/electrical/
-/electrical-1                       /services/electrical/  301
-/electrical-2                       /services/electrical/  301
-/electrical-panel-upgrades          /services/electrical/  301
-/electrical-residential-inspection  /services/electrical/  301
-/electrical-wiring-remodelling      /services/electrical/  301
-/ev-car-charger-installation        /services/electrical/  301
-/exterior-pot-lights                /services/electrical/  301
-/lighting-installation              /services/electrical/  301
-/generator-installation-and-repair  /services/electrical/  301
-/red-tag-removal                    /services/electrical/  301
+# Plumbing — to specific detail pages
+/plumbing                       /services/plumbing/                      301
+/plumbing-1                     /services/plumbing/                      301
+/emergency-plumbing             /services/plumbing/emergency/            301
+/pipe-installation-or-repair    /services/plumbing/pipe-installation/    301
+/sewer-line-repair              /services/plumbing/sewer-line-repair/    301
+/sewer-camera-inspection        /services/plumbing/sewer-camera/         301
+/water-main-repair              /services/plumbing/water-main-repair/    301
+/sump-pumps                     /services/plumbing/sump-pumps/           301
+/clogged-drains                 /services/plumbing/clogged-drains/       301
+/root-intrusion                 /services/plumbing/root-intrusion/       301
+/waterproofing-clean-up         /services/plumbing/waterproofing/        301
 
-# Duct cleaning → /services/duct-cleaning/
-/medical-grade-duct-cleaning  /services/duct-cleaning/  301
+# Electrical — to specific detail pages
+/electrical-1                       /services/electrical/                       301
+/electrical-2                       /services/electrical/                       301
+/electrical-panel-upgrades          /services/electrical/panel-upgrades/        301
+/electrical-residential-inspection  /services/electrical/inspection/            301
+/electrical-wiring-remodelling      /services/electrical/wiring/                301
+/ev-car-charger-installation        /services/electrical/ev-charger/            301
+/exterior-pot-lights                /services/electrical/pot-lights/            301
+/lighting-installation              /services/electrical/lighting/              301
+/generator-installation-and-repair  /services/electrical/generator/             301
+/red-tag-removal                    /services/electrical/red-tag-removal/       301
 
-# Renovations → /services/renovations/
-/home-renovations           /services/renovations/  301
-/basement-renovations       /services/renovations/  301
-/bathroom-renovations       /services/renovations/  301
-/condo-renovations          /services/renovations/  301
-/laneway-suite-renovations  /services/renovations/  301
-/construction-renovations   /services/renovations/  301
+# Duct cleaning
+/medical-grade-duct-cleaning  /services/duct-cleaning/medical-grade/  301
+
+# Renovations — to specific detail pages
+/home-renovations           /services/renovations/home/            301
+/basement-renovations       /services/renovations/basement/        301
+/bathroom-renovations       /services/renovations/bathroom/        301
+/condo-renovations          /services/renovations/condo/           301
+/laneway-suite-renovations  /services/renovations/laneway-suite/   301
+/construction-renovations   /services/renovations/                 301
 
 # Commercial / Property Management
-/commercial          /services/commercial/           301
-/commercial-inspec   /services/commercial/           301
-/property-management /services/property-management/  301
+/commercial          /services/commercial/             301
+/commercial-inspec   /services/commercial/inspection/  301
+/property-management /services/property-management/    301
 
-# Other services
+# Other
 /other-services            /services/other-services/  301
 /other-services-1          /services/other-services/  301
-/maintenance               /pricing/                  301
+/maintenance               /maintenance/              301
+/repair                    /repair/                   301
+/promotions                /promotions/               301
+/quickfast-service-academy /academy/                  301
+/how-to-become-electrician /academy/become-an-hvac-tech/  301
 /our-brands                /shop/                     301
-/promotions                /pricing/                  301
-/quickfast-service-academy /about/                    301
 /equipment-serviced        /shop/                     301
-/repair                    /services/                 301
-/how-to-become-electrician /blog/                     301
 
-# (consolidated into Commercial / Property Management section above)
-
-# Old Wix blog posts → blog index
-/post/why-you-should-schedule-your-ac-installation-today  /blog/  301
-/post/10-benefits-of-choosing-quickfast-for-your-ac-installation /blog/  301
-/post/essential-tips-for-ac-maintenance-before-summer-starts     /blog/  301
+# Blog posts → static blog pages
+/post/why-you-should-schedule-your-ac-installation-today          /blog/why-schedule-your-ac-installation-today/   301
+/post/10-benefits-of-choosing-quickfast-for-your-ac-installation  /blog/10-benefits-of-choosing-quickfast/         301
+/post/essential-tips-for-ac-maintenance-before-summer-starts      /blog/essential-ac-maintenance-tips-before-summer/  301
 
 # Wix store / category / group / product / calendar / hidden pages
-/category/*     /shop/  301
-/product-page/* /shop/  301
-/group-page/*   /           301
-/groups         /           301
-/my-calendar    /contact/   301
-/blank          /           301
-/blank-1        /           301
-/copy-of-*      /           301
+/category/*     /shop/    301
+/product-page/* /shop/    301
+/group-page/*   /         301
+/groups         /         301
+/my-calendar    /contact/ 301
+/blank          /         301
+/blank-1        /         301
+/copy-of-*      /         301
 
 # WordPress / CMS artefacts
 /wp-admin/*     /        301
