@@ -1,0 +1,63 @@
+---
+// Zero-dep cookie consent — stores acceptance in localStorage (no cookie itself)
+---
+
+<div
+  id="cookie-consent"
+  class="cookie-consent-banner hidden fixed bottom-0 left-0 right-0 z-50 bg-secondary text-white shadow-2xl border-t border-white/10"
+  role="dialog"
+  aria-labelledby="cookie-consent-title"
+  aria-describedby="cookie-consent-desc"
+>
+  <div class="max-w-6xl mx-auto px-4 py-4 sm:px-6 sm:py-5 flex flex-col sm:flex-row items-start sm:items-center gap-4">
+    <div class="flex-1">
+      <p id="cookie-consent-title" class="font-semibold text-sm sm:text-base">We use cookies</p>
+      <p id="cookie-consent-desc" class="text-xs sm:text-sm text-white/70 mt-1">
+        We use essential cookies for site functionality and anonymous analytics to understand visits. Read our
+        <a href="/privacy/" class="underline underline-offset-2 hover:text-white">Privacy Policy</a>.
+      </p>
+    </div>
+    <div class="flex gap-2 flex-shrink-0">
+      <button
+        type="button"
+        data-cookie-action="reject"
+        class="px-4 py-2 rounded-md text-sm font-medium text-white/80 hover:text-white hover:bg-white/10 transition-colors"
+      >
+        Essential only
+      </button>
+      <button
+        type="button"
+        data-cookie-action="accept"
+        class="px-4 py-2 rounded-md text-sm font-semibold bg-primary text-white hover:opacity-90 transition-opacity focus:outline-none focus:ring-2 focus:ring-white/40"
+      >
+        Accept all
+      </button>
+    </div>
+  </div>
+</div>
+<script>
+  (() => {
+    const KEY = 'cookie-consent-v1';
+    const banner = document.getElementById('cookie-consent');
+    if (!banner) return;
+    const prior = (() => {
+      try {
+        return localStorage.getItem(KEY);
+      } catch {
+        return null;
+      }
+    })();
+    if (!prior) banner.classList.remove('hidden');
+    (window as any).__consent = prior || 'pending';
+    const set = (value: string) => {
+      try {
+        localStorage.setItem(KEY, value);
+      } catch {}
+      (window as any).__consent = value;
+      banner.classList.add('hidden');
+      window.dispatchEvent(new CustomEvent('consentchange', { detail: { value } }));
+    };
+    banner.querySelector('[data-cookie-action="accept"]')?.addEventListener('click', () => set('accepted'));
+    banner.querySelector('[data-cookie-action="reject"]')?.addEventListener('click', () => set('rejected'));
+  })();
+</script>

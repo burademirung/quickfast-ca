@@ -1,0 +1,27 @@
+---
+import '@fontsource-variable/inter';
+---
+
+<style is:inline>
+  :root {
+    /* Typography — serif for headings (trade default), Inter Variable for body */
+    --aw-font-sans: 'Inter Variable', system-ui, -apple-system, sans-serif;
+    --aw-font-serif: Georgia, 'Times New Roman', serif;
+    --aw-font-heading: Georgia, 'Times New Roman', serif;
+
+    /* QuickFast brand palette — extracted from source: trade blue + deep navy + red accent */
+    --aw-color-primary: rgb(17 109 255);          /* #116DFF — bright trade blue */
+    --aw-color-secondary: rgb(17 47 91);          /* #112F5B — deep navy */
+    --aw-color-accent: rgb(223 49 49);            /* #DF3131 — urgency red */
+
+    --aw-color-text-heading: rgb(17 47 91);       /* navy */
+    --aw-color-text-default: rgb(51 65 85);       /* slate-700 */
+    --aw-color-text-muted: rgb(100 116 139);      /* slate-500 */
+    --aw-color-bg-page: rgb(250 249 246);         /* off-white #FAF9F6 */
+    --aw-color-bg-page-dark: rgb(17 47 91);
+
+    ::selection {
+      background-color: rgb(17 109 255 / 0.2);
+    }
+  }
+</style>

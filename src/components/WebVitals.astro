@@ -1,0 +1,33 @@
+---
+// Real-User Monitoring — collects Core Web Vitals and POSTs to /api/vitals
+---
+
+<script>
+  import { onCLS, onINP, onLCP, onFCP, onTTFB } from 'web-vitals/attribution';
+  import type { Metric } from 'web-vitals';
+
+  const send = (metric: Metric) => {
+    const body = JSON.stringify({
+      name: metric.name,
+      value: Math.round(metric.name === 'CLS' ? metric.value * 1000 : metric.value),
+      rating: (metric as any).rating,
+      id: metric.id,
+      path: location.pathname,
+    });
+    if (navigator.sendBeacon) {
+      navigator.sendBeacon('/api/vitals', body);
+    } else {
+      fetch('/api/vitals', {
+        method: 'POST',
+        body,
+        headers: { 'Content-Type': 'application/json' },
+        keepalive: true,
+      }).catch(() => {});
+    }
+  };
+  onCLS(send);
+  onINP(send);
+  onLCP(send);
+  onFCP(send);
+  onTTFB(send);
+</script>

@@ -1,0 +1,227 @@
+---
+// Single dialog mounted in Layout.astro, opened by any element with data-open-request-dialog
+---
+
+<dialog
+  id="request-service-dialog"
+  class="backdrop:bg-secondary/60 rounded-2xl p-0 max-w-lg w-full max-h-[90vh] overflow-y-auto shadow-2xl"
+  aria-labelledby="request-dialog-title"
+>
+  <div class="p-6 sm:p-8">
+    <div class="flex justify-between items-start mb-5">
+      <div>
+        <p class="text-xs font-semibold text-primary uppercase tracking-wider">QuickFast Service Company</p>
+        <h2 id="request-dialog-title" class="text-2xl font-serif font-bold text-heading mt-1">
+          Request Service
+        </h2>
+        <p class="text-muted text-sm mt-1">We respond within 1 business hour.</p>
+      </div>
+      <button
+        type="button"
+        id="close-dialog"
+        aria-label="Close dialog"
+        class="text-muted hover:text-heading text-3xl leading-none w-12 h-12 flex items-center justify-center flex-shrink-0 rounded-lg hover:bg-secondary/5"
+        >×</button
+      >
+    </div>
+
+    <form id="service-request-form" class="space-y-4" novalidate>
+      <div>
+        <label for="req-name" class="block text-sm font-semibold text-heading mb-1.5">
+          Your name <span aria-hidden="true" class="text-accent">*</span>
+        </label>
+        <input
+          id="req-name"
+          name="name"
+          type="text"
+          required
+          autocomplete="name"
+          class="w-full min-h-[48px] px-4 py-2.5 border border-secondary/20 rounded-xl text-base focus:ring-4 focus:ring-primary/10 focus:border-primary outline-none transition"
+        />
+      </div>
+      <div>
+        <label for="req-phone" class="block text-sm font-semibold text-heading mb-1.5">
+          Phone <span aria-hidden="true" class="text-accent">*</span>
+        </label>
+        <input
+          id="req-phone"
+          name="phone"
+          type="tel"
+          required
+          autocomplete="tel"
+          placeholder="(416) 629-3213"
+          class="w-full min-h-[48px] px-4 py-2.5 border border-secondary/20 rounded-xl text-base focus:ring-4 focus:ring-primary/10 focus:border-primary outline-none transition"
+        />
+      </div>
+      <div>
+        <label for="req-email" class="block text-sm font-semibold text-heading mb-1.5">
+          Email <span aria-hidden="true" class="text-accent">*</span>
+        </label>
+        <input
+          id="req-email"
+          name="email"
+          type="email"
+          required
+          autocomplete="email"
+          class="w-full min-h-[48px] px-4 py-2.5 border border-secondary/20 rounded-xl text-base focus:ring-4 focus:ring-primary/10 focus:border-primary outline-none transition"
+        />
+      </div>
+      <div>
+        <label for="req-service" class="block text-sm font-semibold text-heading mb-1.5">Service needed</label>
+        <select
+          id="req-service"
+          name="service"
+          class="w-full min-h-[48px] px-4 py-2.5 border border-secondary/20 rounded-xl text-base focus:ring-4 focus:ring-primary/10 focus:border-primary outline-none transition bg-white"
+        >
+          <option>HVAC — installation, repair or maintenance</option>
+          <option>Plumbing — emergency, water heater, drain</option>
+          <option>Electrical — wiring, panel, EV charger</option>
+          <option>Duct cleaning</option>
+          <option>Renovations — bath, kitchen, basement</option>
+          <option>Property management</option>
+          <option>Other / not sure</option>
+        </select>
+      </div>
+      <div>
+        <label for="req-message" class="block text-sm font-semibold text-heading mb-1.5">
+          Anything else? <span class="text-muted font-normal">(optional)</span>
+        </label>
+        <textarea
+          id="req-message"
+          name="message"
+          rows="3"
+          class="w-full px-4 py-2.5 border border-secondary/20 rounded-xl text-base focus:ring-4 focus:ring-primary/10 focus:border-primary outline-none transition"
+        ></textarea>
+      </div>
+      <input
+        type="text"
+        name="hp"
+        tabindex="-1"
+        autocomplete="off"
+        aria-hidden="true"
+        class="absolute -left-[9999px]"
+      />
+      <div id="req-error" class="hidden text-sm text-accent bg-accent/5 p-3 rounded-lg" role="alert"></div>
+      <button
+        type="submit"
+        id="req-submit"
+        class="w-full min-h-[52px] btn-primary"
+      >
+        Submit request
+      </button>
+      <p class="text-xs text-muted text-center mt-2">
+        Or call <a href="tel:+14166293213" class="text-primary font-semibold underline">+1-416-629-3213</a> direct.
+      </p>
+    </form>
+
+    <div id="req-success" class="hidden text-center py-8" role="status" aria-live="polite">
+      <div class="w-16 h-16 mx-auto rounded-full bg-primary/10 flex items-center justify-center mb-4">
+        <svg class="w-8 h-8 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"
+          ><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path></svg
+        >
+      </div>
+      <p class="text-2xl font-serif font-bold text-heading mb-2">Thanks!</p>
+      <p class="text-muted">We'll call you within 1 business hour.</p>
+    </div>
+  </div>
+</dialog>
+
+<script>
+  const dialog = document.getElementById('request-service-dialog') as HTMLDialogElement | null;
+  if (dialog) {
+    const form = document.getElementById('service-request-form') as HTMLFormElement | null;
+    const errEl = document.getElementById('req-error') as HTMLElement | null;
+    const successEl = document.getElementById('req-success') as HTMLElement | null;
+    const submitBtn = document.getElementById('req-submit') as HTMLButtonElement | null;
+    const formMountedAt = Date.now();
+
+    function reset() {
+      form?.reset();
+      form?.classList.remove('hidden');
+      successEl?.classList.add('hidden');
+      errEl?.classList.add('hidden');
+      if (submitBtn) {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Submit request';
+      }
+    }
+
+    function showError(message: string, mailto?: string) {
+      if (!errEl) return;
+      errEl.textContent = '';
+      errEl.appendChild(document.createTextNode(message));
+      if (mailto) {
+        errEl.appendChild(document.createTextNode(' — please call us at '));
+        const aPhone = document.createElement('a');
+        aPhone.href = 'tel:+14166293213';
+        aPhone.className = 'font-semibold underline';
+        aPhone.textContent = '+1-416-629-3213';
+        errEl.appendChild(aPhone);
+        errEl.appendChild(document.createTextNode(' or '));
+        const aMail = document.createElement('a');
+        aMail.href = mailto;
+        aMail.className = 'font-semibold underline';
+        aMail.textContent = 'email us';
+        errEl.appendChild(aMail);
+        errEl.appendChild(document.createTextNode('.'));
+      }
+      errEl.classList.remove('hidden');
+    }
+
+    document.addEventListener('click', (e) => {
+      const target = e.target as HTMLElement;
+      const trigger = target.closest('[data-open-request-dialog]');
+      if (trigger) {
+        e.preventDefault();
+        reset();
+        dialog.showModal();
+        requestAnimationFrame(() => {
+          (
+            dialog.querySelector('input:not([type=hidden]):not([tabindex="-1"])') as HTMLElement | null
+          )?.focus();
+        });
+        return;
+      }
+      if (target.id === 'close-dialog' || target === dialog) dialog.close();
+    });
+
+    form?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (!form || !errEl || !successEl || !submitBtn) return;
+      errEl.classList.add('hidden');
+      const data: Record<string, any> = Object.fromEntries(new FormData(form).entries());
+      if (!data.name || !data.phone || !data.email) {
+        showError('Name, phone, and email are required');
+        return;
+      }
+      data.formAgeMs = Date.now() - formMountedAt;
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Sending…';
+      try {
+        const res = await fetch('/api/request-service', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data),
+        });
+        const json = await res.json();
+        if (!res.ok || json.error) throw new Error(json.error || 'Submission failed');
+        form.classList.add('hidden');
+        successEl.classList.remove('hidden');
+      } catch (err: any) {
+        const subject = encodeURIComponent('Service request from ' + String(data.name || ''));
+        const lines = [
+          'Name: ' + String(data.name || ''),
+          'Phone: ' + String(data.phone || ''),
+          'Email: ' + String(data.email || ''),
+          'Service: ' + String(data.service || ''),
+          '',
+          String(data.message || ''),
+        ];
+        const mailto = 'mailto:info@quickfast.ca?subject=' + subject + '&body=' + encodeURIComponent(lines.join('\n'));
+        showError(err && err.message ? err.message : 'Something went wrong', mailto);
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Submit request';
+      }
+    });
+  }
+</script>

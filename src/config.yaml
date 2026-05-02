@@ -1,0 +1,45 @@
+site:
+  name: 'QuickFast Service Company'
+  site: 'https://quickfast.ca'
+  base: '/'
+  trailingSlash: true
+
+# Default SEO metadata
+metadata:
+  title:
+    default: 'QuickFast Service Company — HVAC, Plumbing, Electrical & Renovations | Mississauga'
+    template: '%s | QuickFast Service Company'
+  description: "QuickFast offers expert HVAC, plumbing, electrical, duct cleaning and renovation services for residential, commercial and condo properties across Mississauga and the GTA. 15+ years of fast, reliable, professional service."
+  robots:
+    index: true
+    follow: true
+  openGraph:
+    site_name: 'QuickFast Service Company'
+    images:
+      - url: '/og-image.png'
+        width: 1200
+        height: 630
+    type: website
+  twitter:
+    handle: '@quickfastca'
+    site: '@quickfastca'
+    cardType: summary_large_image
+
+i18n:
+  language: en
+  textDirection: ltr
+
+# AstroWind ships with apps.blog for static blog. We replaced it with a Cloudflare
+# Pages Function (functions/blog/[slug].ts) that reads from KV. Disabled here.
+apps:
+  blog:
+    isEnabled: false
+
+analytics:
+  vendors:
+    googleAnalytics:
+      id: null
+      partytown: false
+
+ui:
+  theme: 'light:only'
