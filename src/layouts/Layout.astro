@@ -55,6 +55,9 @@ const robotsContent = (() => {
     <Metadata {...metadata} />
     <SiteVerification />
 
+    <!-- Per-page head injection slot — pages emit JSON-LD schemas here -->
+    <slot name="head" />
+
     <ClientRouter fallback="swap" />
 
     <!-- Inline boot script: marks the page as JS-ready BEFORE first paint so
