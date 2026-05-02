@@ -56,6 +56,14 @@ const robotsContent = (() => {
     <SiteVerification />
 
     <ClientRouter fallback="swap" />
+
+    <!-- Inline boot script: marks the page as JS-ready BEFORE first paint so
+         entrance animations are armed only when JS will run them. If anything
+         below this fails, content still renders (the .js-animate-ready guard
+         in CSS keeps content visible). -->
+    <script is:inline>
+      document.documentElement.classList.add('js-animate-ready');
+    </script>
   </head>
 
   <body class="antialiased text-default bg-page tracking-tight">
@@ -78,9 +86,9 @@ const robotsContent = (() => {
     <CookieBanner />
     <WebVitals />
 
-    <!-- Scroll entrance animation observer -->
+    <!-- Scroll entrance animation observer (re-arms on Astro view-transition page-load) -->
     <script>
-      document.addEventListener('DOMContentLoaded', () => {
+      function initPage() {
         const observer = new IntersectionObserver(
           (entries) => {
             entries.forEach((e) => {
@@ -147,7 +155,14 @@ const robotsContent = (() => {
           );
           obs.observe(heroEl);
         }
-      });
+      }
+      // Run on first load + after every Astro view transition
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initPage);
+      } else {
+        initPage();
+      }
+      document.addEventListener('astro:page-load', initPage);
     </script>
 
     <BasicScripts />

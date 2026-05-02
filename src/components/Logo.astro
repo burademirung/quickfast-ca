@@ -4,9 +4,9 @@ import logo from '~/assets/logo.png';
 import { SITE } from 'astrowind:config';
 ---
 
-<a class="flex items-center gap-2.5 shrink-0" href="/" aria-label={SITE?.name}>
-  <Image src={logo} alt="QuickFast Service Company" width={48} height={48} class="h-10 w-auto" loading="eager" />
-  <span class="text-lg md:text-xl font-serif font-bold text-heading whitespace-nowrap">
+<span class="flex items-center gap-2.5 shrink-0" aria-label={SITE?.name}>
+  <Image src={logo} alt="QuickFast Service Company" width={48} height={48} class="h-10 w-auto drop-shadow-md" loading="eager" />
+  <span class="logo-text text-lg md:text-xl font-serif font-bold whitespace-nowrap transition-colors duration-500">
     QuickFast Service
   </span>
-</a>
+</span>

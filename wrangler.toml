@@ -4,4 +4,4 @@ pages_build_output_dir = "./dist"
 
 [[kv_namespaces]]
 binding = "CLIENT_SCHEMAS"
-id = "34b358516e744248b4c33ae265e42811"
+id = "53eba461d11b432da60e0ca8a563b233"
