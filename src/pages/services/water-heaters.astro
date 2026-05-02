@@ -1,0 +1,45 @@
+---
+import ServiceCategoryPage from '~/components/ServiceCategoryPage.astro';
+
+const services = [
+  { title: 'Tank Water Heater Installation', desc: 'Standard 40-60 gallon gas + electric tanks installed same-day in most cases.' },
+  { title: 'Tankless Water Heater Installation', desc: 'On-demand water heaters — Navien, Rinnai, Noritz. 50% energy savings vs. tank.' },
+  { title: 'Water Heater Repair', desc: 'Element, thermocouple, T&P valve, gas valve, anode-rod replacement.' },
+  { title: 'Annual Flush + Inspection', desc: 'Removes sediment, extends tank life by 3-5 years.' },
+  { title: 'Heat Pump Water Heater', desc: 'Hybrid water heaters that use ambient heat — Greener Homes Grant eligible.' },
+  { title: 'Power-Vent Water Heater', desc: 'For homes without natural-draft venting — direct-vent and power-vent installs.' },
+  { title: 'Water Softener Installation', desc: 'Hard-water systems sized to your usage. Pairs well with tankless to extend life.' },
+  { title: 'Recirculation Pump', desc: 'Hot water at every fixture in seconds — no waste, no waiting.' },
+  { title: 'Boiler Combi Conversion', desc: 'Replace your old furnace + tank with a single combi-boiler that does both.' },
+  { title: 'Emergency Tank Replacement', desc: 'Same-day swap when your tank fails. We stock the most common sizes.' },
+];
+
+const whyUs = [
+  { title: 'Same-day standard tank swaps', desc: 'Call before noon — we replace standard 40-60 gallon tanks the same day.' },
+  { title: 'TSSA-licensed gas work', desc: 'Every gas water heater install pulled with TSSA permit and inspection.' },
+  { title: 'Manufacturer warranty included', desc: '6-yr standard tank warranty, 12-25 yr on tankless. We pass it through.' },
+  { title: 'Hard-water expertise', desc: 'Mississauga water is hard — we size softeners to extend tankless life 5-10 years.' },
+];
+
+const faqs = [
+  { q: 'Tank or tankless?', a: "Tankless is more efficient (50% energy savings) and lasts ~20 years vs. 8-12 for a tank. It costs 1.5-2× upfront. For 3-4 person households the payback is 7-10 years. We'll quote both with operating-cost comparisons." },
+  { q: 'Can you replace a hot water tank same-day?', a: 'Yes — for standard 40-60 gallon gas/electric tanks we typically replace same-day if you call before noon. We stock the most common sizes (Bradford White, Rheem, John Wood).' },
+  { q: 'How long does a water heater last?', a: 'Standard tanks: 8-12 years (longer with annual flushing). Tankless: 18-25 years. Hybrid heat-pump: 12-15 years. Heat exchangers fail faster in hard-water areas without a softener.' },
+  { q: 'Do you install heat pump water heaters?', a: 'Yes — Rheem, A.O. Smith, Bradford White hybrid heat-pump units. They qualify for the federal Greener Homes Grant. Best fit: basements with adequate ambient heat (>1000 sq ft).' },
+];
+
+const longDescription =
+  "Hot water failures don't give warning — usually you find out at 6 a.m. when the shower runs cold. We stock <strong>Bradford White, Rheem, and John Wood standard tanks</strong> for same-day swaps, and install <strong>Navien, Rinnai, and Noritz tankless</strong> systems for homeowners who want endless hot water and 50% lower bills. TSSA-licensed installation, manufacturer warranty pass-through, and 12-month workmanship guarantee on every job.";
+---
+
+<ServiceCategoryPage
+  slug="water-heaters"
+  title="Water Heaters"
+  kicker="Service Category"
+  intro="Tank, tankless, and heat-pump water heaters — installation, repair and same-day replacement across Mississauga and the GTA."
+  longDescription={longDescription}
+  services={services}
+  metaDescription="Water heater installation + repair in Mississauga & GTA — tank, tankless, heat-pump. Same-day standard tank swaps, TSSA-licensed, manufacturer warranty."
+  whyUs={whyUs}
+  faqs={faqs}
+/>

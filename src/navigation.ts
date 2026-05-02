@@ -5,14 +5,21 @@ export const headerData = {
     {
       text: 'Services',
       links: [
-        { text: 'All Services', href: getPermalink('/services/') },
-        { text: 'HVAC & Heating', href: getPermalink('/services/hvac/') },
+        { text: 'Heating', href: getPermalink('/services/heating/') },
+        { text: 'Air Conditioning', href: getPermalink('/services/air-conditioning/') },
+        { text: 'Water Heaters', href: getPermalink('/services/water-heaters/') },
         { text: 'Plumbing', href: getPermalink('/services/plumbing/') },
         { text: 'Electrical', href: getPermalink('/services/electrical/') },
-        { text: 'Duct Cleaning', href: getPermalink('/services/duct-cleaning/') },
-        { text: 'Renovations', href: getPermalink('/services/renovations/') },
+        { text: 'Medical-Grade Duct Cleaning', href: getPermalink('/services/duct-cleaning/') },
+        { text: 'Property Management', href: getPermalink('/services/property-management/') },
+        { text: 'Commercial', href: getPermalink('/services/commercial/') },
+        { text: 'Construction & Renovations', href: getPermalink('/services/renovations/') },
+        { text: 'Other Services', href: getPermalink('/services/other-services/') },
+        { text: '— View All Services →', href: getPermalink('/services/') },
       ],
     },
+    { text: 'Plans', href: getPermalink('/pricing/') },
+    { text: 'Shop', href: getPermalink('/shop/') },
     { text: 'About', href: getPermalink('/about/') },
     { text: 'Blog', href: getPermalink('/blog/') },
     { text: 'FAQ', href: getPermalink('/faq/') },
@@ -33,12 +40,23 @@ export const footerData = {
     {
       title: 'Services',
       links: [
-        { text: 'HVAC & Heating', href: getPermalink('/services/hvac/') },
+        { text: 'Heating', href: getPermalink('/services/heating/') },
+        { text: 'Air Conditioning', href: getPermalink('/services/air-conditioning/') },
+        { text: 'Water Heaters', href: getPermalink('/services/water-heaters/') },
         { text: 'Plumbing', href: getPermalink('/services/plumbing/') },
         { text: 'Electrical', href: getPermalink('/services/electrical/') },
         { text: 'Duct Cleaning', href: getPermalink('/services/duct-cleaning/') },
-        { text: 'Renovations', href: getPermalink('/services/renovations/') },
+      ],
+    },
+    {
+      title: 'More Services',
+      links: [
+        { text: 'Property Management', href: getPermalink('/services/property-management/') },
         { text: 'Commercial', href: getPermalink('/services/commercial/') },
+        { text: 'Construction & Renovations', href: getPermalink('/services/renovations/') },
+        { text: 'Other Services', href: getPermalink('/services/other-services/') },
+        { text: 'Maintenance Plans', href: getPermalink('/pricing/') },
+        { text: 'Equipment Shop', href: getPermalink('/shop/') },
       ],
     },
     {
@@ -67,5 +85,5 @@ export const footerData = {
     { ariaLabel: 'Google Business', icon: 'tabler:brand-google', href: '#' },
     { ariaLabel: 'Maps', icon: 'tabler:map-pin', href: '#' },
   ],
-  footNote: `\n    © ${new Date().getFullYear()} QuickFast Service Company. All rights reserved.\n  `,
+  footNote: `\n    © ${new Date().getFullYear()} QuickFast Service Company · Proudly Canadian · Mississauga, Ontario\n  `,
 };

@@ -1,0 +1,43 @@
+---
+import ServiceCategoryPage from '~/components/ServiceCategoryPage.astro';
+
+const services = [
+  { title: 'Central AC Installation', desc: 'Brand-agnostic central air conditioner installs with permits and rebates handled.' },
+  { title: 'AC Repair', desc: 'Same-day repair on most makes — capacitors, contactors, blower motors, refrigerant.' },
+  { title: 'Annual AC Maintenance', desc: 'Spring tune-up: coil clean, refrigerant check, electrical inspection, condensate flush.' },
+  { title: 'Mini-Split AC Installation', desc: 'Ductless cooling for additions, condos, basements and laneway suites.' },
+  { title: 'Heat Pump Installation', desc: 'Cold-climate heat pumps that cool in summer and heat in winter — rebate-eligible.' },
+  { title: 'AC Replacement', desc: 'Upgrade old R-22 systems to R-410A or R-454B refrigerant for 30%+ efficiency gain.' },
+  { title: 'Refrigerant Leak Repair', desc: 'Leak detection, repair, and proper recharge with EPA-compliant procedures.' },
+  { title: 'Indoor Air Quality Add-Ons', desc: 'High-MERV filtration, UV lights, air purifiers, humidity control.' },
+  { title: '24/7 Emergency AC Service', desc: 'On-call response during heat waves and after-hours emergencies.' },
+];
+
+const whyUs = [
+  { title: 'TSSA + EPA certified', desc: 'Refrigerant handling done by certified technicians — never illegally vented.' },
+  { title: 'Energy-rebate paperwork', desc: 'We file IESO + manufacturer rebate forms so you actually get the savings.' },
+  { title: 'Same-day diagnosis', desc: 'Most repairs diagnosed and quoted on the first visit, often fixed same-day.' },
+  { title: '12-month workmanship warranty', desc: 'On every installation — plus the manufacturer parts warranty.' },
+];
+
+const faqs = [
+  { q: 'How often should I service my AC?', a: 'Annually, before peak summer. A spring tune-up extends equipment life, prevents breakdowns during heat waves, and keeps your warranty valid. Our maintenance plan covers it.' },
+  { q: 'How long does an AC last?', a: 'Properly-sized and maintained central AC units last 12-17 years. Mini-splits often last longer (15-20 years) because compressors run at variable speed instead of cycling on/off.' },
+  { q: 'My AC is freezing up. Is it serious?', a: 'Usually airflow restriction (dirty filter, blocked vents, low refrigerant) causes coil freeze. Turn it off, replace the filter, and call us — running a frozen AC damages the compressor.' },
+];
+
+const longDescription =
+  "Mississauga summers don't wait — neither do we. <strong>TSSA-licensed, EPA-certified AC installation, repair and tune-up</strong> for every brand. Same-day diagnosis on most service calls during business hours, 24/7 emergency dispatch during heat waves. We file all energy-rebate paperwork on your behalf.";
+---
+
+<ServiceCategoryPage
+  slug="air-conditioning"
+  title="Air Conditioning"
+  kicker="Service Category"
+  intro="Central AC, mini-splits and heat-pump cooling — installation, repair and 24/7 emergency service across Mississauga and the GTA."
+  longDescription={longDescription}
+  services={services}
+  metaDescription="Air conditioning in Mississauga & GTA — central AC, mini-split, heat-pump install, repair and tune-ups. TSSA-licensed, EPA-certified, 24/7 emergency."
+  whyUs={whyUs}
+  faqs={faqs}
+/>

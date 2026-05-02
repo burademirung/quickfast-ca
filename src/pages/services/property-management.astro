@@ -1,0 +1,43 @@
+---
+import ServiceCategoryPage from '~/components/ServiceCategoryPage.astro';
+
+const services = [
+  { title: 'Quarterly Maintenance Visits', desc: 'Scheduled HVAC, plumbing, electrical and life-safety inspections at every property in your portfolio.' },
+  { title: 'Tenant Service Calls', desc: 'Direct-dispatch line for your tenants — fixed-rate per-call billing, no per-property hassle.' },
+  { title: 'Capital Project Coordination', desc: 'HVAC fleet replacement, riser repairs, panel upgrades — we manage the whole project.' },
+  { title: 'Compliance Documentation', desc: 'Permits, ESA/TSSA inspections, warranty paperwork formatted for property records.' },
+  { title: 'Boiler Room Audits', desc: 'Annual boiler/chiller inspections with combustion analysis and efficiency reports.' },
+  { title: 'Common-Area Maintenance', desc: 'Lighting, electrical, plumbing maintenance for lobbies, hallways, mechanical rooms.' },
+  { title: 'Emergency Response', desc: '24/7 dispatch for water leaks, no-heat, electrical failures, sewer backups.' },
+  { title: 'Energy-Efficiency Reports', desc: 'Quarterly utility usage reports with retrofit recommendations.' },
+];
+
+const whyUs = [
+  { title: 'One vendor, every trade', desc: 'HVAC, plumbing, electrical, renovations — one PO, one invoice, one accountable team.' },
+  { title: 'Volume pricing', desc: 'Multi-property contracts get negotiated rates that beat single-call pricing by 15-30%.' },
+  { title: '$5M general liability', desc: 'Plus full WSIB coverage on every employee. Certificates available on request.' },
+  { title: 'Quarterly portfolio review', desc: "We meet quarterly to review what's failing, what's coming due, and what's coming up." },
+];
+
+const faqs = [
+  { q: 'Do you have a service contract for property managers?', a: 'Yes — monthly, quarterly and annual maintenance contracts. Includes priority scheduling, discounted repair rates, and quarterly site visits. We can size a contract to your portfolio.' },
+  { q: 'Can you handle multiple properties at once?', a: 'Yes — we manage rolling maintenance contracts across portfolios of up to 50+ properties. Capital projects (boiler replacements, panel upgrades) get a dedicated project manager.' },
+  { q: 'What insurance do you carry for commercial work?', a: '$5M general liability, WSIB coverage on all employees, tools/equipment insurance, and pollution liability for fuel-burning equipment work. Certificates of insurance are available on request — usually within an hour.' },
+  { q: 'Can you work after-hours to avoid tenant disruption?', a: 'Yes — we routinely schedule mechanical work evenings, weekends, and overnight. Premium rate (1.5x) applies for nights and weekends, but it avoids tenant complaints and per-suite access scheduling.' },
+];
+
+const longDescription =
+  "Property managers waste hours coordinating between separate HVAC, plumbing, and electrical contractors — often paying premium per-call rates because no one has the building's history. <strong>QuickFast handles every trade in-house under one contract</strong>. We carry $5M general liability, WSIB coverage on every technician, and provide formal compliance documentation on every job. Recurring maintenance and capital projects available for residential, condo, and commercial portfolios across the GTA.";
+---
+
+<ServiceCategoryPage
+  slug="property-management"
+  title="Property Management"
+  kicker="Service Category"
+  intro="Recurring HVAC, plumbing and electrical contracts for property managers, condo boards and commercial owners."
+  longDescription={longDescription}
+  services={services}
+  metaDescription="Property management maintenance contracts in Mississauga & GTA — multi-trade, after-hours, $5M liability, recurring portfolio service."
+  whyUs={whyUs}
+  faqs={faqs}
+/>

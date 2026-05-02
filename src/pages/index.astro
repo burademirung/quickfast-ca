@@ -2,6 +2,7 @@
 import Layout from '~/layouts/PageLayout.astro';
 import { Image } from 'astro:assets';
 import heroImage from '~/assets/migrated/52afced9-11062b_26bec688bbde40818a6a17c9e91ba9c0~mv2.jpg';
+import proudlyCanadian from '~/assets/proudly-canadian.png';
 
 const metadata = {
   title:
@@ -281,9 +282,9 @@ const allMigrated = Object.values(import.meta.glob('~/assets/migrated/*.{png,jpg
     <div class="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-page to-transparent pointer-events-none"></div>
   </section>
 
-  {/* TRUST BADGE BAR */}
+  {/* TRUST BADGE BAR + Proudly Canadian */}
   <section class="bg-page border-y border-secondary/5 py-5">
-    <div class="max-w-6xl mx-auto px-4 flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-xs sm:text-sm font-medium text-muted">
+    <div class="max-w-6xl mx-auto px-4 flex flex-wrap items-center justify-center gap-x-6 gap-y-3 text-xs sm:text-sm font-medium text-muted">
       {trustBadges.map((b) => (
         <span class="flex items-center gap-1.5">
           <svg class="w-4 h-4 text-primary" fill="currentColor" viewBox="0 0 20 20">
@@ -292,6 +293,9 @@ const allMigrated = Object.values(import.meta.glob('~/assets/migrated/*.{png,jpg
           {b}
         </span>
       ))}
+      <span class="flex items-center gap-1.5">
+        <Image src={proudlyCanadian} alt="Proudly Canadian" width={120} height={45} class="h-7 w-auto" loading="lazy" />
+      </span>
     </div>
   </section>
 

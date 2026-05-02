@@ -1,0 +1,180 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import { Image } from 'astro:assets';
+import airmax from '~/assets/products/airmax-air-handler.jpeg';
+import hiVelocity from '~/assets/products/hi-velocity-systems.jpeg';
+import magicPak from '~/assets/products/magic-pak.png';
+import skymark from '~/assets/products/skymark-skypak.png';
+import york from '~/assets/products/york-rooftop.jpeg';
+
+const metadata = {
+  title: 'HVAC Equipment Shop',
+  description:
+    'OEM HVAC equipment, condo PTAC units, rooftop systems, and high-velocity components. Bradford White, York, Magic Pak, Skymark, AIRMAX. Ships from Mississauga.',
+};
+
+const products = [
+  {
+    slug: 'airmax-air-handler-50e-70e-100e',
+    title: 'AIRMAX Air Handler 50e / 70e / 100e',
+    category: 'High-Velocity Systems',
+    image: airmax,
+    blurb: 'Compact air-handler designed for high-velocity small-duct (HVSD) systems. Available in 50e, 70e, and 100e capacities.',
+    spec: 'Hi-Velocity Systems · 50/70/100 size · sealed cabinet · variable-speed motor compatible',
+    price: 'Quote on request',
+  },
+  {
+    slug: 'hi-velocity-systems-energy-saving',
+    title: 'Hi-Velocity Systems — Energy-Saving Components',
+    category: 'High-Velocity Systems',
+    image: hiVelocity,
+    blurb: 'Genuine Hi-Velocity OEM parts and energy-saving accessories: outlets, plenums, sound attenuators, balancing dampers.',
+    spec: 'OEM Hi-Velocity · ENERGY STAR-compatible accessories',
+    price: 'Quote on request',
+  },
+  {
+    slug: 'magic-pak-gas-electric-condo',
+    title: 'Magic Pak Gas / Electric Condo Units',
+    category: 'Condo HVAC Units',
+    image: magicPak,
+    blurb: 'Magic Pak HWC, EWC and MGE through-the-wall packaged HVAC units for condo, multi-residential, and hotel applications.',
+    spec: 'HWC / EWC / MGE series · gas + electric models · 1-5 ton',
+    price: '$69.95',
+  },
+  {
+    slug: 'skymark-skypak-replacement',
+    title: 'Skymark / Skypak Replacement Units',
+    category: 'Condo HVAC Units',
+    image: skymark,
+    blurb: 'Direct replacement units for Skymark and Skypak vertical packaged systems. Electric and gas models, drop-in install.',
+    spec: 'Skymark / Skypak compatible · electric + gas · vertical packaged',
+    price: '$140.95',
+  },
+  {
+    slug: 'york-package-rooftop',
+    title: 'York Package Rooftop HVAC Units',
+    category: 'Rooftop HVAC Units',
+    image: york,
+    blurb: 'York rooftop package units for commercial spaces, multi-family, and small commercial buildings.',
+    spec: 'York packaged rooftop · 3-15 ton · gas/electric + heat-pump options',
+    price: '$129.95',
+  },
+];
+
+const categories = [...new Set(products.map((p) => p.category))];
+
+const breadcrumb = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://quickfast.ca/' },
+    { '@type': 'ListItem', position: 2, name: 'Shop', item: 'https://quickfast.ca/shop/' },
+  ],
+};
+
+const itemList = {
+  '@context': 'https://schema.org',
+  '@type': 'ItemList',
+  itemListElement: products.map((p, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    item: {
+      '@type': 'Product',
+      name: p.title,
+      description: p.blurb,
+      category: p.category,
+      brand: { '@type': 'Brand', name: 'QuickFast' },
+      offers: { '@type': 'Offer', priceCurrency: 'CAD', price: p.price.replace(/[^0-9.]/g, '') || '0', availability: 'https://schema.org/InStock' },
+    },
+  })),
+};
+---
+
+<Layout metadata={metadata}>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(breadcrumb).replace(/</g, '\\u003c')} />
+    <script type="application/ld+json" set:html={JSON.stringify(itemList).replace(/</g, '\\u003c')} />
+  </Fragment>
+
+  <section class="relative min-h-[40vh] flex items-center overflow-hidden" style="background: linear-gradient(135deg, #112F5B 0%, #0a1f40 100%);">
+    <div class="absolute inset-0 opacity-[0.05]" style="background-image: radial-gradient(circle, rgba(255,255,255,0.5) 1px, transparent 1px); background-size: 32px 32px;"></div>
+    <div class="absolute top-[10%] right-[5%] w-[400px] h-[400px] rounded-full opacity-[0.18] blur-[100px]" style="background: radial-gradient(circle, #116DFF, transparent 70%); animation: drift 22s ease-in-out infinite alternate;"></div>
+
+    <div class="relative z-10 mx-auto max-w-3xl px-6 text-center pt-24 pb-12">
+      <p class="hero-fade text-xs font-bold uppercase tracking-[0.2em] text-blue-300 mb-3">Shop</p>
+      <h1 class="hero-fade text-4xl sm:text-5xl font-serif font-bold text-white" style="animation-delay:120ms">
+        OEM HVAC Equipment
+      </h1>
+      <p class="hero-fade mt-4 text-lg text-gray-300 max-w-xl mx-auto" style="animation-delay:280ms">
+        Condo PTAC units, rooftop packages, high-velocity components and OEM replacement parts. Ships from Mississauga.
+      </p>
+    </div>
+  </section>
+
+  <section class="py-12 bg-page border-b border-secondary/5">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 flex flex-wrap items-center justify-center gap-3 text-sm">
+      <span class="text-muted font-medium">Categories:</span>
+      {categories.map((c) => (
+        <a href={`#${c.toLowerCase().replace(/\s+/g, '-')}`} class="px-4 py-1.5 rounded-full border border-secondary/15 bg-white text-default hover:bg-primary hover:text-white hover:border-primary transition">{c}</a>
+      ))}
+    </div>
+  </section>
+
+  <section class="py-16 lg:py-20 bg-page">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {products.map((p, i) => (
+          <article class="card group flex flex-col" data-animate style={`animation-delay: ${i * 80}ms`}>
+            <div class="relative aspect-square rounded-xl overflow-hidden bg-secondary/5 mb-5">
+              <Image src={p.image} alt={p.title} width={500} height={500} class="w-full h-full object-contain p-4 group-hover:scale-105 transition-transform duration-500" loading="lazy" />
+              <span class="absolute top-3 left-3 text-[10px] font-bold uppercase tracking-widest bg-secondary text-white px-2.5 py-1 rounded-full">{p.category}</span>
+            </div>
+            <h2 class="text-lg font-serif font-bold text-heading mb-2 group-hover:text-primary transition-colors">{p.title}</h2>
+            <p class="text-sm text-muted leading-relaxed mb-3 flex-1">{p.blurb}</p>
+            <p class="text-xs text-muted/80 mb-4">{p.spec}</p>
+            <div class="flex items-center justify-between gap-3 mt-auto pt-4 border-t border-secondary/10">
+              <span class="text-lg font-serif font-bold text-primary">{p.price}</span>
+              <a href="/contact/" data-open-request-dialog class="inline-flex items-center gap-1.5 rounded-lg bg-primary text-white px-4 py-2 text-sm font-semibold hover:bg-secondary transition">
+                Inquire
+                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
+              </a>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  {/* Why us for equipment */}
+  <section class="py-16 bg-page bg-dots">
+    <div class="max-w-4xl mx-auto px-4 text-center">
+      <p class="text-xs font-bold uppercase tracking-[0.2em] text-primary mb-3" data-animate>Why Buy From QuickFast</p>
+      <h2 class="text-3xl font-serif font-bold text-heading mb-8" data-animate>Equipment + installation + support, all from one source</h2>
+      <div class="grid md:grid-cols-3 gap-5 mt-10 text-left">
+        <div class="card" data-animate>
+          <h3 class="font-serif font-bold text-heading text-lg mb-2">OEM only</h3>
+          <p class="text-muted text-sm">We sell genuine manufacturer equipment — Magic Pak, Skymark/Skypak, York, AIRMAX, Hi-Velocity. Full manufacturer warranty applies.</p>
+        </div>
+        <div class="card" data-animate style="animation-delay:100ms">
+          <h3 class="font-serif font-bold text-heading text-lg mb-2">Install included optional</h3>
+          <p class="text-muted text-sm">Order equipment alone, or bundle with TSSA-licensed installation by our in-house team. One PO, one warranty.</p>
+        </div>
+        <div class="card" data-animate style="animation-delay:200ms">
+          <h3 class="font-serif font-bold text-heading text-lg mb-2">Same-day pickup</h3>
+          <p class="text-muted text-sm">In-stock items available for same-day pickup at our Cawthra Road shop. Special-order items 3-7 business days.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-16 bg-secondary text-white text-center">
+    <div class="max-w-2xl mx-auto px-4" data-animate>
+      <h2 class="text-2xl sm:text-3xl font-serif font-bold mb-4">Need a quote on equipment?</h2>
+      <p class="text-white/80 mb-6">Tell us what you need — we'll quote equipment + installation in one written estimate.</p>
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-3">
+        <a href="/contact/" data-open-request-dialog class="btn-primary">Request Quote</a>
+        <a href="tel:+14166293213" class="inline-flex items-center gap-2 rounded-xl border border-white/15 bg-white/5 px-9 py-4 text-base font-semibold text-white hover:bg-white/10 transition">+1 416-629-3213</a>
+      </div>
+    </div>
+  </section>
+</Layout>

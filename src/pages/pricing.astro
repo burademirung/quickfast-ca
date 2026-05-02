@@ -2,57 +2,128 @@
 import Layout from '~/layouts/PageLayout.astro';
 
 const metadata = {
-  title: 'Pricing & Service Plans',
+  title: 'Maintenance Plans & Pricing',
   description:
-    'Flat-rate pricing for HVAC, plumbing and electrical service. Free written estimates on installations and renovations. No hidden fees.',
+    'QuickFast HVAC ComfortCare + Extended Home Care plans from $11.99/month. Priority booking, parts + labor coverage, annual maintenance — peace of mind for under $1/day.',
 };
 
-const tiers = [
+const hvacPlans = [
   {
-    name: 'Service Call',
-    price: '$95',
-    period: 'flat diagnostic',
-    desc: 'Standard service-call fee for diagnosis and minor repair within Mississauga.',
+    tier: 'Bronze',
+    headline: 'Furnace OR AC OR Heat Pump',
+    accent: 'bronze',
     features: [
-      'Diagnosis + written quote',
-      'Up to 30 minutes on-site',
-      'Service-call fee waived if you proceed with the work',
-      '24/7 emergency rate: $145',
+      { ok: true, text: 'Live Customer Service Support' },
+      { ok: true, text: 'Priority Booking' },
+      { ok: true, text: '1 Maintenance Visit / Year' },
+      { ok: true, text: '5% Repair Discount' },
+      { ok: false, text: 'Waived Diagnostic Service Calls' },
+      { ok: false, text: 'Parts & Labour Coverage' },
     ],
-    cta: 'Book service',
-    accent: false,
   },
   {
-    name: 'Maintenance Plan',
-    price: '$249',
-    period: '/year',
-    desc: 'Annual HVAC tune-up plus priority scheduling and discounted repair rates.',
+    tier: 'Gold',
+    headline: 'Furnace AND AC + Protection',
+    accent: 'gold',
+    badge: 'Best Choice',
     features: [
-      'Annual furnace + AC tune-up',
-      '15% discount on all repair work',
-      'Priority scheduling — no service-call fee',
-      'Same-day response on emergencies',
-      'Auto-renewal, cancel anytime',
+      { ok: true, text: 'Live Customer Service Support' },
+      { ok: true, text: 'Priority Booking' },
+      { ok: true, text: '2 Maintenance Visits / Year' },
+      { ok: true, text: '15% Repair Discount' },
+      { ok: true, text: 'Waived Diagnostic Service Calls (regular hours)' },
+      { ok: true, text: 'Up to $500 parts + labour / unit / year (non-accumulative)' },
+      { ok: true, text: 'Humidifier Maintenance included if needed' },
     ],
-    cta: 'Start membership',
-    accent: true,
   },
   {
-    name: 'Installation',
-    price: 'Free',
-    period: 'written quote',
-    desc: 'New installs and renovations get a free written estimate with itemized costs.',
+    tier: 'Silver',
+    headline: 'Furnace AND AC + Protection',
+    accent: 'silver',
     features: [
-      'On-site evaluation',
-      'Itemized written quote within 24 hours',
-      'Equipment, labour and permits broken out',
-      'No-obligation — quote valid 30 days',
-      'Workmanship guarantee included',
+      { ok: true, text: 'Live Customer Service Support' },
+      { ok: true, text: 'Priority Booking' },
+      { ok: true, text: '2 Maintenance Visits / Year' },
+      { ok: true, text: '10% Repair Discount' },
+      { ok: true, text: 'Waived Diagnostic Service Calls (regular hours)' },
+      { ok: true, text: 'Annual Flush of Boiler or Hot Water Tank' },
+      { ok: true, text: 'Up to $350 parts + labour / unit / year (non-accumulative)' },
     ],
-    cta: 'Get a quote',
-    accent: false,
   },
 ];
+
+const homePlans = [
+  {
+    tier: 'Basic Coverage',
+    price: '$11.99',
+    period: '+HST / month',
+    headline: 'Boiler OR Hot Water Tank OR Plumbing',
+    accent: 'bronze',
+    features: [
+      { ok: true, text: 'Live Customer Service Support' },
+      { ok: true, text: 'Priority Booking' },
+      { ok: true, text: '1 Maintenance Visit / Year' },
+      { ok: true, text: '5% Repair Discount' },
+      { ok: true, text: 'Basic leak inspection + drain check' },
+      { ok: false, text: 'Waived Diagnostic Service Calls' },
+      { ok: false, text: 'Parts & Labour Coverage' },
+    ],
+  },
+  {
+    tier: 'Total Home Comfort',
+    price: '$35.97',
+    period: '+HST / month',
+    headline: 'Boiler AND Hot Water Tank AND Plumbing + Protection',
+    accent: 'gold',
+    badge: 'Best Choice',
+    features: [
+      { ok: true, text: 'Live Customer Service Support' },
+      { ok: true, text: 'Priority Booking' },
+      { ok: true, text: '2 Maintenance Visits / Year' },
+      { ok: true, text: '15% Repair Discount' },
+      { ok: true, text: 'Waived Diagnostic Service Calls (regular hours)' },
+      { ok: true, text: 'Annual Flush of Boiler + Hot Water Tank' },
+      { ok: true, text: 'Emergency Plumbing Response Guarantee' },
+      { ok: true, text: 'Up to $1,100 parts + labour / unit / year' },
+    ],
+  },
+  {
+    tier: 'Enhanced Protection',
+    price: '$23.98',
+    period: '+HST / month',
+    headline: 'Boiler AND/OR HWT AND/OR Plumbing + Protection',
+    accent: 'silver',
+    features: [
+      { ok: true, text: 'Live Customer Service Support' },
+      { ok: true, text: 'Priority Booking' },
+      { ok: true, text: '2 Maintenance Visits / Year' },
+      { ok: true, text: '10% Repair Discount' },
+      { ok: true, text: 'Waived Diagnostic service calls (regular hours)' },
+      { ok: true, text: 'Annual Flush of Boiler or Hot Water Tank' },
+      { ok: true, text: 'Basic Plumbing System Pressure check' },
+      { ok: true, text: 'Up to $550 parts + labour / unit / year' },
+    ],
+  },
+];
+
+const oneOff = [
+  { name: 'Service Call (regular hours)', price: '$95', detail: 'Diagnosis + written quote. Fee waived if you proceed with the work.' },
+  { name: 'Service Call (24/7 emergency)', price: '$145', detail: 'After-hours, weekends and holidays.' },
+  { name: 'Sewer-Camera Inspection', price: '$249', detail: '90 min · written video report included.' },
+  { name: 'Whole-Home Duct Cleaning', price: 'from $399', detail: '3-5 hours · before/after photos · HEPA-filtered process.' },
+  { name: 'Hot-Water Tank Swap', price: 'from $1,450', detail: 'Same-day for standard 40-60 gallon · 6-yr tank warranty.' },
+  { name: 'EV Charger Install', price: 'from $1,200', detail: 'Level-2 · 3-4 hours · ESA inspection included.' },
+  { name: '200A Panel Upgrade', price: 'from $2,400', detail: '1 day · ESA inspected + certified.' },
+  { name: 'Furnace Install', price: 'from $3,800', detail: 'High-efficiency · 12-mo workmanship + 10-yr parts.' },
+  { name: 'Heat Pump Install', price: 'from $6,500', detail: 'Cold-climate · Greener Homes Grant eligible.' },
+  { name: 'Bathroom Renovation', price: 'from $18,000', detail: '2-4 weeks · permits, plumbing, tile, fixtures.' },
+];
+
+const accentColors: Record<string, { ring: string; chip: string; bar: string }> = {
+  bronze: { ring: 'ring-amber-700/30', chip: 'bg-gradient-to-r from-amber-700 to-amber-500 text-white', bar: 'from-amber-700 to-amber-500' },
+  gold: { ring: 'ring-yellow-500/40', chip: 'bg-gradient-to-r from-yellow-500 to-amber-400 text-secondary', bar: 'from-yellow-500 to-amber-400' },
+  silver: { ring: 'ring-slate-400/40', chip: 'bg-gradient-to-r from-slate-400 to-slate-300 text-secondary', bar: 'from-slate-400 to-slate-300' },
+};
 
 const breadcrumb = {
   '@context': 'https://schema.org',
@@ -62,68 +133,331 @@ const breadcrumb = {
     { '@type': 'ListItem', position: 2, name: 'Pricing', item: 'https://quickfast.ca/pricing/' },
   ],
 };
+
+const offerCatalog = {
+  '@context': 'https://schema.org',
+  '@type': 'OfferCatalog',
+  name: 'QuickFast Maintenance Plans',
+  itemListElement: [
+    { '@type': 'Offer', name: 'Basic Coverage Maintenance Plan', price: '11.99', priceCurrency: 'CAD', priceSpecification: { '@type': 'UnitPriceSpecification', price: '11.99', priceCurrency: 'CAD', billingDuration: 'P1M' } },
+    { '@type': 'Offer', name: 'Enhanced Protection Maintenance Plan', price: '23.98', priceCurrency: 'CAD', priceSpecification: { '@type': 'UnitPriceSpecification', price: '23.98', priceCurrency: 'CAD', billingDuration: 'P1M' } },
+    { '@type': 'Offer', name: 'Total Home Comfort Maintenance Plan', price: '35.97', priceCurrency: 'CAD', priceSpecification: { '@type': 'UnitPriceSpecification', price: '35.97', priceCurrency: 'CAD', billingDuration: 'P1M' } },
+  ],
+};
 ---
 
 <Layout metadata={metadata}>
   <Fragment slot="head">
     <script type="application/ld+json" set:html={JSON.stringify(breadcrumb).replace(/</g, '\\u003c')} />
+    <script type="application/ld+json" set:html={JSON.stringify(offerCatalog).replace(/</g, '\\u003c')} />
   </Fragment>
 
   <section class="relative min-h-[40vh] flex items-center overflow-hidden" style="background: linear-gradient(135deg, #112F5B 0%, #0a1f40 100%);">
     <div class="absolute inset-0 opacity-[0.05]" style="background-image: radial-gradient(circle, rgba(255,255,255,0.5) 1px, transparent 1px); background-size: 32px 32px;"></div>
-    <div class="relative z-10 mx-auto max-w-3xl px-6 text-center pt-32 pb-12">
-      <p class="hero-fade text-xs font-bold uppercase tracking-[0.2em] text-blue-300 mb-3">Pricing</p>
+    <div class="relative z-10 mx-auto max-w-3xl px-6 text-center pt-24 pb-12">
+      <p class="hero-fade text-xs font-bold uppercase tracking-[0.2em] text-blue-300 mb-3">Maintenance Plans</p>
       <h1 class="hero-fade text-4xl sm:text-5xl font-serif font-bold text-white" style="animation-delay:120ms">
-        Honest pricing. <span class="block">No surprises on the invoice.</span>
+        Peace of mind starts at <span style="-webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; background-image: linear-gradient(135deg, #FBBF24, #60A5FA);">$11.99 / month</span>
       </h1>
       <p class="hero-fade mt-4 text-lg text-gray-300 max-w-xl mx-auto" style="animation-delay:280ms">
-        Flat-rate diagnostic, transparent membership pricing, free written quotes on installs.
+        Priority booking, annual maintenance, parts + labour coverage. Stop paying full-price when something breaks.
       </p>
     </div>
   </section>
 
+  {/* HVAC ComfortCare */}
   <section class="py-20 bg-page">
     <div class="max-w-6xl mx-auto px-4 sm:px-6">
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {tiers.map((t, i) => (
-          <div class={`rounded-2xl p-8 border-2 ${t.accent ? 'border-primary bg-primary/5 shadow-xl shadow-primary/10' : 'border-secondary/10 bg-white'} transition-all hover:shadow-xl`} data-animate style={`animation-delay: ${i * 100}ms`}>
-            {t.accent && <div class="text-xs font-bold uppercase tracking-widest text-primary mb-3">Most popular</div>}
-            <h2 class="text-2xl font-serif font-bold text-heading">{t.name}</h2>
-            <p class="text-muted mt-1 mb-6 text-sm">{t.desc}</p>
-            <div class="flex items-baseline gap-1 mb-6">
-              <span class="text-4xl font-serif font-bold text-heading">{t.price}</span>
-              <span class="text-muted text-sm">{t.period}</span>
-            </div>
-            <ul class="space-y-3 mb-8 text-sm">
-              {t.features.map((f) => (
-                <li class="flex items-start gap-2">
-                  <svg class="w-5 h-5 text-primary flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
-                  </svg>
-                  <span class="text-default">{f}</span>
-                </li>
-              ))}
-            </ul>
-            <a href="/contact/" data-open-request-dialog class={t.accent ? 'btn-primary w-full text-center' : 'btn w-full text-center'}>{t.cta}</a>
-          </div>
-        ))}
+      <div class="text-center mb-12" data-animate>
+        <p class="text-xs font-bold uppercase tracking-[0.2em] text-primary mb-3">HVAC ComfortCare</p>
+        <h2 class="text-3xl sm:text-4xl font-serif font-bold text-heading">Choose a plan that's right for you</h2>
+        <p class="mt-3 text-muted max-w-2xl mx-auto">Three coverage tiers for furnace, air conditioning and heat-pump systems.</p>
       </div>
 
-      <div class="mt-16 max-w-3xl mx-auto text-center" data-animate>
-        <h2 class="text-2xl sm:text-3xl font-serif font-bold text-heading mb-4">Project pricing</h2>
-        <p class="text-default leading-relaxed mb-4">
-          Renovations, panel upgrades, water-heater swaps, EV-charger installs and similar capital projects are quoted per-project. Most quotes turn around within 24 hours of the on-site visit. No deposits required to receive a quote.
-        </p>
-        <p class="text-muted text-sm">
-          Service prices effective {new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long' })}. Subject to change with 30 days' notice.
-        </p>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {hvacPlans.map((p, i) => {
+          const a = accentColors[p.accent];
+          return (
+            <div
+              class={`relative rounded-2xl p-7 bg-white border-2 ${p.badge ? 'border-yellow-400 shadow-2xl shadow-yellow-500/20' : 'border-secondary/10'} transition-all hover:-translate-y-1 hover:shadow-xl`}
+              data-animate
+              style={`animation-delay: ${i * 100}ms`}
+            >
+              {p.badge && (
+                <div class="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full text-xs font-bold uppercase tracking-widest bg-gradient-to-r from-yellow-500 to-amber-400 text-secondary shadow-md">
+                  ★ {p.badge}
+                </div>
+              )}
+              <div class={`inline-block px-3 py-1 rounded-full text-xs font-black uppercase tracking-widest ${a.chip} mb-4`}>{p.tier}</div>
+              <p class="text-sm text-muted mb-5 min-h-[2.5rem]">{p.headline}</p>
+              <ul class="space-y-2.5 text-sm">
+                {p.features.map((f) => (
+                  <li class="flex items-start gap-2.5">
+                    {f.ok ? (
+                      <svg class="w-5 h-5 text-primary flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                      </svg>
+                    ) : (
+                      <svg class="w-5 h-5 text-accent/60 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"/>
+                      </svg>
+                    )}
+                    <span class={f.ok ? 'text-default' : 'text-muted/70 line-through'}>{f.text}</span>
+                  </li>
+                ))}
+              </ul>
+              <a href="/contact/" data-open-request-dialog class={`mt-7 block text-center rounded-xl py-3 font-bold transition-all ${p.badge ? 'bg-primary text-white shadow-lg shadow-primary/25 hover:bg-primary/90' : 'bg-secondary/5 text-secondary hover:bg-primary hover:text-white'}`}>Inquire today</a>
+            </div>
+          );
+        })}
       </div>
     </div>
   </section>
 
+  {/* Extended Home Care */}
+  <section class="py-20 bg-page bg-dots">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <div class="text-center mb-12" data-animate>
+        <p class="text-xs font-bold uppercase tracking-[0.2em] text-primary mb-3">Extended Home Care</p>
+        <h2 class="text-3xl sm:text-4xl font-serif font-bold text-heading">Boiler, hot water tank + plumbing plans</h2>
+        <p class="mt-3 text-muted max-w-2xl mx-auto">Complete protection for your home's water and heating infrastructure — from $11.99/month.</p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {homePlans.map((p, i) => (
+          <div
+            class={`relative rounded-2xl p-7 bg-white border-2 ${p.badge ? 'border-yellow-400 shadow-2xl shadow-yellow-500/20' : 'border-secondary/10'} transition-all hover:-translate-y-1 hover:shadow-xl`}
+            data-animate
+            style={`animation-delay: ${i * 100}ms`}
+          >
+            {p.badge && (
+              <div class="absolute -top-3 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full text-xs font-bold uppercase tracking-widest bg-gradient-to-r from-yellow-500 to-amber-400 text-secondary shadow-md">
+                ★ {p.badge}
+              </div>
+            )}
+            <div class={`inline-block px-3 py-1 rounded-full text-xs font-black uppercase tracking-widest ${accentColors[p.accent].chip} mb-3`}>{p.tier}</div>
+            <p class="text-sm text-muted mb-5 min-h-[2.5rem]">{p.headline}</p>
+            <div class="flex items-baseline gap-1 mb-5">
+              <span class="text-4xl font-serif font-bold text-heading">{p.price}</span>
+              <span class="text-sm text-muted">{p.period}</span>
+            </div>
+            <ul class="space-y-2.5 text-sm">
+              {p.features.map((f) => (
+                <li class="flex items-start gap-2.5">
+                  {f.ok ? (
+                    <svg class="w-5 h-5 text-primary flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                    </svg>
+                  ) : (
+                    <svg class="w-5 h-5 text-accent/60 flex-shrink-0 mt-0.5" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"/>
+                    </svg>
+                  )}
+                  <span class={f.ok ? 'text-default' : 'text-muted/70 line-through'}>{f.text}</span>
+                </li>
+              ))}
+            </ul>
+            <a href="/contact/" data-open-request-dialog class={`mt-7 block text-center rounded-xl py-3 font-bold transition-all ${p.badge ? 'bg-primary text-white shadow-lg shadow-primary/25 hover:bg-primary/90' : 'bg-secondary/5 text-secondary hover:bg-primary hover:text-white'}`}>Inquire today</a>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  {/* One-off pricing reference */}
+  <section class="py-20 bg-page">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6">
+      <div class="text-center mb-10" data-animate>
+        <p class="text-xs font-bold uppercase tracking-[0.2em] text-primary mb-3">One-Off Pricing</p>
+        <h2 class="text-3xl sm:text-4xl font-serif font-bold text-heading">Common service rates</h2>
+        <p class="mt-3 text-muted max-w-2xl mx-auto">Starting prices for non-plan customers. Final quote depends on access, equipment brand and permitting.</p>
+      </div>
+      <div class="overflow-x-auto rounded-2xl border border-secondary/10 bg-white shadow-sm" data-animate>
+        <table class="w-full text-sm">
+          <thead class="bg-secondary/5">
+            <tr>
+              <th class="text-left px-5 py-4 font-bold text-heading">Service</th>
+              <th class="text-left px-5 py-4 font-bold text-heading">Starting price</th>
+              <th class="text-left px-5 py-4 font-bold text-heading">Detail</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-secondary/10">
+            {oneOff.map((o) => (
+              <tr>
+                <td class="px-5 py-3 font-medium text-heading whitespace-nowrap">{o.name}</td>
+                <td class="px-5 py-3 text-primary font-semibold whitespace-nowrap">{o.price}</td>
+                <td class="px-5 py-3 text-muted">{o.detail}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p class="text-xs text-muted mt-4 text-center">Prices effective {new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long' })}. Plan members get 5-15% off all service work.</p>
+    </div>
+  </section>
+
+  {/* Protection-plan enrollment form */}
+  <section class="relative py-20 lg:py-28 overflow-hidden bg-page" id="enroll">
+    <div class="absolute inset-0 opacity-[0.03]" style="background-image: radial-gradient(circle, rgb(17 47 91) 1px, transparent 1px); background-size: 32px 32px;"></div>
+
+    <div class="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 grid md:grid-cols-2 gap-12 items-start">
+      <div data-animate>
+        <p class="text-xs font-bold uppercase tracking-[0.2em] text-primary mb-3">Enroll Now</p>
+        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-serif font-bold text-heading leading-tight mb-6">
+          Start Your <span style="-webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; background-image: linear-gradient(135deg, #116DFF, #DF3131);">Protection Plan</span> Today
+        </h2>
+        <p class="text-lg text-default leading-relaxed mb-8">
+          Don't wait for a costly breakdown to take action. Contact QuickFast today to enroll in a maintenance plan that protects your home and saves you money. Our team will walk you through your options and get you set up quickly so you can enjoy reliable comfort and peace of mind.
+        </p>
+
+        <ul class="space-y-4 text-default">
+          <li class="flex items-start gap-3">
+            <div class="flex-shrink-0 w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
+              <svg class="w-5 h-5 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0zM15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+            </div>
+            <address class="not-italic">
+              2390 Cawthra Road Unit #2<br />
+              Mississauga, ON, L5A 2X1
+            </address>
+          </li>
+          <li class="flex items-center gap-3">
+            <div class="flex-shrink-0 w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
+              <svg class="w-5 h-5 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
+            </div>
+            <a href="tel:+14166293213" class="text-lg font-semibold hover:text-primary transition-colors">+1 416-629-3213</a>
+          </li>
+          <li class="flex items-center gap-3">
+            <div class="flex-shrink-0 w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
+              <svg class="w-5 h-5 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+            </div>
+            <a href="mailto:info@quickfast.ca" class="text-lg font-semibold hover:text-primary transition-colors">info@quickfast.ca</a>
+          </li>
+        </ul>
+      </div>
+
+      <form id="enroll-form" class="bg-white rounded-2xl shadow-xl border border-secondary/10 p-6 sm:p-8 space-y-5" data-animate style="animation-delay:140ms" novalidate>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label for="enr-fname" class="block text-sm font-semibold text-heading mb-1.5">First name <span class="text-accent">*</span></label>
+            <input id="enr-fname" name="firstName" type="text" required autocomplete="given-name" class="w-full min-h-[48px] px-4 py-2.5 border border-secondary/20 rounded-xl text-base focus:ring-4 focus:ring-primary/10 focus:border-primary outline-none transition" />
+          </div>
+          <div>
+            <label for="enr-lname" class="block text-sm font-semibold text-heading mb-1.5">Last name <span class="text-accent">*</span></label>
+            <input id="enr-lname" name="lastName" type="text" required autocomplete="family-name" class="w-full min-h-[48px] px-4 py-2.5 border border-secondary/20 rounded-xl text-base focus:ring-4 focus:ring-primary/10 focus:border-primary outline-none transition" />
+          </div>
+        </div>
+        <div>
+          <label for="enr-address" class="block text-sm font-semibold text-heading mb-1.5">Address <span class="text-accent">*</span></label>
+          <input id="enr-address" name="address" type="text" required autocomplete="street-address" placeholder="123 Main St, Mississauga, ON" class="w-full min-h-[48px] px-4 py-2.5 border border-secondary/20 rounded-xl text-base focus:ring-4 focus:ring-primary/10 focus:border-primary outline-none transition" />
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label for="enr-phone" class="block text-sm font-semibold text-heading mb-1.5">Phone <span class="text-accent">*</span></label>
+            <input id="enr-phone" name="phone" type="tel" required autocomplete="tel" class="w-full min-h-[48px] px-4 py-2.5 border border-secondary/20 rounded-xl text-base focus:ring-4 focus:ring-primary/10 focus:border-primary outline-none transition" />
+          </div>
+          <div>
+            <label for="enr-email" class="block text-sm font-semibold text-heading mb-1.5">Email <span class="text-accent">*</span></label>
+            <input id="enr-email" name="email" type="email" required autocomplete="email" class="w-full min-h-[48px] px-4 py-2.5 border border-secondary/20 rounded-xl text-base focus:ring-4 focus:ring-primary/10 focus:border-primary outline-none transition" />
+          </div>
+        </div>
+
+        <fieldset>
+          <legend class="block text-sm font-semibold text-heading mb-2">Preferred contact</legend>
+          <div class="flex flex-wrap gap-4 text-sm">
+            <label class="flex items-center gap-2 cursor-pointer"><input type="radio" name="contactMethod" value="Call" class="text-primary focus:ring-primary" /> Call</label>
+            <label class="flex items-center gap-2 cursor-pointer"><input type="radio" name="contactMethod" value="Email" class="text-primary focus:ring-primary" /> Email</label>
+            <label class="flex items-center gap-2 cursor-pointer"><input type="radio" name="contactMethod" value="Text" class="text-primary focus:ring-primary" /> Text Message</label>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend class="block text-sm font-semibold text-heading mb-2">Plan(s) you're interested in <span class="text-accent">*</span></legend>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm">
+            <label class="flex items-center gap-2 cursor-pointer p-2 rounded-lg hover:bg-secondary/5"><input type="checkbox" name="plans" value="Bronze" class="rounded text-primary focus:ring-primary" /> Bronze (HVAC)</label>
+            <label class="flex items-center gap-2 cursor-pointer p-2 rounded-lg hover:bg-secondary/5"><input type="checkbox" name="plans" value="Silver" class="rounded text-primary focus:ring-primary" /> Silver (HVAC)</label>
+            <label class="flex items-center gap-2 cursor-pointer p-2 rounded-lg hover:bg-secondary/5"><input type="checkbox" name="plans" value="Gold" class="rounded text-primary focus:ring-primary" /> Gold (HVAC)</label>
+            <label class="flex items-center gap-2 cursor-pointer p-2 rounded-lg hover:bg-secondary/5"><input type="checkbox" name="plans" value="Basic Coverage" class="rounded text-primary focus:ring-primary" /> Basic Coverage</label>
+            <label class="flex items-center gap-2 cursor-pointer p-2 rounded-lg hover:bg-secondary/5"><input type="checkbox" name="plans" value="Enhanced Protection" class="rounded text-primary focus:ring-primary" /> Enhanced Protection</label>
+            <label class="flex items-center gap-2 cursor-pointer p-2 rounded-lg hover:bg-secondary/5"><input type="checkbox" name="plans" value="Total Home Comfort" class="rounded text-primary focus:ring-primary" /> Total Home Comfort</label>
+          </div>
+        </fieldset>
+
+        <input type="text" name="hp" tabindex="-1" autocomplete="off" aria-hidden="true" class="absolute -left-[9999px]" />
+        <div id="enr-error" class="hidden text-sm text-accent bg-accent/5 p-3 rounded-lg" role="alert"></div>
+        <div id="enr-success" class="hidden text-center py-6 bg-primary/5 rounded-xl" role="status" aria-live="polite">
+          <p class="text-xl font-serif font-bold text-heading mb-1">Enrollment received!</p>
+          <p class="text-muted text-sm">We'll reach out within 1 business hour to confirm your plan.</p>
+        </div>
+        <button type="submit" id="enr-submit" class="w-full btn-primary text-base">
+          Send enrollment
+        </button>
+      </form>
+    </div>
+
+    <script>
+      const form = document.getElementById('enroll-form') as HTMLFormElement | null;
+      const err = document.getElementById('enr-error');
+      const ok = document.getElementById('enr-success');
+      const sub = document.getElementById('enr-submit') as HTMLButtonElement | null;
+      const mountedAt = Date.now();
+
+      form?.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        if (!form || !err || !ok || !sub) return;
+        err.classList.add('hidden');
+        const data = new FormData(form);
+        const obj: Record<string, any> = {};
+        for (const [k, v] of data.entries()) {
+          if (k === 'plans') {
+            obj.plans = obj.plans || [];
+            obj.plans.push(v);
+          } else obj[k] = v;
+        }
+        if (!obj.firstName || !obj.lastName || !obj.address || !obj.phone || !obj.email) {
+          err.textContent = 'First name, last name, address, phone and email are all required.';
+          err.classList.remove('hidden');
+          return;
+        }
+        if (!Array.isArray(obj.plans) || obj.plans.length === 0) {
+          err.textContent = 'Please select at least one plan you\'re interested in.';
+          err.classList.remove('hidden');
+          return;
+        }
+        // Pack into the existing /api/request-service shape
+        const payload = {
+          name: obj.firstName + ' ' + obj.lastName,
+          phone: obj.phone,
+          email: obj.email,
+          service: 'Maintenance Plan Enrollment: ' + obj.plans.join(', '),
+          message: 'Address: ' + obj.address + '\nPreferred contact: ' + (obj.contactMethod || 'any') + '\nPlans: ' + obj.plans.join(', '),
+          hp: obj.hp,
+          formAgeMs: Date.now() - mountedAt,
+        };
+        sub.disabled = true;
+        sub.textContent = 'Sending…';
+        try {
+          const res = await fetch('/api/request-service', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload),
+          });
+          const j = await res.json();
+          if (!res.ok || j.error) throw new Error(j.error || 'Submit failed');
+          form.classList.add('hidden');
+          ok.classList.remove('hidden');
+        } catch (e: any) {
+          err.textContent = (e?.message || 'Something went wrong') + ' — please call +1-416-629-3213.';
+          err.classList.remove('hidden');
+          sub.disabled = false;
+          sub.textContent = 'Send enrollment';
+        }
+      });
+    </script>
+  </section>
+
   <section class="py-16 bg-secondary text-white text-center">
     <div class="max-w-2xl mx-auto px-4" data-animate>
-      <h2 class="text-2xl font-serif font-bold mb-4">Need an after-hours quote?</h2>
+      <h2 class="text-2xl sm:text-3xl font-serif font-bold mb-4">Need an after-hours quote?</h2>
       <p class="text-white/80 mb-6">Call our 24/7 line — we'll get a written quote to your inbox.</p>
       <a href="tel:+14166293213" class="btn-primary">+1 416-629-3213</a>
     </div>

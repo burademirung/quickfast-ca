@@ -1,0 +1,44 @@
+---
+import ServiceCategoryPage from '~/components/ServiceCategoryPage.astro';
+
+const services = [
+  { title: 'Handyman Service', desc: 'Drywall patching, door adjustments, fixture installs, miscellaneous repairs.' },
+  { title: 'Appliance Installation', desc: 'Dishwasher, garbage disposal, range, washer/dryer hookup with proper venting.' },
+  { title: 'Pre-Listing Inspection', desc: 'Quick inspection of HVAC, plumbing, electrical before you list — surface red flags before the buyer does.' },
+  { title: 'Real Estate Service Letters', desc: 'Service-history letters for HVAC, electrical, plumbing for real-estate closings.' },
+  { title: 'Insurance Inspection', desc: 'Pre-quote inspections for home insurance — Wett, ESA, plumbing certs.' },
+  { title: 'Smart Home Installation', desc: 'Smart thermostats, video doorbells, smart locks, leak sensors.' },
+  { title: 'Crawlspace + Attic Insulation', desc: 'Spray foam, batt insulation, vapour barrier — improves heating + cooling efficiency.' },
+  { title: 'Garage Heater Installation', desc: 'Gas + electric garage heaters — TSSA-licensed gas hookup.' },
+  { title: 'Outdoor Faucet / Hose Bib', desc: 'Frost-free outdoor faucets, irrigation hookups.' },
+  { title: 'Equipment Maintenance Contracts', desc: 'Custom recurring contracts for unusual equipment we serviced previously.' },
+];
+
+const whyUs = [
+  { title: 'No job too small', desc: 'Single drywall patch? Single light fixture? We do those — most contractors won\'t.' },
+  { title: 'Hourly rate transparency', desc: 'Handyman rate is $145/hour with a 1-hour minimum. No hidden trip charge.' },
+  { title: 'In-house trades', desc: 'If a small job uncovers a real plumbing or electrical issue, we have the right person on staff.' },
+  { title: 'Insurance + ESA paperwork', desc: 'We prepare insurance inspection paperwork the same day for real-estate closings.' },
+];
+
+const faqs = [
+  { q: 'What\'s your minimum charge?', a: 'For handyman / miscellaneous work, our minimum is 1 hour at $145/hour. For HVAC/plumbing/electrical service calls, the standard $95 service-call fee applies and is waived if you proceed with the recommended work.' },
+  { q: 'Do you do small jobs?', a: 'Yes. Single drywall patch, hanging a TV mount, replacing a light fixture, fixing a wobbly toilet — these are real bookings for us. Most large contractors decline jobs under $500; we\'ll show up for the small stuff.' },
+  { q: 'Can you provide service letters for a real-estate closing?', a: 'Yes — we provide service-history letters with our license + certification numbers, ESA inspection reports, and TSSA gas-fitting certs typically within 1 business day of request.' },
+];
+
+const longDescription =
+  "Beyond the major trades, we handle the dozens of small jobs homeowners need but most contractors decline: <strong>appliance installation, drywall patching, fixture installs, pre-listing inspections, insurance paperwork, smart-home setup, and one-off projects</strong>. Hourly handyman rate is $145/hour with a 1-hour minimum and no hidden trip charge. If your small job uncovers a real HVAC, plumbing, or electrical issue, we have the right licensed technician on staff — no second contractor required.";
+---
+
+<ServiceCategoryPage
+  slug="other-services"
+  title="Other Services"
+  kicker="Service Category"
+  intro="Handyman, appliance installation, pre-listing inspections, insurance paperwork, smart-home, and miscellaneous projects."
+  longDescription={longDescription}
+  services={services}
+  metaDescription="Handyman, appliance install, pre-listing inspections + miscellaneous services in Mississauga & GTA. $145/hour with 1-hr min, no hidden trip charges."
+  whyUs={whyUs}
+  faqs={faqs}
+/>
